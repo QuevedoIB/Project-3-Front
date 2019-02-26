@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import auth from '../lib/auth-service';
+import authService from '../lib/auth-service';
 
 export const AuthContext = React.createContext(
   // authStore // default value
@@ -7,7 +7,7 @@ export const AuthContext = React.createContext(
 
 export const { Provider, Consumer }  = AuthContext.Consumer;
 
-export const withAuth = () => (Comp) => {
+export const withAuth = (Comp) => {
   return class WithAuth extends Component {
     render() {
       return (
@@ -17,7 +17,8 @@ export const withAuth = () => (Comp) => {
               isLogged={authStore.isLogged}
               user={authStore.user}
               logout={authStore.logout}
-              setUser={authStore.setUser}
+              login={authStore.login}
+              signup={authStore.signup}
               {...this.props} />
           }}
         </Consumer>
@@ -40,8 +41,8 @@ export default class AuthProvider extends Component {
     })
   }
 
-  logoutUser = () =>{
-    auth.logout()
+  logoutUser = () => {
+    return authService.logout()
       .then(() => {
         this.setState({ 
           isLogged: false,
@@ -51,8 +52,24 @@ export default class AuthProvider extends Component {
       .catch( error => console.log(error))
   }
 
+  loginUser = (body) => {
+    return authService.login(body)
+      .then((user) => {
+        this.setUser(user);
+      })
+      .catch(error => console.log(error))
+  }
+
+  signupUser = (body) => {
+    return authService.signup(body)
+      .then((user) => {
+        this.setUser(user);
+      })
+      .catch(error => console.log(error))
+  }
+
   componentDidMount() {
-    auth.me()
+    authService.me()
       .then((user) => {
         this.setState({
           isLogged: true,
@@ -77,7 +94,13 @@ export default class AuthProvider extends Component {
         return <div>Loading</div>
       default:
         return (
-          <Provider value={{ isLogged, user, logout: this.logoutUser, setUser: this.setUser }}>
+          <Provider value={
+            { isLogged,
+              user,
+              logout: this.logoutUser, 
+              login: this.loginUser,
+              signup: this.signupUser,
+            }}>
             {children}
           </Provider>    
         );

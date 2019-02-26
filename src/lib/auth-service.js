@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class Auth {
+class AuthService {
   constructor() {
     this.auth = axios.create({
       baseURL: 'http://localhost:5000',
@@ -31,6 +31,6 @@ class Auth {
   }
 }
 
-const auth = new Auth();
+const authService = new AuthService();
 
-export default auth
+export default authService;

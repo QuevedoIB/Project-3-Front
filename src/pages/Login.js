@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import auth from '../lib/auth-service';
-// import { AuthConsumer } from '../components/AuthProvider';
-
+import { withAuth } from '../components/AuthProvider';
 class Login extends Component {
   state = {
     username: "",
@@ -12,11 +10,11 @@ class Login extends Component {
     event.preventDefault();
     const { username, password } = this.state
 
-    auth.login({ username, password })
-    .then( (user) => {
-      this.props.setUser(user)
-    })
-    .catch( error => console.log(error) )
+    this.props.login({ username, password })
+      .then(() => {
+        this.props.history.push('/private')
+      })
+      .catch( error => console.log(error) )
   }
 
   handleChange = (event) => {  
@@ -38,4 +36,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withAuth(Login);

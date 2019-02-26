@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from '../lib/auth-service';
+import { withAuth } from '../components/AuthProvider';
 
 class Signup extends Component {
 
@@ -14,13 +14,12 @@ class Signup extends Component {
     const username = this.state.username;
     const password = this.state.password;
 
-    auth.signup({ username, password })
+    this.props.signup({ username, password })
       .then( (user) => {
         this.setState({
             username: "",
             password: "",
         });
-        this.props.setUser(user)
       })
       .catch( error => console.log(error) )
   }
@@ -51,4 +50,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default withAuth(Signup);
