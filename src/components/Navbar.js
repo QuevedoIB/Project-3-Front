@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withAuth } from '../components/AuthProvider';
+import { withAuth } from '../providers/AuthProvider';
 
 class Navbar extends Component {
   render() {
@@ -8,7 +8,7 @@ class Navbar extends Component {
     const { username } = user;
     if (isLogged) {
       return <div>
-        <p>username: { username }</p>
+        <p>username: {username}</p>
         <p onClick={logout}>Logout</p>
       </div>
     } else {
@@ -17,7 +17,7 @@ class Navbar extends Component {
         <Link to='/signup'>Signup</Link>
       </div>
     }
-  
+
   }
 }
 

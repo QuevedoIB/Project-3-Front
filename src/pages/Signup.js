@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withAuth } from '../components/AuthProvider';
+import { withAuth } from '../providers/AuthProvider';
 
 class Signup extends Component {
 
@@ -15,18 +15,18 @@ class Signup extends Component {
     const password = this.state.password;
 
     this.props.signup({ username, password })
-      .then( (user) => {
+      .then(() => {
         this.setState({
-            username: "",
-            password: "",
+          username: "",
+          password: "",
         });
       })
-      .catch( error => console.log(error) )
+      .catch(error => console.log(error))
   }
 
-  handleChange = (event) => {  
-    const {name, value} = event.target;
-    this.setState({[name]: value});
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   render() {
@@ -35,13 +35,13 @@ class Signup extends Component {
       <div>
         <form onSubmit={this.handleFormSubmit}>
           <label>Username:</label>
-          <input type="text" name="username" value={username} onChange={this.handleChange}/>
+          <input type="text" name="username" value={username} onChange={this.handleChange} />
           <label>Password:</label>
           <input type="password" name="password" value={password} onChange={this.handleChange} />
           <input type="submit" value="Signup" />
         </form>
 
-        <p>Already have account? 
+        <p>Already have account?
           <Link to={"/login"}> Login</Link>
         </p>
 

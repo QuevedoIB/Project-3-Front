@@ -5,7 +5,8 @@ class AuthService {
     this.auth = axios.create({
       baseURL: 'http://localhost:5000',
       // withCredentials es para propagar las cookies
-      withCredentials: true
+      baseURL: process.env.REACT_APP_BACKEND_URL,
+      withCredentials: true // only beacause we want to share cookies with the backend server otherwise set it to false
     })
   }
 

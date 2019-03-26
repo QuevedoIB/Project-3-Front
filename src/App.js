@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {Switch} from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute';
 import Navbar from './components/Navbar';
 import Private from './pages/Private';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import AuthProvider from './components/AuthProvider';
+import AuthProvider from './providers/AuthProvider';
 
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <AuthProvider>
         <div className="container">
-          <h1>Basic React Authentication</h1>
+          <h1>Module 3 boilerplate</h1>
           <Navbar data='data' />
           <Switch>
             <AnonRoute path="/signup" component={Signup} />

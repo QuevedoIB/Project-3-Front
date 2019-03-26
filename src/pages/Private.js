@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withAuth } from '../components/AuthProvider';
+import { withAuth } from '../providers/AuthProvider';
 class Private extends Component {
   render() {
     const { user } = this.props

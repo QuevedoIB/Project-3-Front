@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { withAuth } from '../components/AuthProvider';
+import { withAuth } from '../providers/AuthProvider';
 
 const AnonRoute = ({ component: Component, isLogged, ...rest }) => {
   return (

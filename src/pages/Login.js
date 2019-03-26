@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withAuth } from '../components/AuthProvider';
+import { withAuth } from '../providers/AuthProvider';
 class Login extends Component {
   state = {
     username: "",
@@ -11,15 +11,13 @@ class Login extends Component {
     const { username, password } = this.state
 
     this.props.login({ username, password })
-      .then(() => {
-        this.props.history.push('/private')
-      })
-      .catch( error => console.log(error) )
+      .then(() => { })
+      .catch(error => console.log(error))
   }
 
-  handleChange = (event) => {  
-    const {name, value} = event.target;
-    this.setState({[name]: value});
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   render() {
@@ -27,7 +25,7 @@ class Login extends Component {
     return (
       <form onSubmit={this.handleFormSubmit}>
         <label>Username:</label>
-        <input type="text" name="username" value={username} onChange={this.handleChange}/>
+        <input type="text" name="username" value={username} onChange={this.handleChange} />
         <label>Password:</label>
         <input type="password" name="password" value={password} onChange={this.handleChange} />
         <input type="submit" value="Login" />

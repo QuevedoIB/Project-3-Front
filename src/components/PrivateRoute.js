@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { withAuth } from '../components/AuthProvider';
+import { withAuth } from '../providers/AuthProvider';
 
 const PrivateRoute = ({ component: Component, isLogged, ...rest }) => {
   // console.log({ component: Component, user, ...rest }) 
   return (
-    <Route 
+    <Route
       {...rest}
       render={props => {
         if (isLogged) {
