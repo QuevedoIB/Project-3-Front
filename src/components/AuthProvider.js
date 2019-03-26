@@ -5,7 +5,7 @@ export const AuthContext = React.createContext(
   // authStore // default value
 );
 
-export const { Provider, Consumer }  = AuthContext.Consumer;
+const { Provider, Consumer }  = AuthContext;
 
 export const withAuth = (Comp) => {
   return class WithAuth extends Component {
