@@ -20,21 +20,24 @@ class Signup extends Component {
     email: '',
     interests: [],
     valueInterests: '',
+    personality: [],
     indexPage: 0,
   };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const username = this.state.username;
-    const password = this.state.password;
+    const { username, password, email, interests, personality } = this.state;
+    const userData = {
+      username,
+      password,
+      email,
+      interests,
+      personality
+    }
 
-    this.props.signup({ username, password })
+    this.props.signup(userData)
       .then(() => {
-        this.setState({
-          username: "",
-          email: "",
-          password: "",
-        });
+        this.props.history.push('/profile')
       })
       .catch(error => console.log(error))
   }
@@ -44,7 +47,8 @@ class Signup extends Component {
     this.setState({ [name]: value });
   }
 
-  handleNext = () => {
+  handleNext = (e) => {
+    e.preventDefault();
     this.setState({
       indexPage: this.state.indexPage + 1,
     });
@@ -92,8 +96,14 @@ class Signup extends Component {
     this.setState({ interests, valueInterests: interest });
   }
 
+  handleData = (array) => {
+    this.setState({
+      personality: array,
+    })
+  }
+
   renderContent() {
-    const { username, password, email, valueInterests, interests, questions, indexPage } = this.state;
+    const { username, password, email, valueInterests, interests, questions, indexPage, personality } = this.state;
     if (indexPage === 0) {
       return (
         <div>
@@ -106,33 +116,38 @@ class Signup extends Component {
             email={email}
             handleChange={this.handleChange}
           />
+          <button onClick={this.handleNext}>Next</button>
         </div>
       );
     } else if (indexPage === 1) {
       return (
-        <Interests
-          valueInterests={valueInterests}
-          handleChange={this.handleChange}
-          handleKeyUp={this.handleKeyUp}
-          handleKeyDown={this.handleKeyDown}
-          interests={interests}
-        />
+        <>
+          <Interests
+            valueInterests={valueInterests}
+            handleChange={this.handleChange}
+            handleKeyUp={this.handleKeyUp}
+            handleKeyDown={this.handleKeyDown}
+            interests={interests}
+          />
+          <button onClick={this.handleNext}>Next</button>
+        </>
       );
     } else if (indexPage === 2) {
-      return <Personality questions={questions} />
+      if (personality.length === questions.length) {
+        return <button type='submit' id="sign-up-fade" className="bottomLinks one">Sign Up</button>
+
+      } else {
+        return <Personality questions={questions} onData={this.handleData} />
+      }
     }
   }
 
   render() {
 
-    console.log(this.state)
-
-
     return (
       <div>
-        <form onSubmit={this.handleFormSubmit} enctype="multipart/form-data" >
+        <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" >
           {this.renderContent()}
-          <button onClick={this.handleNext}>Next</button>
           {/* <button type="submit" onKeyPress={(e) => { e.target.keyCode === 13 && e.preventDefault(); }}>Submit</button> */}
         </form>
 
