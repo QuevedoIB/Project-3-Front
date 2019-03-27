@@ -12,6 +12,7 @@ import Chat from './pages/Chat';
 import Contact from './pages/Contact';
 import Home from './pages/Home'; // <-
 import Profile from './pages/Profile'; // <-
+import ProfileEdit from './pages/ProfileEdit';
 import './App.css';
 
 class App extends Component {
@@ -24,7 +25,8 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <AnonRoute exact path='/signup' component={Signup} />
             <AnonRoute exact path='/login' component={Login} />
-            <PrivateRoute path='/profile' component={Profile} />
+            <PrivateRoute exact path='/profile' component={Profile} />
+            <PrivateRoute path='/profile/edit' component={ProfileEdit} />
             <PrivateRoute exact path='/contacts' component={Contacts} />
             <PrivateRoute exact path='/contacts' component={Contacts} />
             <PrivateRoute exact path='/chat/:id' component={Chat} />

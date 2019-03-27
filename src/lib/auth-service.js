@@ -33,6 +33,11 @@ class AuthService {
     return this.auth.get('/auth/me')
       .then(response => response.data)
   }
+
+  editUser(user) {
+    return this.auth.post('/profile/edit', user)
+      .then(response => response.data)
+  }
 }
 
 const authService = new AuthService();
