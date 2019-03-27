@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/navbar/Navbar';
 import { Link } from 'react-router-dom';
 import SignUpButton from '../components/buttons/SignUpButton' // <-
 
