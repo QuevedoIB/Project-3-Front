@@ -14,8 +14,7 @@ class AuthService {
   }
 
   signup(user) {
-    const { username, password } = user;
-    return this.auth.post('/auth/signup', { username, password })
+    return this.auth.post('/auth/signup', user)
       .then(({ data }) => data);
   }
 
