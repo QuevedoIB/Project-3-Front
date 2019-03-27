@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withAuth } from '../providers/AuthProvider';
+import { withAuth } from '../../providers/AuthProvider';
 import './Navbar.css';
 
 class Navbar extends Component {

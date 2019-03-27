@@ -24,8 +24,8 @@ class UserService {
   }
 
   // añadir id del user conectado en la petición para comprobar si son match como seguridad¿?
-  getOneContact(id) {
-    return this.users.get(`/contact/${id}`)
+  getOneContact(meId, id) {
+    return this.users.get(`${meId}/contact/${id}`)
       .then(({ data }) => data);
   }
 }

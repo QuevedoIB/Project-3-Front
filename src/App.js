@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import PrivateRoute from './components/route-protection/PrivateRoute';
-import AnonRoute from './components/AnonRoute';
-import Navbar from './components/Navbar';
+import AnonRoute from './components/route-protection/AnonRoute';
+import Navbar from './components/navbar/Navbar';
 import Private from './pages/Private';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -18,7 +18,6 @@ class App extends Component {
     return (
       <AuthProvider>
         <div className='container'>
-          <h1>Module 3 boilerplate</h1>
           <Navbar data='data' />
           <Switch>
             <Route exact path='/' component={Home} />
