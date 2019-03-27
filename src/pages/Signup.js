@@ -4,24 +4,23 @@ import { withAuth } from '../providers/AuthProvider';
 import parser from '../lib/file-upload';
 import InfoFields from '../components/signup/InfoFields';
 import Interests from '../components/signup/Interests';
+import Personality from '../components/signup/personality-test/Personality';
+import { questions } from '../data/questions';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
 const BACKSPACE_KEY = 8;
 
-
-
-
 class Signup extends Component {
 
   state = {
+    questions: questions,
     username: '',
     password: '',
     email: '',
-    preferences: [],
     interests: [],
     valueInterests: '',
-    page: 'infoFields'
+    indexPage: 0,
   };
 
   handleFormSubmit = (event) => {
@@ -47,7 +46,7 @@ class Signup extends Component {
 
   handleNext = () => {
     this.setState({
-      page: 'interests'
+      indexPage: this.state.indexPage + 1,
     });
   }
 
@@ -64,7 +63,7 @@ class Signup extends Component {
     const key = e.keyCode;
     if (key === BACKSPACE_KEY && !this.state.valueInterests) {
       this.editPrevTag();
-    } else if (key === 13){
+    } else if (key === 13) {
       e.preventDefault();
     }
   }
@@ -93,12 +92,9 @@ class Signup extends Component {
     this.setState({ interests, valueInterests: interest });
   }
 
-
-
-
   renderContent() {
-    if (this.state.page === 'infoFields') {
-      const { username, password, email } = this.state;
+    const { username, password, email, valueInterests, interests, questions, indexPage } = this.state;
+    if (indexPage === 0) {
       return (
         <div>
           <p>Already have account?
@@ -110,11 +106,9 @@ class Signup extends Component {
             email={email}
             handleChange={this.handleChange}
           />
-          <button onClick={this.handleNext}>Next</button>
         </div>
       );
-    } else if (this.state.page === 'interests') {
-      const { valueInterests, interests } = this.state;
+    } else if (indexPage === 1) {
       return (
         <Interests
           valueInterests={valueInterests}
@@ -124,6 +118,8 @@ class Signup extends Component {
           interests={interests}
         />
       );
+    } else if (indexPage === 2) {
+      return <Personality questions={questions} />
     }
   }
 
@@ -136,7 +132,8 @@ class Signup extends Component {
       <div>
         <form onSubmit={this.handleFormSubmit} enctype="multipart/form-data" >
           {this.renderContent()}
-          <button type="submit" onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault();}}>Submit</button>
+          <button onClick={this.handleNext}>Next</button>
+          {/* <button type="submit" onKeyPress={(e) => { e.target.keyCode === 13 && e.preventDefault(); }}>Submit</button> */}
         </form>
 
 

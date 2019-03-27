@@ -7,11 +7,11 @@ export default class Question extends Component {
     class: '',
   }
 
-  getDerivedStateFromProps() {
-    this.setState({
-      class: 'question-to-left',
-    })
-  }
+  // getDerivedStateFromProps() {
+  //   this.setState({
+  //     class: 'question-from-right',
+  //   })
+  // }
 
   componentDidMount() {
     this.setState({
@@ -19,20 +19,20 @@ export default class Question extends Component {
     })
   }
 
-  componentWillUnmount = () => {
-    this.setState({
-      class: 'question-to-left',
-    })
-  }
+  // componentWillUnmount = () => {
+  //   this.setState({
+  //     class: 'question-to-left',
+  //   })
+  // }
 
   render() {
     const { completed } = this.props;
     const { imageUrl, me, notMe } = this.props.question;
     return (
-      <div style={this.state.class}>
+      <div className={`slider-question ${this.state.class}`} >
         <img src={imageUrl} alt={me} />
         <div>
-          {completed ? <button type='submit' id="inventory" class="bottomLinks one">Sign Up</button> : <>
+          {completed ? <button type='submit' id="sign-up-fade" class="bottomLinks one">Sign Up</button> : <>
             <button onClick={() => this.props.onClick(me)}>ME</button>
             <button onClick={() => this.props.onClick(notMe)}>NOT ME</button>
           </>
