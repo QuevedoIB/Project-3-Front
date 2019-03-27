@@ -30,11 +30,13 @@ export default class Question extends Component {
 
     return (
       <div className={`slider-question ${this.state.class}`} >
-        <img src={process.env.PUBLIC_URL + imageUrl} alt={me} width="300px" />
-        <p>{me}</p>
+        <div className="personality-card">
+          <p className="personality-text">{me}</p>
+          <img src={process.env.PUBLIC_URL + imageUrl} alt={me} width="100%" />
+        </div>
         <div>
-          <button onClick={(e) => { e.preventDefault(); return this.props.onClick(me) }}>ME</button>
-          <button onClick={(e) => { e.preventDefault(); return this.props.onClick(notMe) }}>NOT ME</button>
+          <button onClick={(e) => { e.preventDefault(); return this.props.onClick(me) }} className="me-button">ME</button>
+          <button onClick={(e) => { e.preventDefault(); return this.props.onClick(notMe) }} className="not-me-button">NOT ME</button>
         </div>
       </div>
     )

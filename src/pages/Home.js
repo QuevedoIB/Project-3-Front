@@ -7,7 +7,7 @@ export default class Home extends Component {
   render() {
     return (
       <section>
-        <Navbar />
+        {/* <Navbar data='data' /> */}
         <article>
           <div>
             <h1>Project Title</h1>
@@ -18,9 +18,9 @@ export default class Home extends Component {
             <p>1 linea que describa app y conjunte con eslogan</p>
           </div>
           <div>
-            <SignUpButton>Sign Up</SignUpButton>
-            <p>If you already have an account</p>
-            <Link to='/login'>Log In</Link>
+            <Link to='/signup' className="link-button">Sign Up</Link>
+            <p>If you already have an account: <Link to='/login' className="link-text">Log In</Link></p>
+            
           </div>
         </article>
       </section>

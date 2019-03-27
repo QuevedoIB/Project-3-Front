@@ -19,7 +19,6 @@ class App extends Component {
     return (
       <AuthProvider>
         <div className='container'>
-          <Navbar data='data' />
           <Switch>
             <Route exact path='/' component={Home} />
             <AnonRoute exact path='/signup' component={Signup} />

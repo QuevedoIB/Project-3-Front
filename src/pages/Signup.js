@@ -110,7 +110,7 @@ class Signup extends Component {
       return (
         <div>
           <p>Already have account?
-          <Link to={"/login"}> Login</Link>
+          <Link to={"/login"} className="link-text"> Login</Link>
           </p>
           <InfoFields
             username={username}
@@ -118,7 +118,7 @@ class Signup extends Component {
             email={email}
             handleChange={this.handleChange}
           />
-          <button onClick={this.handleNext}>Next</button>
+          <button onClick={this.handleNext} className="link-button">Next</button>
         </div>
       );
     } else if (indexPage === 1) {
@@ -132,13 +132,17 @@ class Signup extends Component {
             handleKeyDown={this.handleKeyDown}
             interests={interests}
           />
-          <button onClick={this.handleNext}>Next</button>
+          <button onClick={this.handleNext} className="link-button">Next</button>
         </>
       );
     } else if (indexPage === 2) {
       if (personality.length === questions.length) {
-        return <button type='submit' id="sign-up-fade" className="bottomLinks one">Sign Up</button>
-
+        return (
+          <>
+            <p>All is ready!</p>
+            <button type='submit' id="sign-up-fade" className="bottomLinks one" className="link-button">Sign Up</button>
+          </>
+        );
       } else {
         return <Personality questions={questions} onData={this.handleData} />
       }
@@ -149,6 +153,7 @@ class Signup extends Component {
 
     return (
       <div>
+        {/* <h1>Sign up</h1> */}
         <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" >
           {this.renderContent()}
           {/* <button type="submit" onKeyPress={(e) => { e.target.keyCode === 13 && e.preventDefault(); }}>Submit</button> */}
