@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
 import parser from '../lib/file-upload';
-
+import InfoFields from '../components/signup/InfoFields';
+import Interests from '../components/signup/Interests';
 class Signup extends Component {
 
   state = {
     username: '',
     password: '',
     email: '',
+    preferences: [],
+    page: 'infoFields'
   };
 
   handleFormSubmit = (event) => {
@@ -20,6 +23,7 @@ class Signup extends Component {
       .then(() => {
         this.setState({
           username: "",
+          email: "",
           password: "",
         });
       })
@@ -31,28 +35,47 @@ class Signup extends Component {
     this.setState({ [name]: value });
   }
 
+  handleNext = () => {
+    this.setState({
+      page: 'preferences'
+    });
+  }
+  renderContent() {
+    if (this.state.page === 'infoFields') {
+      const { username, password, email } = this.state;
+      return (
+        <div>
+          <p>Already have account?
+          <Link to={"/login"}> Login</Link>
+          </p>
+          <InfoFields
+            username={username}
+            password={password}
+            email={email}
+            handleChange={this.handleChange}
+          />
+          <button onClick={this.handleNext}>Next</button>
+        </div>
+      );
+    } else if (this.state.page === 'preferences') {
+      return (
+        <Interests/>
+      );
+    }
+  }
+
   render() {
-    const { username, password } = this.state;
+    
+    console.log(this.state)
+
+
     return (
       <div>
         <form onSubmit={this.handleFormSubmit} enctype="multipart/form-data">
-          <label for='username'>Username:</label>
-          <input type="text" name="username" value={username} onChange={this.handleChange} />
-          <label for='password'>Password:</label>
-          <input type="password" name="password" value={password} onChange={this.handleChange} />
-          <label for='email'>Email:</label>
-          <input type="email" name="email" value={password} onChange={this.handleChange} />
-
-          {/* comprobar si se suben las imágenes */}
-
-          <span class="image-upload"><input type="file" name="imageUrl" class="input-img" />
-            Choose Image</span>
+          {this.renderContent()}
           <input type="submit" value="Signup" />
         </form>
 
-        <p>Already have account?
-          <Link to={"/login"}> Login</Link>
-        </p>
 
       </div>
     )

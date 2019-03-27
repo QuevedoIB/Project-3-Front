@@ -1,4 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './Interests.css';
+
+const ENTER_KEY = 13;
+const COMMA_KEY = 188;
+const BACKSPACE_KEY = 8;
+
 
 export default class Interests extends Component {
 
@@ -8,13 +14,13 @@ export default class Interests extends Component {
   }
 
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({
       value: e.target.value
     });
   }
 
-  handleKeyUp(e) {
+  handleKeyUp = (e) => {
     const key = e.keyCode;
 
     if (key === ENTER_KEY || key === COMMA_KEY) {
@@ -22,14 +28,14 @@ export default class Interests extends Component {
     }
   }
 
-  handleKeyDown(e) {
+  handleKeyDown = (e) => {
     const key = e.keyCode;
     if (key === BACKSPACE_KEY && !this.state.value) {
       this.editPrevTag();
     }
   }
 
-  addTag() {
+  addTag = () => {
     const { interests, value } = this.state;
     let interest = value.trim();
 
@@ -45,7 +51,7 @@ export default class Interests extends Component {
     });
   }
 
-  editPrevTag() {
+  editPrevTag = () => {
     let { interests } = this.state;
 
     const interest = interests.pop();
@@ -68,7 +74,7 @@ export default class Interests extends Component {
           <input
             type="text"
             placeholder="Add tag..."
-            value={value}
+            value={this.props.value}
             onChange={this.handleChange}
             ref="tag"
             className="tag-input"
@@ -84,4 +90,4 @@ export default class Interests extends Component {
     );
   }
 }
-}
+
