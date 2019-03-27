@@ -15,7 +15,7 @@ export default class Personality extends Component {
 
   handleMe = (value) => {
     const { index, personality } = this.state;
-    if (index === this.props.questions.length - 1) {
+    if (index === this.props.questions.length - 2) {
       this.setState({
         personality: [...personality, value],
         index: index + 1,
