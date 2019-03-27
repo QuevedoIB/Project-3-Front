@@ -12,6 +12,7 @@ import Chat from './pages/Chat';
 import Contact from './pages/Contact';
 import Home from './pages/Home'; // <-
 import Profile from './pages/Profile'; // <-
+import './App.css';
 
 class App extends Component {
   render() {
