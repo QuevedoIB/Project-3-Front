@@ -26,7 +26,6 @@ class ProfileEdit extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target, this.state)
     const input = e.target.name;
     this.setState({
       [input]: e.target.value,
@@ -44,7 +43,7 @@ class ProfileEdit extends Component {
         data[prop] = this.state[prop];
       }
     }
-    console.log(data);
+
     this.props.editUser(data);
   }
 
@@ -95,7 +94,7 @@ class ProfileEdit extends Component {
     const { username, password, quote, valueInterests, currentPassword, interests } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={(e) => this.handleSubmit(e)}>
         <label htmlFor="username"></label>
         <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' />
         <label htmlFor="new-password"></label>
