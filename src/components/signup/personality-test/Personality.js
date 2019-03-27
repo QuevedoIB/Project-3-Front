@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Question from '../personality-test/Question';
 
+
+
+
+
 export default class Personality extends Component {
 
   state = {
@@ -11,7 +15,7 @@ export default class Personality extends Component {
 
   handleMe = (value) => {
     const { index, personality } = this.state;
-    if (index === personality.length - 2) {
+    if (index === this.props.questions.length - 1) {
       this.setState({
         personality: [...personality, value],
         index: index + 1,
@@ -28,9 +32,11 @@ export default class Personality extends Component {
   render() {
     const { index, personality, completed } = this.state;
     const currentQuestion = this.props.questions[index];
+    console.log('completed ', completed, index, this.props.questions.length);
+    
     return (
       <div>
-        <Question question={currentQuestion} complted={completed} onClick={this.handleMe} />
+        <Question question={currentQuestion} completed={completed} onClick={this.handleMe} />
         <p>{index}/{personality}</p>
       </div>
     )
