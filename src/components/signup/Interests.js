@@ -60,9 +60,10 @@ export default class Interests extends Component {
   // }
 
   render() {
-    const { interests, valueInterests } = this.props;
+    const { interests, valueInterests, quote } = this.props;
     return (
       <div className="form">
+        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" maxlentgh="100"/>
         <div className="tags">
           <ul className="tags-list">
             {interests.map((interest, i) => (

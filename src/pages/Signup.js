@@ -18,6 +18,7 @@ class Signup extends Component {
     username: '',
     password: '',
     email: '',
+    quote: '',
     interests: [],
     valueInterests: '',
     personality: [],
@@ -26,11 +27,12 @@ class Signup extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { username, password, email, interests, personality } = this.state;
+    const { username, password, email, quote, interests, personality } = this.state;
     const userData = {
       username,
       password,
       email,
+      quote,
       interests,
       personality
     }
@@ -103,7 +105,7 @@ class Signup extends Component {
   }
 
   renderContent() {
-    const { username, password, email, valueInterests, interests, questions, indexPage, personality } = this.state;
+    const { username, password, email, quote, valueInterests, interests, questions, indexPage, personality } = this.state;
     if (indexPage === 0) {
       return (
         <div>
@@ -123,6 +125,7 @@ class Signup extends Component {
       return (
         <>
           <Interests
+            quote={quote}
             valueInterests={valueInterests}
             handleChange={this.handleChange}
             handleKeyUp={this.handleKeyUp}
