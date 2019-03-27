@@ -4,6 +4,14 @@ import { withAuth } from '../providers/AuthProvider';
 import parser from '../lib/file-upload';
 import InfoFields from '../components/signup/InfoFields';
 import Interests from '../components/signup/Interests';
+
+const ENTER_KEY = 13;
+const COMMA_KEY = 188;
+const BACKSPACE_KEY = 8;
+
+
+
+
 class Signup extends Component {
 
   state = {
@@ -11,6 +19,8 @@ class Signup extends Component {
     password: '',
     email: '',
     preferences: [],
+    interests: [],
+    valueInterests: '',
     page: 'infoFields'
   };
 
@@ -37,9 +47,52 @@ class Signup extends Component {
 
   handleNext = () => {
     this.setState({
-      page: 'preferences'
+      page: 'interests'
     });
   }
+
+  handleKeyUp = (e) => {
+    const key = e.keyCode;
+
+    if (key === ENTER_KEY || key === COMMA_KEY) {
+      this.addTag();
+    }
+  }
+
+  handleKeyDown = (e) => {
+    const key = e.keyCode;
+    if (key === BACKSPACE_KEY && !this.state.valueInterests) {
+      this.editPrevTag();
+    }
+  }
+
+  addTag = () => {
+    const { interests, valueInterests } = this.state;
+    let interest = valueInterests.trim();
+
+    interest = interest.replace(/,/g, "");
+
+    if (!interest) {
+      return;
+    }
+
+    this.setState({
+      interests: [...interests, interest],
+      valueInterests: ""
+    });
+  }
+
+  editPrevTag = () => {
+    let { interests } = this.state;
+
+    const interest = interests.pop();
+
+    this.setState({ interests, valueInterests: interest });
+  }
+
+
+
+
   renderContent() {
     if (this.state.page === 'infoFields') {
       const { username, password, email } = this.state;
@@ -57,15 +110,22 @@ class Signup extends Component {
           <button onClick={this.handleNext}>Next</button>
         </div>
       );
-    } else if (this.state.page === 'preferences') {
+    } else if (this.state.page === 'interests') {
+      const { valueInterests, interests } = this.state;
       return (
-        <Interests/>
+        <Interests
+          valueInterests={valueInterests}
+          handleChange={this.handleChange}
+          handleKeyUp={this.handleKeyUp}
+          handleKeyDown={this.handleKeyDown}
+          interests={interests}
+        />
       );
     }
   }
 
   render() {
-    
+
     console.log(this.state)
 
 

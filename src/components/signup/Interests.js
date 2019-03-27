@@ -14,53 +14,53 @@ export default class Interests extends Component {
   }
 
 
-  handleChange = (e) => {
-    this.setState({
-      value: e.target.value
-    });
-  }
+  // handleChange = (e) => {
+  //   this.setState({
+  //     value: e.target.value
+  //   });
+  // }
 
-  handleKeyUp = (e) => {
-    const key = e.keyCode;
+  // handleKeyUp = (e) => {
+  //   const key = e.keyCode;
 
-    if (key === ENTER_KEY || key === COMMA_KEY) {
-      this.addTag();
-    }
-  }
+  //   if (key === ENTER_KEY || key === COMMA_KEY) {
+  //     this.addTag();
+  //   }
+  // }
 
-  handleKeyDown = (e) => {
-    const key = e.keyCode;
-    if (key === BACKSPACE_KEY && !this.state.value) {
-      this.editPrevTag();
-    }
-  }
+  // handleKeyDown = (e) => {
+  //   const key = e.keyCode;
+  //   if (key === BACKSPACE_KEY && !this.state.value) {
+  //     this.editPrevTag();
+  //   }
+  // }
 
-  addTag = () => {
-    const { interests, value } = this.state;
-    let interest = value.trim();
+  // addTag = () => {
+  //   const { interests, value } = this.state;
+  //   let interest = value.trim();
 
-    interest = interest.replace(/,/g, "");
+  //   interest = interest.replace(/,/g, "");
 
-    if (!interest) {
-      return;
-    }
+  //   if (!interest) {
+  //     return;
+  //   }
 
-    this.setState({
-      interests: [...interests, interest],
-      value: ""
-    });
-  }
+  //   this.setState({
+  //     interests: [...interests, interest],
+  //     value: ""
+  //   });
+  // }
 
-  editPrevTag = () => {
-    let { interests } = this.state;
+  // editPrevTag = () => {
+  //   let { interests } = this.state;
 
-    const interest = interests.pop();
+  //   const interest = interests.pop();
 
-    this.setState({ interests, value: interest });
-  }
+  //   this.setState({ interests, value: interest });
+  // }
 
   render() {
-    const { interests, value } = this.state;
+    const { interests, valueInterests } = this.props;
     return (
       <div className="form">
         <div className="tags">
@@ -74,12 +74,12 @@ export default class Interests extends Component {
           <input
             type="text"
             placeholder="Add tag..."
-            value={this.props.value}
-            onChange={this.handleChange}
+            value={valueInterests}
+            onChange={this.props.handleChange}
             ref="tag"
             className="tag-input"
-            onKeyUp={this.handleKeyUp}
-            onKeyDown={this.handleKeyDown}
+            onKeyUp={this.props.handleKeyUp}
+            onKeyDown={this.props.handleKeyDown}
           />
         </div>
         <small>
