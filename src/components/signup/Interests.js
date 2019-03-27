@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import './Interests.css';
 
-const ENTER_KEY = 13;
-const COMMA_KEY = 188;
-const BACKSPACE_KEY = 8;
+// const ENTER_KEY = 13;
+// const COMMA_KEY = 188;
+// const BACKSPACE_KEY = 8;
 
 
 export default class Interests extends Component {
 
-  state = {
-    interests: [],
-    value: '',
-  }
+  // state = {
+  //   interests: [],
+  //   value: '',
+  // }
 
 
   // handleChange = (e) => {
@@ -64,7 +64,7 @@ export default class Interests extends Component {
     return (
       <div className="form">
         <div className="tags">
-          <ul>
+          <ul className="tags-list">
             {interests.map((interest, i) => (
               <li key={interest + i} className="tag">
                 {interest}
@@ -73,7 +73,8 @@ export default class Interests extends Component {
           </ul>
           <input
             type="text"
-            placeholder="Add tag..."
+            name="valueInterests"
+            placeholder="Interests, hobbies..."
             value={valueInterests}
             onChange={this.props.handleChange}
             ref="tag"

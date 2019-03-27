@@ -52,6 +52,7 @@ class Signup extends Component {
   }
 
   handleKeyUp = (e) => {
+    //e.preventDefault();
     const key = e.keyCode;
 
     if (key === ENTER_KEY || key === COMMA_KEY) {
@@ -63,6 +64,8 @@ class Signup extends Component {
     const key = e.keyCode;
     if (key === BACKSPACE_KEY && !this.state.valueInterests) {
       this.editPrevTag();
+    } else if (key === 13){
+      e.preventDefault();
     }
   }
 
@@ -131,9 +134,9 @@ class Signup extends Component {
 
     return (
       <div>
-        <form onSubmit={this.handleFormSubmit} enctype="multipart/form-data">
+        <form onSubmit={this.handleFormSubmit} enctype="multipart/form-data" >
           {this.renderContent()}
-          <input type="submit" value="Signup" />
+          <button type="submit" onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault();}}>Submit</button>
         </form>
 
 
