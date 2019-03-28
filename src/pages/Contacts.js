@@ -12,7 +12,8 @@ class Contacts extends Component {
     matches: [],
     text: '',
     loadingMatches: true,
-    loadingContacts: true
+    loadingContacts: true,
+    showMatches: true,
   }
 
   componentDidMount = () => {
@@ -21,12 +22,12 @@ class Contacts extends Component {
     this.getMatches();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.contacts.length !== this.state.contacts.length) {
-      this.setState({
+  onChangeContacts = () => {
+    this.getContacts();
+  }
 
-      })
-    }
+  onChangeMatches = () => {
+    this.getMatches();
   }
 
   onChange = (event) => {
@@ -82,21 +83,27 @@ class Contacts extends Component {
     }
   }
 
-  renderList() {
+  renderList = () => {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
 
-    if (this.state.contacts.length === 0 && this.state.matches.length === 0) {
-      return <p>No contacts</p>
+    if (this.state.showMatches) {
+      if (this.state.matches.length > 0) {
+        return matches
+      } else {
+        return <p>No matches</p>
+      }
     } else {
-      return (<>
-        {matches}
-        {contacts}
-      </>);
+      if (this.state.contacts.length > 0) {
+        return contacts
+      } else {
+        return <p>No contacts</p>
+      }
     }
   }
 
-  renderListMatches() {
+
+  renderListMatches = () => {
     if (!this.state.loadingMatches) {
       const { matches, text } = this.state;
       const filteredMatches = matches.filter(match => match.username.includes(text));
@@ -107,6 +114,7 @@ class Contacts extends Component {
             <MatchCard match={match}
               acceptMatch={this.props.acceptMatch}
               declineMatch={this.props.declineMatch}
+              updateMatches={this.onChangeMatches}
             />
           </li>
         })
@@ -118,14 +126,14 @@ class Contacts extends Component {
     }
   }
   //cambiar on delete
-  renderListContacts() {
+  renderListContacts = () => {
     if (!this.state.loadingContacts) {
       const { contacts, text } = this.state;
       const filteredContacts = contacts.filter(contact => contact.username.includes(text));
       if (filteredContacts.length > 0) {
         return filteredContacts.map(contact => {
-          return <li key={contact.id}>
-            <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} />
+          return <li key={contact._id}>
+            <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} updateContacts={this.onChangeContacts} />
           </li>
         })
 
@@ -136,6 +144,22 @@ class Contacts extends Component {
     }
   }
 
+  showMatches = () => {
+    if (!this.state.showMatches) {
+      this.setState({
+        showMatches: true,
+      })
+    }
+  }
+
+  showContacts = () => {
+    if (this.state.showMatches) {
+      this.setState({
+        showMatches: false,
+      })
+    }
+  }
+
   render() {
 
     const { text } = this.state;
@@ -143,6 +167,10 @@ class Contacts extends Component {
     return (
       <section>
         <input value={text} type='text' placeholder='Search User' onChange={this.onChange}></input>
+        <div>
+          <button onClick={this.showMatches}>Show matches</button>
+          <button onClick={this.showContacts}>Show contacts</button>
+        </div>
         <ul>
           {this.renderList()}
         </ul>

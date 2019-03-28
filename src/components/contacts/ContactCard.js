@@ -14,7 +14,10 @@ export default class ContactCard extends Component {
         <div>
           <Link to={`/chat/${_id}`}>Chat</Link>
         </div>
-        <button onClick={() => this.props.deleteContact(_id, this.props.userId)}>Delete Match</button>
+        <button onClick={() => {
+          this.props.deleteContact(this.props.userId, _id)
+          this.props.updateContacts()
+        }}>Delete Contact</button>
       </div>
     )
   }

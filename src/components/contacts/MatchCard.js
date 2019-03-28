@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default class MatchCard extends Component {
   render() {
+    console.log(this.props)
     const { imageUrl, username, quote, _id } = this.props.match;
     return (
       <div>
@@ -12,8 +13,14 @@ export default class MatchCard extends Component {
           <p>{quote}</p>
         </div>
         <div>
-          <button onClick={() => this.props.acceptMatch(_id)}>Accept</button>
-          <button onClick={() => this.props.declineMatch(_id)}>Decline</button>
+          <button onClick={() => {
+            this.props.acceptMatch(_id)
+            this.props.updateMatches()
+          }}>Accept</button>
+          <button onClick={() => {
+            this.props.declineMatch(_id)
+            this.props.updateMatches()
+          }}>Decline</button>
         </div>
       </div>
     )
