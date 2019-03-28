@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-export default class ContactCard extends Component {
+export default class PendingCard extends Component {
   render() {
     const { imageUrl, username, quote, id } = this.props.contact;
     return (
@@ -12,9 +12,8 @@ export default class ContactCard extends Component {
           <p>{quote}</p>
         </div>
         <div>
-          <Link to={`/chat/${id}`}>Chat</Link>
+          <p>Pending</p>
         </div>
-        <button onClick={this.props.onDelete(id)}>Delete Match</button>
       </div>
     )
   }

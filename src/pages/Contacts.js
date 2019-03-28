@@ -7,18 +7,13 @@ class Contacts extends Component {
 
   state = {
     contacts: [],
+    matches:[],
+    invitations:[],
     text: '',
   }
 
-  componentDidMount = async () => {
-    try {
-      const contacts = await userService.getContacts();
-      this.setState({
-        contacts
-      })
-    } catch (err) {
-      console.log(err)
-    }
+  componentDidMount = () => {
+    this.getContacts();
   }
 
   onChange = (event) => {
@@ -44,20 +39,65 @@ class Contacts extends Component {
     }
   }
 
+  getContacts = async() =>{
+    try {
+      const contacts = await userService.getContacts(this.props.user._id);
+      this.setState({
+        contacts
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  renderList() {
+    const invitations = this.renderListInvitations();
+    const contacts = this.renderListContacts();
+    const pending = this.renderListPending();
+    console.log(contacts);
+    if (this.state.contacts.length === 0 && this.state.invitations.length === 0 && this.state.matches.length === 0) {
+      return <p>No contacts</p>
+    } else {
+      return (<>
+      {invitations}
+      {contacts}
+      {pending}
+      </>);
+    }
+  }
+
+  renderListInvitations() {
+
+  }
+
+  renderListContacts() {
+    const { contacts, text } = this.state;
+    const filteredContacts = contacts.filter(contact => contact.name.includes(text));
+
+    return filteredContacts.map(contact => {
+      return <li key={contact.id}>
+        <ContactCard contact={contact} onDelete={this.handleDelete} />
+      </li>
+    })
+
+  }
+
+  renderListPending() {
+
+  }
+
+
+
   render() {
 
     const { contacts, text } = this.state;
-    const filteredContacts = contacts.filter(contact => contact.name.includes(text));
+    // const filteredContacts = contacts.filter(contact => contact.name.includes(text));
 
     return (
       <section>
         <input value={text} type='text' placeholder='Search User' onChange={this.onChange}></input>
         <ul>
-          {filteredContacts.map(contact => {
-            return <li key={contact.id}>
-              <ContactCard contact={contact} onDelete={this.handleDelete} />
-            </li>
-          })}
+          {this.renderList()}
         </ul>
       </section>
     )
