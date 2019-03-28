@@ -20,7 +20,7 @@ export const withContacts = (Comp) => {
               getUsers={contactStore.getUsers}
               matchUser={contactStore.matchUser}
               getContacts={contactStore.getContacts}
-              getMatches={contactStore.getContacts}
+              getMatches={contactStore.getMatches}
               deleteContact={contactStore.deleteContact}
               {...this.props} />
           }}

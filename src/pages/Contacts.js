@@ -56,7 +56,7 @@ class Contacts extends Component {
   getMatches = async () => {
     try {
       const matches = await this.props.getMatches();
-      if (matches) {
+      if (matches.length===0) {
         this.setState({
           matches
         })
@@ -80,8 +80,8 @@ class Contacts extends Component {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
 
-    console.log(contacts);
-    console.log(matches);
+    console.log('CONTACTS ' + contacts);
+    console.log('MATCHES ' + matches);
     if (this.state.contacts.length === 0 && this.state.matches.length === 0) {
       return <p>No contacts</p>
     } else {
@@ -94,27 +94,37 @@ class Contacts extends Component {
 
   renderListMatches() {
     const { matches, text } = this.state;
-    const filteredMatches = matches.filter(match => match.name.includes(text));
+    const filteredMatches = matches.filter(match => match.username.includes(text));
 
-    return filteredMatches.map(match => {
-      return <li key={match.id}>
-        <ContactCard match={match}
-          acceptMatch={this.acceptMatch}
-          declineMatch={this.declineMatch}
-        />
-      </li>
-    })
+    if (filteredMatches) {
+      return filteredMatches.map(match => {
+        return <li key={match.id}>
+          <ContactCard match={match}
+            acceptMatch={this.acceptMatch}
+            declineMatch={this.declineMatch}
+          />
+        </li>
+      })
+
+    } else {
+      return <></>
+    }
+
   }
 
   renderListContacts() {
     const { contacts, text } = this.state;
-    const filteredContacts = contacts.filter(contact => contact.name.includes(text));
+    const filteredContacts = contacts.filter(contact => contact.username.includes(text));
+    if (filteredContacts) {
+      return filteredContacts.map(contact => {
+        return <li key={contact.id}>
+          <ContactCard contact={contact} onDelete={this.handleDelete} />
+        </li>
+      })
 
-    return filteredContacts.map(contact => {
-      return <li key={contact.id}>
-        <ContactCard contact={contact} onDelete={this.handleDelete} />
-      </li>
-    })
+    } else {
+      return <></>
+    }
 
   }
 
