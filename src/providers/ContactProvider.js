@@ -61,10 +61,6 @@ export default class ContactProvider extends Component {
       .catch(error => console.log(error))
   }
 
-<<<<<<< HEAD
-  matchUser = (id) => {
-    return userService.matchUser(id)
-=======
   getContacts = () => {
     return userService.getContacts()
     .then((users) => users)
@@ -85,7 +81,6 @@ export default class ContactProvider extends Component {
 
   matchUser = (body) => {
     return userService.matchUser(body)
->>>>>>> 51293d1082a3cf9f023ba0b0a03cb6a068fccc7b
       .then((user) => user)
       .catch(error => console.log(error))
   }
