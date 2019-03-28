@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Question from '../personality-test/Question';
+import './Personality.css';
 
 export default class Personality extends Component {
 
@@ -33,7 +34,7 @@ export default class Personality extends Component {
     return (
       <div>
         <Question question={currentQuestion} onClick={this.handleMe} />
-        <p>{index}/{questions.length}</p>
+        <p className="counter-test">{index}/{questions.length}</p>
       </div>
     )
   }

@@ -94,7 +94,7 @@ div.question-to-left figure {
   font-size: 20px;
   width: 20vh;
   justify-self: center;
-  margin: 0 10px;
+  margin: 5vh 10px;
 }
 
 .not-me-button{
@@ -108,7 +108,7 @@ div.question-to-left figure {
   font-size: 20px;
   width: 20vh;
   justify-self: center;
-  margin: 0 10px;
+  margin: 5vh 10px;
 }
 
 .personality-text{
@@ -119,12 +119,19 @@ div.question-to-left figure {
 .personality-card{
   display: grid;
   justify-content: center;
-  border: 1px solid rgb(185, 185, 185);
+  border: 1px solid rgb(105, 105, 105);
   border-radius: 5px;
-  width: 30vw;
+  width: 80vw;
 }
 
 .personality-card p{
   text-align: center;
+  margin: 2vh;
 
+}
+
+.personality-card img{
+  text-align: center;
+  border-bottom-left-radius: 5px; 
+  border-bottom-right-radius: 5px; 
 }

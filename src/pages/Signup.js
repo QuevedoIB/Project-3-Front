@@ -153,7 +153,7 @@ class Signup extends Component {
   render() {
 
     return (
-      <div className="page">
+      <div className="page signup">
         <h1>Sign up</h1>
         <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" >
           {this.renderContent()}

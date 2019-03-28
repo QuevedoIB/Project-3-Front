@@ -6,7 +6,7 @@ import SignUpButton from '../components/buttons/SignUpButton' // <-
 export default class Home extends Component {
   render() {
     return (
-      <section className="page home">
+      <section className="page home full">
         {/* <Navbar data='data' /> */}
         <article>
           <div>

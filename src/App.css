@@ -23,10 +23,11 @@ h1{
   justify-items: center;
   align-items: center;
   text-align: center;
-  height: 100vh;
-
 }
 
+.full{
+  height: 100vh;
+}
 
 .home div{
   margin: 5vh 0;
@@ -34,6 +35,10 @@ h1{
 
 .home p{
   margin: 5vh 0;
+}
+
+.signup h1{
+ margin: 7vh 0;
 }
 
 .link-button{
