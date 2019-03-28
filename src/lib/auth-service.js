@@ -35,12 +35,6 @@ class AuthService {
   }
 
   editUser(user) {
-    console.log(user)
-    // return this.auth.post('/profile/edit', user)
-    //   .then(response => {
-    //     console.log(response);
-    //     return response.data
-    //   })
     return this.auth.post('/profile/edit', user)
       .then(response => {
         console.log(response)

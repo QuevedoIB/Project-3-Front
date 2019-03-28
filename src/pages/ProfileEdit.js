@@ -8,21 +8,12 @@ const BACKSPACE_KEY = 8;
 class ProfileEdit extends Component {
 
   state = {
-    username: '',
+    username: this.props.user.username,
     password: '',
-    quote: '',
+    quote: this.props.user.quote,
     valueInterests: '',
-    interests: [],
-    currentUser: this.props.user.username,
+    interests: this.props.user.interests,
     currentPassword: '',
-  }
-
-  componentDidMount() {
-    this.setState({
-      username: this.props.user.username,
-      quote: this.props.user.quote,
-      interests: this.props.user.interests,
-    })
   }
 
   handleChange = (e) => {
@@ -32,19 +23,21 @@ class ProfileEdit extends Component {
     })
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {};
+    // const data = {};
 
-    for (let prop in this.state) {
-      if (!this.state[prop]) {
-        data[prop] = this.props.user[prop]
-      } else {
-        data[prop] = this.state[prop];
-      }
-    }
+    // for (let prop in this.state) {
+    //   if (!this.state[prop]) {
+    //     data[prop] = this.props.user[prop]
+    //   } else {
+    //     data[prop] = this.state[prop];
+    //   }
+    // }
 
-    this.props.editUser(data);
+    await this.props.editUser(this.state);
+
+    this.props.history.push('/profile')
   }
 
   handleKeyUp = (e) => {
