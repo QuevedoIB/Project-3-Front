@@ -7,7 +7,6 @@ class Contacts extends Component {
 
   state = {
     contacts: [],
-    matches:[],
     invitations:[],
     text: '',
   }
@@ -53,15 +52,14 @@ class Contacts extends Component {
   renderList() {
     const invitations = this.renderListInvitations();
     const contacts = this.renderListContacts();
-    const pending = this.renderListPending();
+
     console.log(contacts);
-    if (this.state.contacts.length === 0 && this.state.invitations.length === 0 && this.state.matches.length === 0) {
+    if (this.state.contacts.length === 0 && this.state.invitations.length === 0) {
       return <p>No contacts</p>
     } else {
       return (<>
       {invitations}
       {contacts}
-      {pending}
       </>);
     }
   }
@@ -79,10 +77,6 @@ class Contacts extends Component {
         <ContactCard contact={contact} onDelete={this.handleDelete} />
       </li>
     })
-
-  }
-
-  renderListPending() {
 
   }
 
