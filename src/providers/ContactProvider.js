@@ -63,19 +63,19 @@ export default class ContactProvider extends Component {
 
   getContacts = () => {
     return userService.getContacts()
-    .then((users) => users)
-    .catch(error => console.log(error))
+      .then((users) => users)
+      .catch(error => console.log(error))
   }
 
   getMatches = () => {
     return userService.getMatches()
-    .then((users) => users)
-    .catch(error => console.log(error))
+      .then((users) => users)
+      .catch(error => console.log(error))
   }
 
   deleteContact = (userId, contactId) => {
     return userService.deleteContact(userId, contactId)
-      .then((user)=> user)
+      .then((user) => user)
       .catch(error => console.log(error))
   }
 
