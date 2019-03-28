@@ -67,11 +67,21 @@ class Contacts extends Component {
     }
   }
 
+  acceptMatch = (id) => {
+
+  }
+
+  declineMatch = (id) => {
+    
+  }
+
+
   renderList() {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
 
     console.log(contacts);
+    console.log(matches);
     if (this.state.contacts.length === 0 && this.state.matches.length === 0) {
       return <p>No contacts</p>
     } else {
@@ -88,7 +98,10 @@ class Contacts extends Component {
 
     return filteredMatches.map(match => {
       return <li key={match.id}>
-        <ContactCard match={match} />
+        <ContactCard match={match} 
+        acceptMatch={this.acceptMatch}
+        declineMatch={this.declineMatch}
+        />
       </li>
     })
   }

@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
 
 export default class ContactProfile extends Component {
+  renderInterests(){
+    return this.props.contact.interests.map(e=>{
+      return <li>e</li>
+    });
+  }
+
   render() {
-    const { username, imageUrl, quote, email, personality } = this.props.contact;
+    const { username, imageUrl, quote, interests } = this.props.contact;
 
     return (
-      <h1>Es necesaria esta vista?¿ {username} </h1>
+      <div>
+        <img src={imageUrl} alt={username} />
+        <h1>{username}</h1>
+        <p>{quote}</p>
+        <ul>
+          {this.renderInterests()}
+        </ul>
+      </div>
     )
   }
 }
