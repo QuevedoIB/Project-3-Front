@@ -97,9 +97,9 @@ class SearchPeople extends Component {
           <form>
             <h3>Match by :</h3>
             <label htmlFor="personality">Personality </label>
-            <input type="checkbox" value={personality} name="personality" id={personality} onChange={this.onChange} />
+            <input type="checkbox" value={personality} name="personality" id="personality" onChange={this.onChange} />
             <label htmlFor="location">Location </label>
-            <input type="checkbox" value={location} name="location" id={location} onChange={this.onChange} />
+            <input type="checkbox" value={location} name="location" id="location" onChange={this.onChange} />
           </form>
         </header>
         <article>
