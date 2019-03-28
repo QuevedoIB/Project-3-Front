@@ -3,6 +3,7 @@ import { withContacts } from '../providers/ContactProvider';
 import Personality from '../components/signup/personality-test/Personality';
 import SearchCard from '../components/contacts/SearchCard';
 import Spinner from '../components/loading/Spinner';
+import { Link } from 'react-router-dom';
 
 class SearchPeople extends Component {
 
@@ -127,6 +128,7 @@ class SearchPeople extends Component {
             <button onClick={this.matchUser}>Add</button>
           </article>
         }
+        <Link to='/profile' >Back to Profile</Link>
       </section>
     )
   }

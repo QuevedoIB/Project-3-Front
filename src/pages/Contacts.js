@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import ContactCard from '../components/contacts/ContactCard';
+import MatchCard from '../components/contacts/MatchCard';
 import { withAuth } from '../providers/AuthProvider';
 import { withContacts } from '../providers/ContactProvider';
+import { Link } from 'react-router-dom';
 
 class Contacts extends Component {
 
@@ -12,6 +14,7 @@ class Contacts extends Component {
   }
 
   componentDidMount = () => {
+
     this.getContacts();
     this.getMatches();
   }
@@ -42,7 +45,8 @@ class Contacts extends Component {
   getContacts = async () => {
     try {
       const contacts = await this.props.getContacts();
-      if (contacts) {
+
+      if (contacts.length > 0) {
         this.setState({
           contacts
         })
@@ -56,7 +60,8 @@ class Contacts extends Component {
   getMatches = async () => {
     try {
       const matches = await this.props.getMatches();
-      if (matches.length===0) {
+
+      if (matches.length > 0) {
         this.setState({
           matches
         })
@@ -80,8 +85,6 @@ class Contacts extends Component {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
 
-    console.log('CONTACTS ' + contacts);
-    console.log('MATCHES ' + matches);
     if (this.state.contacts.length === 0 && this.state.matches.length === 0) {
       return <p>No contacts</p>
     } else {
@@ -97,9 +100,9 @@ class Contacts extends Component {
     const filteredMatches = matches.filter(match => match.username.includes(text));
 
     if (filteredMatches) {
-      return filteredMatches.map(match => {
-        return <li key={match.id}>
-          <ContactCard match={match}
+      return filteredMatches.map((match, index) => {
+        return <li key={`${match}${index}`}>
+          <MatchCard match={match}
             acceptMatch={this.acceptMatch}
             declineMatch={this.declineMatch}
           />
@@ -116,8 +119,8 @@ class Contacts extends Component {
     const { contacts, text } = this.state;
     const filteredContacts = contacts.filter(contact => contact.username.includes(text));
     if (filteredContacts) {
-      return filteredContacts.map(contact => {
-        return <li key={contact.id}>
+      return filteredContacts.map((contact, index) => {
+        return <li key={`${contact._id}${index}`}>
           <ContactCard contact={contact} onDelete={this.handleDelete} />
         </li>
       })
@@ -130,8 +133,7 @@ class Contacts extends Component {
 
   render() {
 
-    const { contacts, text } = this.state;
-    // const filteredContacts = contacts.filter(contact => contact.name.includes(text));
+    const { text } = this.state;
 
     return (
       <section>
@@ -139,6 +141,7 @@ class Contacts extends Component {
         <ul>
           {this.renderList()}
         </ul>
+        <Link to='/profile' >Back to Profile</Link>
       </section>
     )
   }

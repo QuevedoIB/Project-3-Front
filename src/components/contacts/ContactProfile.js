@@ -1,10 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default class ContactProfile extends Component {
-  renderInterests(){
-    return this.props.contact.interests.map(e=>{
-      return <li>e</li>
+class ContactProfile extends Component {
+  renderInterests() {
+    return this.props.contact.interests.map((e, index) => {
+      return <li key={`${e}${index}`}>{e}</li>
     });
+  }
+
+  onBack = () => {
+    this.props.history.goBack();
   }
 
   render() {
@@ -18,7 +23,10 @@ export default class ContactProfile extends Component {
         <ul>
           {this.renderInterests()}
         </ul>
+        <button onClick={this.onBack}>Back</button>
       </div>
     )
   }
 }
+
+export default withRouter(ContactProfile);

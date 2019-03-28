@@ -24,13 +24,13 @@ class UserService {
   }
 
   deleteContact(userId, contactId) {
-    return this.users.post('/contacts/delete', { userId, contactId })
+    return this.users.post('/profile/contact/delete', { userId, contactId })
       .then(({ data }) => data);
   }
 
   // añadir id del user conectado en la petición para comprobar si son match como seguridad¿?
-  getOneContact(meId, id) {
-    return this.users.get(`${meId}/contact/${id}`)
+  getOneContact(id) {
+    return this.users.get(`/profile/contact/${id}`)
       .then(({ data }) => data);
   }
 

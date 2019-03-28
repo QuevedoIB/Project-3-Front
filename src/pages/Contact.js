@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { withContacts } from '../providers/ContactProvider';
 import { withRouter } from 'react-router-dom';
-import userService from '../lib/user-service';
 import ContactProfile from '../components/contacts/ContactProfile'; // <-
 import Spinner from '../components/loading/Spinner';
 
@@ -12,8 +12,9 @@ class Contact extends Component {
   }
 
   componentDidMount = async () => {
+
     try {
-      const contact = await userService.getOneContact(this.props.match.params.id);
+      const contact = await this.props.getOneContact(this.props.match.params.id);
 
       this.setState({
         contact,
@@ -37,4 +38,4 @@ class Contact extends Component {
   }
 }
 
-export default withRouter(Contact);
+export default withRouter(withContacts(Contact));
