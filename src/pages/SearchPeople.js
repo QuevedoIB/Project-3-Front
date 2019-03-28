@@ -88,9 +88,18 @@ class SearchPeople extends Component {
   }
 
 
+  matchUser = async () => {
+    const { listOfUsers, indexUser } = this.state;
+    try {
+      await this.props.matchUser(listOfUsers[indexUser]._id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   render() {
     const { location, personality, listOfUsers, loading, indexUser } = this.state;
-
     return (
       <section>
         <header>

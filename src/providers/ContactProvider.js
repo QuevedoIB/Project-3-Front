@@ -18,6 +18,7 @@ export const withContacts = (Comp) => {
               isLogged={contactStore.isLogged}
               user={contactStore.user}
               getUsers={contactStore.getUsers}
+              matchUser={contactStore.matchUser}
               {...this.props} />
           }}
         </Consumer>
@@ -57,6 +58,12 @@ export default class ContactProvider extends Component {
       .catch(error => console.log(error))
   }
 
+  matchUser = (body) => {
+    return userService.matchUser(body)
+      .then((user) => user)
+      .catch(error => console.log(error))
+  }
+
   render() {
     const { isLogged, user, status } = this.state;
     const { children } = this.props;
@@ -70,6 +77,7 @@ export default class ContactProvider extends Component {
               isLogged,
               user,
               getUsers: this.getUsers,
+              matchUser: this.matchUser
             }}>
             {children}
           </Provider>
