@@ -37,7 +37,7 @@ class AuthService {
   editUser(user) {
     return this.auth.post('/profile/edit', user)
       .then(response => {
-        console.log(response)
+
         return response.data
       })
   }

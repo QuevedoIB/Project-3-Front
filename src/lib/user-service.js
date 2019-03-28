@@ -35,7 +35,7 @@ class UserService {
   }
 
   getUsers() {
-    // console.log(object, 'HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA')
+
     return this.users.get(`/api/users`)
       .then(({ data }) => {
         return data
@@ -43,7 +43,7 @@ class UserService {
   }
 
   matchUser(id) {
-    console.log(id)
+
     return this.users.post('/api/send-match', { id })
       .then(({ data }) => data);
   }

@@ -71,7 +71,7 @@ class Contacts extends Component {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
 
-    console.log(contacts);
+
     if (this.state.contacts.length === 0 && this.state.matches.length === 0) {
       return <p>No contacts</p>
     } else {
