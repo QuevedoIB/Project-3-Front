@@ -37,6 +37,11 @@ class UserService {
       });
   }
 
+  matchUser(id) {
+    return this.users.post('/send-match', {id})
+      .then(({data})=>data);
+  }
+
 }
 
 const userService = new UserService();
