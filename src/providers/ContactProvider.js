@@ -17,7 +17,7 @@ export const withContacts = (Comp) => {
             return <Comp
               isLogged={contactStore.isLogged}
               user={contactStore.user}
-              getOne={contactStore.getOne}
+              getUsers={contactStore.getUsers}
               {...this.props} />
           }}
         </Consumer>
@@ -51,9 +51,9 @@ export default class ContactProvider extends Component {
       })
   }
 
-  getOne = (body) => {
-    return userService.getOneUser(body)
-      .then((user) => user)
+  getUsers = () => {
+    return userService.getUsers()
+      .then((users) => users)
       .catch(error => console.log(error))
   }
 
@@ -69,7 +69,7 @@ export default class ContactProvider extends Component {
             {
               isLogged,
               user,
-              getOne: this.getOne,
+              getUsers: this.getUsers,
             }}>
             {children}
           </Provider>

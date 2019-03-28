@@ -9,47 +9,103 @@ class SearchPeople extends Component {
   state = {
     location: false,
     personality: false,
-    foundUser: {},
+    listOfUsers: [],
     loading: true,
+    indexUser: 0,
   }
 
   componentDidMount = () => {
-    this.getOne();
+    this.getUsers();
   }
 
   onChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: !this.state[e.target.name],
     })
+
+    this.getUsers();
   }
 
-  getOne = async () => {
-    const resultUser = await this.props.getOne(this.state);
-    console.log(resultUser, 'FRONT GOT IT')
-    this.setState({
-      foundUser: resultUser,
-      loading: false,
-    })
+  getUsers = async () => {
+    const resultUsers = await this.props.getUsers();
+
+    if (this.state.personality) {
+      let sortedUsers = this.sortUsersListByPersonality(resultUsers, this.props.user)
+      this.setState({
+        listOfUsers: sortedUsers,
+        loading: false,
+        indexUser: 0,
+      })
+    } else {
+      this.setState({
+        listOfUsers: this.sortUsersRandom(resultUsers),
+        loading: false,
+        indexUser: 0,
+      })
+    }
+
   }
+
+  getNext = () => {
+    if (this.state.indexUser < this.state.listOfUsers.length - 1) {
+      this.setState({
+        indexUser: this.state.indexUser + 1
+      })
+    }
+  }
+
+  sortUsersListByPersonality = (usersList, user) => {
+    usersList.forEach(person => {
+      let counter = 0;
+      person.personality.forEach((p, index) => {
+        if (user.personality.includes(p)) {
+          counter++;
+        }
+      })
+      person.counter = counter;
+    })
+
+    return usersList.sort((a, b) => b.counter - a.counter);
+  }
+
+  sortUsersRandom = (array) => {
+
+    const copyArray = array.slice();
+
+    let currentIndex = copyArray.length, temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = copyArray[currentIndex];
+      copyArray[currentIndex] = copyArray[randomIndex];
+      copyArray[randomIndex] = temporaryValue;
+    }
+
+    return copyArray;
+  }
+
 
   render() {
-    const { location, personality, foundUser, loading } = this.state;
-    console.log('USER ', foundUser)
+    const { location, personality, listOfUsers, loading, indexUser } = this.state;
+
     return (
       <section>
         <header>
           <form>
             <h3>Match by :</h3>
             <label htmlFor="personality">Personality </label>
-            <input type="checkbox" value={personality} name={personality} id={personality} onChange={this.onChange} />
+            <input type="checkbox" value={personality} name="personality" id={personality} onChange={this.onChange} />
             <label htmlFor="location">Location </label>
-            <input type="checkbox" value={location} name={location} id={location} onChange={this.onChange} />
+            <input type="checkbox" value={location} name="location" id={location} onChange={this.onChange} />
           </form>
         </header>
         <article>
-          {loading ? <Spinner /> : <SearchCard user={foundUser} />}
-          <button onClick={this.getOne}>Next</button>
-          <button onClick={this.getOne}>Add</button>
+          {loading ? <Spinner /> : <SearchCard user={listOfUsers[indexUser]} />}
+          <button onClick={this.getNext}>Next</button>
+          <button onClick={this.matchUser}>Add</button>
         </article>
       </section>
     )
@@ -57,3 +113,27 @@ class SearchPeople extends Component {
 }
 
 export default withContacts(SearchPeople);
+
+
+
+// const me = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+
+// const array = [{
+//   personality: ['a', 1, 2, 3, 4, 5, 6, 7, 8, 'h'],
+// },
+// {
+//   personality: ['a', 1, 'j', 3, 4, 5, 'f', 7, 8, 'h']
+// }];
+
+
+// array.forEach(person => {
+//   let counter = 0;
+//   person.personality.forEach((p, index) => {
+//     if (me.includes(p)) {
+//       counter++;
+//     }
+//   })
+//   person.counter = counter;
+// })
+
+// array.sort((a, b) => b.counter - a.counter);

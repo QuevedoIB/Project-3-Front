@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import userService from '../lib/user-service';
-import ContactCard from '../contacts/ContactCard';
+import ContactCard from '../components/contacts/ContactCard';
 import { withAuth } from '../providers/AuthProvider';
 
 class Contacts extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import userService from '../lib/user-service';
-import ContactProfile from '../contacts/ContactProfile'; // <-
+import ContactProfile from '../components/contacts/ContactProfile'; // <-
 import Spinner from '../components/loading/Spinner';
 
 class Contact extends Component {

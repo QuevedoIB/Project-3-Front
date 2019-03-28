@@ -29,11 +29,10 @@ class UserService {
       .then(({ data }) => data);
   }
 
-  getOneUser(object) {
+  getUsers() {
     // console.log(object, 'HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA')
-    return this.users.post(`/api/search-people`)
+    return this.users.get(`/api/users`)
       .then(({ data }) => {
-        console.log(data)
         return data
       });
   }
