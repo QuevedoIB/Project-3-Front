@@ -38,8 +38,9 @@ class UserService {
   }
 
   matchUser(id) {
-    return this.users.post('/send-match', {id})
-      .then(({data})=>data);
+    console.log(id)
+    return this.users.post('/api/send-match', { id })
+      .then(({ data }) => data);
   }
 
 }

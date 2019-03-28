@@ -92,6 +92,7 @@ class SearchPeople extends Component {
     const { listOfUsers, indexUser } = this.state;
     try {
       await this.props.matchUser(listOfUsers[indexUser]._id);
+      this.getNext();
     } catch (error) {
       console.log(error);
     }

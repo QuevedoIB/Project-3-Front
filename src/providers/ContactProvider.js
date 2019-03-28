@@ -58,8 +58,8 @@ export default class ContactProvider extends Component {
       .catch(error => console.log(error))
   }
 
-  matchUser = (body) => {
-    return userService.matchUser(body)
+  matchUser = (id) => {
+    return userService.matchUser(id)
       .then((user) => user)
       .catch(error => console.log(error))
   }

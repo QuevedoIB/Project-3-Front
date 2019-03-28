@@ -64,6 +64,7 @@ export default class AuthProvider extends Component {
   signupUser = (body) => {
     return authService.signup(body)
       .then((user) => {
+        console.log(user)
         this.setUser(user);
       })
       .catch(error => console.log(error))
