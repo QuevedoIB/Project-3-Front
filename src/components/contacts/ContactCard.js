@@ -6,7 +6,7 @@ export default class ContactCard extends Component {
     const { imageUrl, username, quote, id } = this.props.contact;
     return (
       <div>
-        <img src={imageUrl} alt={username} />
+        <img src="" alt={username} />
         <div>
         <Link to={`/contact/${id}`}><h3>{username}</h3></Link>
           <p>{quote}</p>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ContactCard from '../components/contacts/ContactCard';
+import MatchCard from '../components/contacts/MatchCard';
 import { withAuth } from '../providers/AuthProvider';
 import { withContacts } from '../providers/ContactProvider';
 
@@ -9,6 +10,8 @@ class Contacts extends Component {
     contacts: [],
     matches: [],
     text: '',
+    loadingMatches: true,
+    loadingContacts: true
   }
 
   componentDidMount = () => {
@@ -42,12 +45,12 @@ class Contacts extends Component {
   getContacts = async () => {
     try {
       const contacts = await this.props.getContacts();
-      if (contacts) {
+      if (contacts.length>0) {
         this.setState({
-          contacts
+          contacts,
+          loadingContacts: false
         })
       }
-
     } catch (err) {
       console.log(err)
     }
@@ -56,12 +59,13 @@ class Contacts extends Component {
   getMatches = async () => {
     try {
       const matches = await this.props.getMatches();
-      if (matches.length===0) {
+      if (matches.length > 0) {
         this.setState({
-          matches
+          matches,
+          loadingMatches: false
         })
       }
-
+      
     } catch (err) {
       console.log(err)
     }
@@ -93,39 +97,43 @@ class Contacts extends Component {
   }
 
   renderListMatches() {
-    const { matches, text } = this.state;
-    const filteredMatches = matches.filter(match => match.username.includes(text));
+    if (!this.state.loadingMatches) {
+      const { matches, text } = this.state;
+      const filteredMatches = matches.filter(match => match.username.includes(text));
 
-    if (filteredMatches) {
-      return filteredMatches.map(match => {
-        return <li key={match.id}>
-          <ContactCard match={match}
-            acceptMatch={this.acceptMatch}
-            declineMatch={this.declineMatch}
-          />
-        </li>
-      })
+      if (filteredMatches.length>0) {
+        return filteredMatches.map(match => {
+          return <li key={match.id}>
+            <MatchCard match={match}
+              acceptMatch={this.acceptMatch}
+              declineMatch={this.declineMatch}
+            />
+          </li>
+        })
 
-    } else {
-      return <></>
+      } else {
+        return <></>
+      }
+
     }
-
   }
 
   renderListContacts() {
-    const { contacts, text } = this.state;
-    const filteredContacts = contacts.filter(contact => contact.username.includes(text));
-    if (filteredContacts) {
-      return filteredContacts.map(contact => {
-        return <li key={contact.id}>
-          <ContactCard contact={contact} onDelete={this.handleDelete} />
-        </li>
-      })
+    if (!this.state.loadingContacts) {
+      const { contacts, text } = this.state;
+      const filteredContacts = contacts.filter(contact => contact.username.includes(text));
+      if (filteredContacts.length>0) {
+        return filteredContacts.map(contact => {
+          return <li key={contact.id}>
+            <ContactCard contact={contact} onDelete={this.handleDelete} />
+          </li>
+        })
 
-    } else {
-      return <></>
+      } else {
+        return <></>
+      }
+
     }
-
   }
 
   render() {
