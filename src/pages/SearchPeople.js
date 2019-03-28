@@ -12,6 +12,7 @@ class SearchPeople extends Component {
     listOfUsers: [],
     loading: true,
     indexUser: 0,
+    noUsers: false,
   }
 
   componentDidMount = () => {
@@ -28,6 +29,13 @@ class SearchPeople extends Component {
 
   getUsers = async () => {
     const resultUsers = await this.props.getUsers();
+
+    if (resultUsers.length < 1) {
+      return this.setState({
+        loading: false,
+        noUsers: true,
+      })
+    }
 
     if (this.state.personality) {
       let sortedUsers = this.sortUsersListByPersonality(resultUsers, this.props.user)
@@ -100,7 +108,7 @@ class SearchPeople extends Component {
 
 
   render() {
-    const { location, personality, listOfUsers, loading, indexUser } = this.state;
+    const { location, personality, listOfUsers, loading, indexUser, noUsers } = this.state;
     return (
       <section>
         <header>
@@ -112,11 +120,13 @@ class SearchPeople extends Component {
             <input type="checkbox" value={location} name="location" id="location" onChange={this.onChange} />
           </form>
         </header>
-        <article>
-          {loading ? <Spinner /> : <SearchCard user={listOfUsers[indexUser]} />}
-          <button onClick={this.getNext}>Next</button>
-          <button onClick={this.matchUser}>Add</button>
-        </article>
+        {noUsers ? <h1>No Users Avaliable</h1> :
+          <article>
+            {loading ? <Spinner /> : <SearchCard user={listOfUsers[indexUser]} />}
+            <button onClick={this.getNext}>Next</button>
+            <button onClick={this.matchUser}>Add</button>
+          </article>
+        }
       </section>
     )
   }
