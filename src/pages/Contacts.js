@@ -21,6 +21,14 @@ class Contacts extends Component {
     this.getMatches();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      this.setState({
+
+      })
+    }
+  }
+
   onChange = (event) => {
     this.setState({
       text: event.target.value,
@@ -74,7 +82,7 @@ class Contacts extends Component {
           loadingMatches: false
         })
       }
-      
+
     } catch (err) {
       console.log(err)
     }
@@ -99,7 +107,7 @@ class Contacts extends Component {
       const { matches, text } = this.state;
       const filteredMatches = matches.filter(match => match.username.includes(text));
 
-      if (filteredMatches.length>0) {
+      if (filteredMatches.length > 0) {
         return filteredMatches.map(match => {
           return <li key={match.id}>
             <MatchCard match={match}
@@ -120,7 +128,7 @@ class Contacts extends Component {
     if (!this.state.loadingContacts) {
       const { contacts, text } = this.state;
       const filteredContacts = contacts.filter(contact => contact.username.includes(text));
-      if (filteredContacts.length>0) {
+      if (filteredContacts.length > 0) {
         return filteredContacts.map(contact => {
           return <li key={contact.id}>
             <ContactCard contact={contact} deleteContact={this.handleDelete} userId={this.props.user._id}/>
