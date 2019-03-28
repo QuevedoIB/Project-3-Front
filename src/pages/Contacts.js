@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
-import userService from '../lib/user-service';
 import ContactCard from '../components/contacts/ContactCard';
 import { withAuth } from '../providers/AuthProvider';
+import { withContacts } from '../providers/ContactProvider';
 
 class Contacts extends Component {
 
   state = {
     contacts: [],
-    invitations:[],
+    matches: [],
     text: '',
   }
 
   componentDidMount = () => {
     this.getContacts();
+    this.getMatches();
   }
 
   onChange = (event) => {
@@ -27,7 +28,7 @@ class Contacts extends Component {
 
     try {
 
-      await userService.deleteContact(this.props.user.id, deletedContactId);
+      await this.props.deleteContact(this.props.user.id, deletedContactId);
 
       this.setState({
         contacts: newContacts,
@@ -38,34 +39,58 @@ class Contacts extends Component {
     }
   }
 
-  getContacts = async() =>{
+  getContacts = async () => {
     try {
-      const contacts = await userService.getContacts(this.props.user._id);
-      this.setState({
-        contacts
-      })
+      const contacts = await this.props.getContacts();
+      if (contacts) {
+        this.setState({
+          contacts
+        })
+      }
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  getMatches = async () => {
+    try {
+      const matches = await this.props.getMatches();
+      if (matches) {
+        this.setState({
+          matches
+        })
+      }
+
     } catch (err) {
       console.log(err)
     }
   }
 
   renderList() {
-    const invitations = this.renderListInvitations();
+    const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
 
     console.log(contacts);
-    if (this.state.contacts.length === 0 && this.state.invitations.length === 0) {
+    if (this.state.contacts.length === 0 && this.state.matches.length === 0) {
       return <p>No contacts</p>
     } else {
       return (<>
-      {invitations}
-      {contacts}
+        {matches}
+        {contacts}
       </>);
     }
   }
 
-  renderListInvitations() {
+  renderListMatches() {
+    const { matches, text } = this.state;
+    const filteredMatches = matches.filter(match => match.name.includes(text));
 
+    return filteredMatches.map(match => {
+      return <li key={match.id}>
+        <ContactCard match={match} />
+      </li>
+    })
   }
 
   renderListContacts() {
@@ -79,8 +104,6 @@ class Contacts extends Component {
     })
 
   }
-
-
 
   render() {
 
@@ -98,4 +121,4 @@ class Contacts extends Component {
   }
 }
 
-export default withAuth(Contacts);
+export default withAuth(withContacts(Contacts));
