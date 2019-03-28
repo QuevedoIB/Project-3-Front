@@ -3,6 +3,7 @@ import ContactCard from '../components/contacts/ContactCard';
 import MatchCard from '../components/contacts/MatchCard';
 import { withAuth } from '../providers/AuthProvider';
 import { withContacts } from '../providers/ContactProvider';
+import { Link } from 'react-router-dom';
 
 class Contacts extends Component {
 
@@ -15,6 +16,7 @@ class Contacts extends Component {
   }
 
   componentDidMount = () => {
+
     this.getContacts();
     this.getMatches();
   }
@@ -45,7 +47,8 @@ class Contacts extends Component {
   getContacts = async () => {
     try {
       const contacts = await this.props.getContacts();
-      if (contacts.length>0) {
+
+      if (contacts.length > 0) {
         this.setState({
           contacts,
           loadingContacts: false
@@ -71,21 +74,10 @@ class Contacts extends Component {
     }
   }
 
-  acceptMatch = (id) => {
-
-  }
-
-  declineMatch = (id) => {
-
-  }
-
-
   renderList() {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
 
-    console.log('CONTACTS ' + contacts);
-    console.log('MATCHES ' + matches);
     if (this.state.contacts.length === 0 && this.state.matches.length === 0) {
       return <p>No contacts</p>
     } else {
@@ -117,7 +109,7 @@ class Contacts extends Component {
 
     }
   }
-
+  //cambiar on delete
   renderListContacts() {
     if (!this.state.loadingContacts) {
       const { contacts, text } = this.state;
@@ -138,8 +130,7 @@ class Contacts extends Component {
 
   render() {
 
-    const { contacts, text } = this.state;
-    // const filteredContacts = contacts.filter(contact => contact.name.includes(text));
+    const { text } = this.state;
 
     return (
       <section>
@@ -147,6 +138,7 @@ class Contacts extends Component {
         <ul>
           {this.renderList()}
         </ul>
+        <Link to='/profile' >Back to Profile</Link>
       </section>
     )
   }
