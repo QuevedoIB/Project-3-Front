@@ -72,15 +72,6 @@ class Contacts extends Component {
     }
   }
 
-  acceptMatch = (id) => {
-
-  }
-
-  declineMatch = (id) => {
-
-  }
-
-
   renderList() {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
@@ -103,8 +94,8 @@ class Contacts extends Component {
       return filteredMatches.map((match, index) => {
         return <li key={`${match}${index}`}>
           <MatchCard match={match}
-            acceptMatch={this.acceptMatch}
-            declineMatch={this.declineMatch}
+            acceptMatch={this.props.acceptMatch}
+            declineMatch={this.props.declineMatch}
           />
         </li>
       })
@@ -114,14 +105,14 @@ class Contacts extends Component {
     }
 
   }
-
+  //cambiar on delete
   renderListContacts() {
     const { contacts, text } = this.state;
     const filteredContacts = contacts.filter(contact => contact.username.includes(text));
     if (filteredContacts) {
       return filteredContacts.map((contact, index) => {
         return <li key={`${contact._id}${index}`}>
-          <ContactCard contact={contact} onDelete={this.handleDelete} />
+          <ContactCard contact={contact} deleteContact={this.props.deleteContact} />
         </li>
       })
 

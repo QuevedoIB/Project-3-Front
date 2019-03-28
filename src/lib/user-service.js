@@ -35,7 +35,6 @@ class UserService {
   }
 
   getUsers() {
-
     return this.users.get(`/api/users`)
       .then(({ data }) => {
         return data
@@ -43,11 +42,21 @@ class UserService {
   }
 
   matchUser(id) {
-
     return this.users.post('/api/send-match', { id })
       .then(({ data }) => data);
   }
 
+  acceptMatch(id) {
+
+    return this.users.post(`/profile/add-contact/${id}`)
+      .then(({ data }) => data);
+  }
+
+  declineMatch(id) {
+
+    return this.users.post(`/profile/decline-contact/${id}`)
+      .then(({ data }) => data);
+  }
 }
 
 const userService = new UserService();

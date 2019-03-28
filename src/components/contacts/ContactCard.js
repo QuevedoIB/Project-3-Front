@@ -8,13 +8,13 @@ export default class ContactCard extends Component {
       <div>
         <img src={imageUrl} alt={username} />
         <div>
-        <Link to={`/contact/${id}`}><h3>{username}</h3></Link>
+          <Link to={`/contact/${id}`}><h3>{username}</h3></Link>
           <p>{quote}</p>
         </div>
         <div>
           <Link to={`/chat/${id}`}>Chat</Link>
         </div>
-        <button onClick={this.props.onDelete(id)}>Delete Match</button>
+        <button onClick={() => this.props.deleteContact(id)}>Delete Match</button>
       </div>
     )
   }

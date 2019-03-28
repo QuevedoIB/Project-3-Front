@@ -23,6 +23,8 @@ export const withContacts = (Comp) => {
               getMatches={contactStore.getMatches}
               deleteContact={contactStore.deleteContact}
               getOneContact={contactStore.getOneContact}
+              declineMatch={contactStore.declineMatch}
+              acceptMatch={contactStore.acceptMatch}
               {...this.props} />
           }}
         </Consumer>
@@ -92,6 +94,19 @@ export default class ContactProvider extends Component {
       .catch(error => console.log(error))
   }
 
+  acceptMatch = (id) => {
+    return userService.acceptMatch(id)
+      .then((user) => user)
+      .catch(error => console.log(error))
+  }
+
+  declineMatch = (id) => {
+    return userService.declineMatch(id)
+      .then((user) => user)
+      .catch(error => console.log(error))
+  }
+
+
   render() {
     const { isLogged, user, status } = this.state;
     const { children } = this.props;
@@ -110,6 +125,8 @@ export default class ContactProvider extends Component {
               deleteContact: this.deleteContact,
               matchUser: this.matchUser,
               getOneContact: this.getOneContact,
+              acceptMatch: this.acceptMatch,
+              declineMatch: this.declineMatch,
             }}>
             {children}
           </Provider>
