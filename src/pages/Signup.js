@@ -113,6 +113,7 @@ class Signup extends Component {
           <Link to={"/login"} className="link-text"> Login</Link>
           </p>
           <InfoFields
+            
             username={username}
             password={password}
             email={email}
@@ -152,8 +153,8 @@ class Signup extends Component {
   render() {
 
     return (
-      <div>
-        {/* <h1>Sign up</h1> */}
+      <div className="page">
+        <h1>Sign up</h1>
         <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" >
           {this.renderContent()}
           {/* <button type="submit" onKeyPress={(e) => { e.target.keyCode === 13 && e.preventDefault(); }}>Submit</button> */}

@@ -63,7 +63,7 @@ export default class Interests extends Component {
     const { interests, valueInterests, quote } = this.props;
     return (
       <div className="form">
-        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you"/>
+        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" className="quote-form"/>
         <div className="tags">
           <ul className="tags-list">
             {interests.map((interest, i) => (
