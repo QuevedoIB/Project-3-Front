@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 
 export default class ContactCard extends Component {
   render() {
-    const { imageUrl, username, quote, id } = this.props.contact;
+    const { imageUrl, username, quote, _id } = this.props.contact;
     return (
       <div>
-        <img src="" alt={username} />
+        <img src={imageUrl} alt={username} />
         <div>
-        <Link to={`/contact/${id}`}><h3>{username}</h3></Link>
+        <Link to={`/contact/${_id}`}><h3>{username}</h3></Link>
           <p>{quote}</p>
         </div>
         <div>
-          <Link to={`/chat/${id}`}>Chat</Link>
+          <Link to={`/chat/${_id}`}>Chat</Link>
         </div>
-        <button onClick={this.props.onDelete(id)}>Delete Match</button>
+        <button onClick={this.props.onDelete(_id)}>Delete Match</button>
       </div>
     )
   }
