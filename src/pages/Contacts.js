@@ -44,6 +44,12 @@ class Contacts extends Component {
     }
   }
 
+  acceptMatch = (_id) =>{
+    this.props.acceptMatch(_id)
+    this.getMatches();
+  }
+  
+
   getContacts = async () => {
     try {
       const contacts = await this.props.getContacts();
@@ -97,7 +103,7 @@ class Contacts extends Component {
         return filteredMatches.map(match => {
           return <li key={match.id}>
             <MatchCard match={match}
-              acceptMatch={this.props.acceptMatch}
+              acceptMatch={this.acceptMatch}
               declineMatch={this.props.declineMatch}
             />
           </li>
@@ -117,7 +123,7 @@ class Contacts extends Component {
       if (filteredContacts.length>0) {
         return filteredContacts.map(contact => {
           return <li key={contact.id}>
-            <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id}/>
+            <ContactCard contact={contact} deleteContact={this.handleDelete} userId={this.props.user._id}/>
           </li>
         })
 
