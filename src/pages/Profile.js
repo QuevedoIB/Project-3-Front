@@ -19,7 +19,7 @@ class Profile extends Component {
         </div>
         <div>
           <Link to='search-people'>Search People</Link>
-          <Link to='search-people'>Contacts</Link>
+          <Link to='contacts'>Contacts</Link>
         </div>
       </section >
       </>
