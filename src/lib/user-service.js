@@ -28,6 +28,16 @@ class UserService {
     return this.users.get(`${meId}/contact/${id}`)
       .then(({ data }) => data);
   }
+
+  getOneUser(object) {
+    // console.log(object, 'HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA')
+    return this.users.post(`/api/search-people`)
+      .then(({ data }) => {
+        console.log(data)
+        return data
+      });
+  }
+
 }
 
 const userService = new UserService();

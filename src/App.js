@@ -13,26 +13,30 @@ import Contact from './pages/Contact';
 import Home from './pages/Home'; // <-
 import Profile from './pages/Profile'; // <-
 import ProfileEdit from './pages/ProfileEdit';
+import SearchPeople from './pages/SearchPeople';
 import './App.css';
+import ContactProvider from './providers/ContactProvider';
 
 class App extends Component {
   render() {
     return (
       <AuthProvider>
-        <div className='container'>
-          <Switch>
-            <AnonRoute exact path='/' component={Home} />
-            <AnonRoute exact path='/signup' component={Signup} />
-            <AnonRoute exact path='/login' component={Login} />
-            <PrivateRoute exact path='/profile' component={Profile} />
-            <PrivateRoute path='/profile/edit' component={ProfileEdit} />
-            <PrivateRoute exact path='/contacts' component={Contacts} />
-            <PrivateRoute exact path='/contacts' component={Contacts} />
-            <PrivateRoute exact path='/chat/:id' component={Chat} />
-            <PrivateRoute exact path='/contact/:id' component={Contact} />
-            <PrivateRoute path='/private' component={Private} />
-          </Switch>
-        </div>
+        <ContactProvider>
+          <div className='container'>
+            <Switch>
+              <AnonRoute exact path='/' component={Home} />
+              <AnonRoute exact path='/signup' component={Signup} />
+              <AnonRoute exact path='/login' component={Login} />
+              <PrivateRoute exact path='/profile' component={Profile} />
+              <PrivateRoute path='/profile/edit' component={ProfileEdit} />
+              <PrivateRoute exact path='/contacts' component={Contacts} />
+              <PrivateRoute exact path='/search-people' component={SearchPeople} />
+              <PrivateRoute exact path='/chat/:id' component={Chat} />
+              <PrivateRoute exact path='/contact/:id' component={Contact} />
+              <PrivateRoute path='/private' component={Private} />
+            </Switch>
+          </div>
+        </ContactProvider>
       </AuthProvider>
     )
   }
