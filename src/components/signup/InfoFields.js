@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import './InfoFields.css';
 
 export default class InfoFields extends Component {
   render() {
     return (
-      <div>
+      <div className="column-content form-fields">
         <label htmlFor='username'>Username:</label>
         <input type="text" name="username" value={this.props.username} onChange={this.props.handleChange} />
         <label htmlFor='password'>Password:</label>

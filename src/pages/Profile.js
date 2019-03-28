@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
-
+import Navbar from '../components/navbar/Navbar';
 class Profile extends Component {
   render() {
     const { username, imageUrl, quote } = this.props.user;
     return (
+      <>
+      <Navbar/>
       <section>
-        <Link to='/profile/edit'><img src='https://image.flaticon.com/icons/svg/60/60473.svg' alt='edit-profile' /></Link>
+        <Link to='/profile/edit'><img src={process.env.PUBLIC_URL + '/images/settings.png'} alt='edit-profile' width="80px"/></Link>
         <div>
           <img src={imageUrl} alt={username} />
           <div>
@@ -20,6 +22,7 @@ class Profile extends Component {
           <Link to='search-people'>Contacts</Link>
         </div>
       </section >
+      </>
     )
   }
 }

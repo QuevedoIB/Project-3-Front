@@ -6,7 +6,7 @@ import SignUpButton from '../components/buttons/SignUpButton' // <-
 export default class Home extends Component {
   render() {
     return (
-      <section>
+      <section className="page home">
         {/* <Navbar data='data' /> */}
         <article>
           <div>
@@ -15,7 +15,6 @@ export default class Home extends Component {
           </div>
           <div>
             <h3>Slogan</h3>
-            <p>1 linea que describa app y conjunte con eslogan</p>
           </div>
           <div>
             <Link to='/signup' className="link-button">Sign Up</Link>

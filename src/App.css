@@ -18,6 +18,24 @@ h1{
 
 }
 
+.page{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+
+}
+
+
+.home div{
+  margin: 5vh 0;
+}
+
+.home p{
+  margin: 5vh 0;
+}
+
 .link-button{
   text-decoration: none;
   background-color: rgb(78, 74, 74);
