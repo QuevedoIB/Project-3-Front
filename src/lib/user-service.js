@@ -24,6 +24,7 @@ class UserService {
   }
 
   deleteContact(userId, contactId) {
+    console.log(userId, contactId);
     return this.users.post('/profile/contact/delete', { userId, contactId })
       .then(({ data }) => data);
   }
