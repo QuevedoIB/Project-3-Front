@@ -19,6 +19,9 @@ export const withContacts = (Comp) => {
               user={contactStore.user}
               getUsers={contactStore.getUsers}
               matchUser={contactStore.matchUser}
+              getContacts={contactStore.getContacts}
+              getMatches={contactStore.getContacts}
+              deleteContact={contactStore.deleteContact}
               {...this.props} />
           }}
         </Consumer>
@@ -58,6 +61,24 @@ export default class ContactProvider extends Component {
       .catch(error => console.log(error))
   }
 
+  getContacts = () => {
+    return userService.getContacts()
+    .then((users) => users)
+    .catch(error => console.log(error))
+  }
+
+  getMatches = () => {
+    return userService.getMatches()
+    .then((users) => users)
+    .catch(error => console.log(error))
+  }
+
+  deleteContact = (userId, contactId) => {
+    return userService.deleteContact(userId, contactId)
+      .then((user)=> user)
+      .catch(error => console.log(error))
+  }
+
   matchUser = (body) => {
     return userService.matchUser(body)
       .then((user) => user)
@@ -77,6 +98,9 @@ export default class ContactProvider extends Component {
               isLogged,
               user,
               getUsers: this.getUsers,
+              getContacts: this.getContacts,
+              getMatches: this.getMatches,
+              deleteContact: this.deleteContact,
               matchUser: this.matchUser
             }}>
             {children}

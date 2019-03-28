@@ -13,8 +13,13 @@ class UserService {
     })
   }
 
-  getContacts(id) {
-    return this.users.get(`${id}/contacts`)
+  getContacts() {
+    return this.users.get(`/profile/contacts`)
+      .then(response => response.data)
+  }
+
+  getMatches() {
+    return this.users.get(`/profile/matches`)
       .then(response => response.data)
   }
 
