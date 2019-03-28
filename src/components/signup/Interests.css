@@ -1,18 +1,18 @@
-body {
+/* body {
   font-family: 'open sans', 'helvetica neue', helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: #222;
   background: #ecf0f1;
-}
+} */
 
-#root {
+/* #root {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%);
   min-width: 700px;
-}
+} */
 
 .tags-list{
   list-style: none;
