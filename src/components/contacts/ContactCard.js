@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import chatService from '../../lib/chat-service';
+import {withRouter} from 'react-router-dom';
 
-export default class ContactCard extends Component {
+class ContactCard extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,3 +34,5 @@ export default class ContactCard extends Component {
     )
   }
 }
+
+export default withRouter(ContactCard);
