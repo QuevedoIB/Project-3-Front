@@ -23,6 +23,7 @@ class Signup extends Component {
     valueInterests: '',
     personality: [],
     indexPage: 0,
+    allFields: true,
   };
 
   handleFormSubmit = (event) => {
@@ -51,9 +52,35 @@ class Signup extends Component {
 
   handleNext = (e) => {
     e.preventDefault();
-    this.setState({
-      indexPage: this.state.indexPage + 1,
-    });
+    const { indexPage, username, password, email, quote, interests } = this.state;
+    switch (indexPage) {
+      case 0:
+        if (!username || !password || !email) {
+          return this.setState({
+            allFields: false,
+          })
+        } else {
+          return this.setState({
+            indexPage: this.state.indexPage + 1,
+            allFields: true,
+          });
+        }
+      case 1:
+        if (!quote || !interests.length) {
+          return this.setState({
+            allFields: false,
+          })
+        } else {
+          return this.setState({
+            indexPage: this.state.indexPage + 1,
+            allFields: true,
+          });
+        }
+      default:
+        return this.setState({
+          indexPage: this.state.indexPage + 1,
+        });
+    }
   }
 
   handleKeyUp = (e) => {
@@ -113,7 +140,7 @@ class Signup extends Component {
           <Link to={"/login"} className="link-text"> Login</Link>
           </p>
           <InfoFields
-            
+
             username={username}
             password={password}
             email={email}
@@ -157,7 +184,7 @@ class Signup extends Component {
         <h1>Sign up</h1>
         <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" >
           {this.renderContent()}
-          {/* <button type="submit" onKeyPress={(e) => { e.target.keyCode === 13 && e.preventDefault(); }}>Submit</button> */}
+          {!this.state.allFields && <h3>Missing Fields</h3>}
         </form>
 
 
