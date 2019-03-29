@@ -42,9 +42,9 @@ class Contacts extends Component {
     try {
 
       await this.props.deleteContact(this.props.user.id, deletedContactId);
-
+      
       this.setState({
-        contacts: newContacts,
+        contacts: this.getContacts(),
       })
 
     } catch (err) {
