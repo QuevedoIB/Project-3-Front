@@ -44,12 +44,14 @@ class SearchPeople extends Component {
         listOfUsers: sortedUsers,
         loading: false,
         indexUser: 0,
+        noUsers: false
       })
     } else {
       this.setState({
         listOfUsers: this.sortUsersRandom(resultUsers),
         loading: false,
         indexUser: 0,
+        noUsers: false
       })
     }
 

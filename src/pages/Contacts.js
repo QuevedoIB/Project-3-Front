@@ -13,7 +13,7 @@ class Contacts extends Component {
     text: '',
     // loadingMatches: true,
     // loadingContacts: true,
-    showMatches: true,
+    showContacts: true,
   }
 
   componentDidMount = () => {
@@ -106,18 +106,19 @@ class Contacts extends Component {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
 
-    if (this.state.showMatches) {
-      if (this.state.matches.length > 0) {
-        return matches
-      } else {
-        return <p>No matches</p>
-      }
-    } else {
+    if (this.state.showContacts) {
       if (this.state.contacts.length > 0) {
         return contacts
       } else {
         return <p>No contacts</p>
       }
+    } else {
+      if (this.state.matches.length > 0) {
+        return matches
+      } else {
+        return <p>No matches</p>
+      }
+
     }
   }
 
@@ -165,17 +166,17 @@ class Contacts extends Component {
   }
 
   showMatches = () => {
-    if (!this.state.showMatches) {
+    if (this.state.showContacts) {
       this.setState({
-        showMatches: true,
+        showContacts: false,
       })
     }
   }
 
   showContacts = () => {
-    if (this.state.showMatches) {
+    if (!this.state.showContacts) {
       this.setState({
-        showMatches: false,
+        showContacts: true,
       })
     }
   }
@@ -188,8 +189,8 @@ class Contacts extends Component {
       <section>
         <input value={text} type='text' placeholder='Search User' onChange={this.onChange}></input>
         <div>
-          <button onClick={this.showMatches}>Show matches</button>
           <button onClick={this.showContacts}>Show contacts</button>
+          <button onClick={this.showMatches}>Show matches</button>
         </div>
         <ul>
           {this.renderList()}
