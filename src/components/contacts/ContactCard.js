@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import chatService from '../../lib/chat-service';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class ContactCard extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    await chatService.createChat(this.props.contact._id);
+    const createdChat = await chatService.createChat(this.props.contact._id);
     this.props.history.push(`/chat/${this.props.contact._id}`)
   }
 

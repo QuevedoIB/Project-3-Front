@@ -148,7 +148,7 @@ class Contacts extends Component {
   //cambiar on delete
   renderListContacts = () => {
     //if (!this.state.loadingContacts) {
-    console.log('RENDER CONTACTS')
+
     const { contacts, text } = this.state;
     const filteredContacts = contacts.filter(contact => contact.username.includes(text));
     if (filteredContacts.length > 0) {
@@ -182,13 +182,13 @@ class Contacts extends Component {
   }
 
   render() {
-    console.log('RENDER ', this.state.contacts)
+
     const { text, matches } = this.state;
 
     return (
       <section>
         <input value={text} type='text' placeholder='Search User' onChange={this.onChange}></input>
-        <div class='contacts-buttons'>
+        <div className='contacts-buttons'>
           <button onClick={this.showContacts}>Show contacts</button>
           <div className='contacts-matches-button'>
             <button onClick={this.showMatches}>Show matches</button><div className='notifications'>{matches.length}</div>
