@@ -16,7 +16,7 @@ class Contacts extends Component {
     showContacts: true,
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
 
     this.getContacts();
     this.getMatches();
