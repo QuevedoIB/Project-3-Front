@@ -58,13 +58,19 @@ class Contacts extends Component {
       await this.props.deleteContact(this.props.user.id, deletedContactId);
 
       this.setState({
-        contacts: newContacts,
+        contacts: this.getContacts(),
       })
 
     } catch (err) {
 
     }
   }
+
+  acceptMatch = (_id) => {
+    this.props.acceptMatch(_id)
+    this.getMatches();
+  }
+
 
   getContacts = async () => {
     try {

@@ -13,6 +13,7 @@ export default class MatchCard extends Component {
           <p>{quote}</p>
         </div>
         <div>
+<<<<<<< HEAD
           <button onClick={() => {
             this.props.acceptMatch(_id)
             this.props.updateMatches(this.props.match, true)
@@ -21,6 +22,10 @@ export default class MatchCard extends Component {
             this.props.declineMatch(_id)
             this.props.updateMatches(this.props.match, false)
           }}>Decline</button>
+=======
+          <button onClick={this.props.acceptMatch(_id)}>Accept</button>
+          <button onClick={() => this.props.declineMatch(_id)}>Decline</button>
+>>>>>>> 00614986253033b5844cfeb61da8c5cca96bc68f
         </div>
       </div>
     )
