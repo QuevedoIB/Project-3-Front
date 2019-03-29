@@ -8,7 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import AuthProvider from './providers/AuthProvider';
 import Contacts from './pages/Contacts';
-import Chat from './pages/Chat';
+import ChatPage from './pages/ChatPage';
 import Contact from './pages/Contact';
 import Home from './pages/Home'; // <-
 import Profile from './pages/Profile'; // <-
@@ -31,7 +31,7 @@ class App extends Component {
               <PrivateRoute path='/profile/edit' component={ProfileEdit} />
               <PrivateRoute exact path='/contacts' component={Contacts} />
               <PrivateRoute exact path='/search-people' component={SearchPeople} />
-              <PrivateRoute exact path='/chat/:id' component={Chat} />
+              <PrivateRoute exact path='/chat/:id' component={ChatPage} />
               <PrivateRoute exact path='/contact/:id' component={Contact} />
               <PrivateRoute path='/private' component={Private} />
             </Switch>

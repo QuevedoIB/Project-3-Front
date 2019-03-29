@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import chatService from '../../lib/chat-service';
 
 export default class ContactCard extends Component {
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    await chatService.createChat(this.props.contact._id);
+    this.props.history.push(`/chat/${this.props.contact._id}`)
+  }
+
   render() {
     const { imageUrl, username, quote, _id } = this.props.contact;
     return (
@@ -12,7 +20,10 @@ export default class ContactCard extends Component {
           <p>{quote}</p>
         </div>
         <div>
-          <Link to={`/chat/${_id}`}>Chat</Link>
+          <form onSubmit={this.handleSubmit}>
+            <button type="submit">Chat</button>
+          </form>
+
         </div>
         <button onClick={() => {
           this.props.deleteContact(this.props.userId, _id)
