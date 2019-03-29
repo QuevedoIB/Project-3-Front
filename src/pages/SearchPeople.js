@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withContacts } from '../providers/ContactProvider';
+import { withAuth } from '../providers/AuthProvider';
 import Personality from '../components/signup/personality-test/Personality';
 import SearchCard from '../components/contacts/SearchCard';
 import Spinner from '../components/loading/Spinner';
@@ -30,7 +31,6 @@ class SearchPeople extends Component {
 
   getUsers = async () => {
     const resultUsers = await this.props.getUsers();
-
     if (resultUsers.length < 1) {
       return this.setState({
         loading: false,
@@ -39,6 +39,7 @@ class SearchPeople extends Component {
     }
 
     if (this.state.personality) {
+
       let sortedUsers = this.sortUsersListByPersonality(resultUsers, this.props.user)
       this.setState({
         listOfUsers: sortedUsers,
@@ -83,6 +84,7 @@ class SearchPeople extends Component {
   }
 
   sortUsersListByPersonality = (usersList, user) => {
+
     usersList.forEach(person => {
       let counter = 0;
       person.personality.forEach((p, index) => {
@@ -153,7 +155,7 @@ class SearchPeople extends Component {
   }
 }
 
-export default withContacts(SearchPeople);
+export default withAuth(withContacts(SearchPeople));
 
 
 
