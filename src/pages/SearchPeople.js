@@ -56,11 +56,28 @@ class SearchPeople extends Component {
   }
 
   getNext = () => {
-    if (this.state.indexUser < this.state.listOfUsers.length - 1) {
+    const { listOfUsers, indexUser } = this.state;
+    //  
+    //   if (listOfUsers.length === 1) {
+    //     this.setState({
+    //       noUser: true
+    //     })
+    //   } else if (indexUser !== listOfUsers.length - 1) {
+    //     this.setState({
+    //       indexUser: indexUser + 1
+    //     })
+    //   }
+
+    if (indexUser !== listOfUsers.length - 1) {
       this.setState({
-        indexUser: this.state.indexUser + 1
+        indexUser: indexUser + 1
+      })
+    } else {
+      this.setState({
+        noUsers: true
       })
     }
+
   }
 
   sortUsersListByPersonality = (usersList, user) => {
