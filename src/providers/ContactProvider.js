@@ -95,6 +95,7 @@ export default class ContactProvider extends Component {
   }
 
   acceptMatch = (id) => {
+
     return userService.acceptMatch(id)
       .then((user) => user)
       .catch(error => console.log(error))

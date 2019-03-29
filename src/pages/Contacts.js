@@ -11,8 +11,8 @@ class Contacts extends Component {
     contacts: [],
     matches: [],
     text: '',
-    loadingMatches: true,
-    loadingContacts: true,
+    // loadingMatches: true,
+    // loadingContacts: true,
     showMatches: true,
   }
 
@@ -22,12 +22,25 @@ class Contacts extends Component {
     this.getMatches();
   }
 
-  onChangeContacts = () => {
-    this.getContacts();
+  onChangeContacts = (deletedId) => {
+
+    const newContacts = this.state.contacts.filter(e => e._id !== deletedId);
+    this.setState({ contacts: newContacts })
+
   }
 
-  onChangeMatches = () => {
-    this.getMatches();
+  onChangeMatches = (match, acceptedBool) => {
+    const newMatches = this.state.matches.filter(e => e._id !== match._id);
+    if (acceptedBool) {
+      this.setState({
+        matches: newMatches,
+        contacts: [match, ...this.state.contacts]
+      })
+    } else {
+      this.setState({
+        matches: newMatches,
+      })
+    }
   }
 
   onChange = (event) => {
@@ -60,7 +73,7 @@ class Contacts extends Component {
       if (contacts.length > 0) {
         this.setState({
           contacts,
-          loadingContacts: false
+          //loadingContacts: false
         })
       }
     } catch (err) {
@@ -74,7 +87,7 @@ class Contacts extends Component {
       if (matches.length > 0) {
         this.setState({
           matches,
-          loadingMatches: false
+          //loadingMatches: false
         })
       }
 
@@ -104,44 +117,45 @@ class Contacts extends Component {
 
 
   renderListMatches = () => {
-    if (!this.state.loadingMatches) {
-      const { matches, text } = this.state;
-      const filteredMatches = matches.filter(match => match.username.includes(text));
+    //if (!this.state.loadingMatches) {
+    const { matches, text } = this.state;
+    const filteredMatches = matches.filter(match => match.username.includes(text));
 
-      if (filteredMatches.length > 0) {
-        return filteredMatches.map(match => {
-          return <li key={match.id}>
-            <MatchCard match={match}
-              acceptMatch={this.props.acceptMatch}
-              declineMatch={this.props.declineMatch}
-              updateMatches={this.onChangeMatches}
-            />
-          </li>
-        })
+    if (filteredMatches.length > 0) {
+      return filteredMatches.map(match => {
+        return <li key={match._id}>
+          <MatchCard match={match}
+            acceptMatch={this.props.acceptMatch}
+            declineMatch={this.props.declineMatch}
+            updateMatches={this.onChangeMatches}
+          />
+        </li>
+      })
 
-      } else {
-        return <></>
-      }
-
+    } else {
+      return <></>
     }
+
+    //}
   }
   //cambiar on delete
   renderListContacts = () => {
-    if (!this.state.loadingContacts) {
-      const { contacts, text } = this.state;
-      const filteredContacts = contacts.filter(contact => contact.username.includes(text));
-      if (filteredContacts.length > 0) {
-        return filteredContacts.map(contact => {
-          return <li key={contact._id}>
-            <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} updateContacts={this.onChangeContacts} />
-          </li>
-        })
+    //if (!this.state.loadingContacts) {
+    console.log('RENDER CONTACTS')
+    const { contacts, text } = this.state;
+    const filteredContacts = contacts.filter(contact => contact.username.includes(text));
+    if (filteredContacts.length > 0) {
+      return filteredContacts.map(contact => {
+        return <li key={contact._id}>
+          <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} updateContacts={this.onChangeContacts} />
+        </li>
+      })
 
-      } else {
-        return <></>
-      }
-
+    } else {
+      return <></>
     }
+
+    //}
   }
 
   showMatches = () => {
@@ -161,7 +175,7 @@ class Contacts extends Component {
   }
 
   render() {
-
+    console.log('RENDER ', this.state.contacts)
     const { text } = this.state;
 
     return (

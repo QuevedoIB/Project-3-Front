@@ -16,7 +16,7 @@ export default class ContactCard extends Component {
         </div>
         <button onClick={() => {
           this.props.deleteContact(this.props.userId, _id)
-          this.props.updateContacts()
+          this.props.updateContacts(_id)
         }}>Delete Contact</button>
       </div>
     )

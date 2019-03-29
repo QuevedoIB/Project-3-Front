@@ -24,7 +24,7 @@ class UserService {
   }
 
   deleteContact(userId, contactId) {
-    console.log(userId, contactId);
+
     return this.users.post('/profile/contact/delete', { userId, contactId })
       .then(({ data }) => data);
   }
@@ -48,7 +48,7 @@ class UserService {
   }
 
   acceptMatch(id) {
-    console.log(id);
+
     return this.users.post(`/profile/add-contact/${id}`)
       .then(({ data }) => data);
   }

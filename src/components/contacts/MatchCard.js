@@ -15,11 +15,11 @@ export default class MatchCard extends Component {
         <div>
           <button onClick={() => {
             this.props.acceptMatch(_id)
-            this.props.updateMatches()
+            this.props.updateMatches(this.props.match, true)
           }}>Accept</button>
           <button onClick={() => {
             this.props.declineMatch(_id)
-            this.props.updateMatches()
+            this.props.updateMatches(this.props.match, false)
           }}>Decline</button>
         </div>
       </div>
