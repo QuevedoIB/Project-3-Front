@@ -15,8 +15,8 @@ export const withContacts = (Comp) => {
         <Consumer>
           {(contactStore) => {
             return <Comp
-              isLogged={contactStore.isLogged}
-              user={contactStore.user}
+              // isLogged={contactStore.isLogged}
+              // user={contactStore.user}
               getUsers={contactStore.getUsers}
               matchUser={contactStore.matchUser}
               getContacts={contactStore.getContacts}
@@ -34,29 +34,29 @@ export const withContacts = (Comp) => {
 }
 
 export default class ContactProvider extends Component {
-  state = {
-    isLogged: false,
-    user: {},
-    status: 'loading'
-  }
+  // state = {
+  //   isLogged: false,
+  //   user: {},
+  //   status: 'loading'
+  // }
 
-  componentDidMount() {
-    authService.me()
-      .then((user) => {
-        this.setState({
-          isLogged: true,
-          user,
-          status: 'loaded'
-        })
-      })
-      .catch((error) => {
-        this.setState({
-          isLogged: false,
-          user: {},
-          status: 'loaded'
-        });
-      })
-  }
+  // componentDidMount() {
+  //   authService.me()
+  //     .then((user) => {
+  //       this.setState({
+  //         isLogged: true,
+  //         user,
+  //         status: 'loaded'
+  //       })
+  //     })
+  //     .catch((error) => {
+  //       this.setState({
+  //         isLogged: false,
+  //         user: {},
+  //         status: 'loaded'
+  //       });
+  //     })
+  // }
 
   getUsers = () => {
     return userService.getUsers()
@@ -109,17 +109,16 @@ export default class ContactProvider extends Component {
 
 
   render() {
-    const { isLogged, user, status } = this.state;
+    // const { isLogged, user, status } = this.state;
     const { children } = this.props;
-    switch (status) {
-      case 'loading':
-        return <div>Loading</div>
-      default:
+    // switch (status) {
+    //   case 'loading':
+    //     return <div>Loading</div>
+    //   default:
         return (
           <Provider value={
             {
-              isLogged,
-              user,
+              
               getUsers: this.getUsers,
               getContacts: this.getContacts,
               getMatches: this.getMatches,
@@ -134,4 +133,3 @@ export default class ContactProvider extends Component {
         );
     }
   }
-}

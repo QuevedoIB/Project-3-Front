@@ -11,7 +11,7 @@ class Contact extends Component {
     loading: true,
   }
 
-  componentDidMount = async () => {
+  async componentDidMount() {
 
     try {
       const contact = await this.props.getOneContact(this.props.match.params.id);
