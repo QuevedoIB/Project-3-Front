@@ -183,14 +183,16 @@ class Contacts extends Component {
 
   render() {
     console.log('RENDER ', this.state.contacts)
-    const { text } = this.state;
+    const { text, matches } = this.state;
 
     return (
       <section>
         <input value={text} type='text' placeholder='Search User' onChange={this.onChange}></input>
-        <div>
+        <div class='contacts-buttons'>
           <button onClick={this.showContacts}>Show contacts</button>
-          <button onClick={this.showMatches}>Show matches</button>
+          <div className='contacts-matches-button'>
+            <button onClick={this.showMatches}>Show matches</button><div className='notifications'>{matches.length}</div>
+          </div>
         </div>
         <ul>
           {this.renderList()}
