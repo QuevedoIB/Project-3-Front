@@ -16,7 +16,7 @@ class ChatPage extends Component {
 
   componentDidMount = async () => {
     await this.handleGetChat();
-    socketManager.initSocket(this.state.chatId);
+    await socketManager.initSocket(this.state.chatId);
     let socket = socketManager.getSocket();
     socket.on("NEW_MESSAGE", () => {
       console.log('NEW MESSAGE');
@@ -33,20 +33,18 @@ class ChatPage extends Component {
     });
   }
 
-  handleSendMessage = (message) => {
-    chatService.sendMessage(this.state.chatId, message)
-      .then((data) => {
-        this.setState({
-          message: "",
-          chat: data,
-        })
-        let socket = socketManager.getSocket();
-        socket.on("NEW_MESSAGE", () => {
-          console.log('AAAAAH');
-          this.handleGetChat();
-        });
-      })
+  handleSendMessage = async (message) => {
+    const chatData = await chatService.sendMessage(this.state.chatId, message)
 
+    await this.setState({
+      message: '',
+      chat: chatData,
+    })
+
+    let socket = socketManager.getSocket();
+    socket.on("NEW_MESSAGE", () => {
+      this.handleGetChat();
+    });
   }
 
 
