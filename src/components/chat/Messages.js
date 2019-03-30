@@ -4,7 +4,7 @@ import './Messages.css';
 import { withAuth } from '../../providers/AuthProvider';
 
 const meStyle = {
-  background: 'red',
+  background: 'gray',
   textAlign: 'right',
 }
 
