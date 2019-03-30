@@ -19,7 +19,7 @@ class Signup extends Component {
     password: '',
     email: '',
     imageUrl: '',
-    location: '',
+    location: [],
     quote: '',
     interests: [],
     personality: [],
@@ -189,7 +189,7 @@ class Signup extends Component {
   }
 
   render() {
-    console.log(this.state.imageUrl);
+
     return (
       <div className="page signup">
         <h1>Sign up</h1>

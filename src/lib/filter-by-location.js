@@ -1,6 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from 'mapbox-gl-geocoder';
-import dotenv from 'dotenv';
+import fetch from 'node-fetch';
 
 //añadir key al .env?¿ falla el access token porque se pierde al pasar a js
 
@@ -41,7 +41,7 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
 
   fetch(`https://api.mapbox.com/geocoding/v5/places/${userLocation}.json&access_token=${token}`)
     .then(function (response) {
-      console.log(response, 'Hola')
+
       return response.json();
     })
     .then(function (myJson) {
@@ -63,20 +63,6 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
 
       return getDistanceBetween(userCoordinates, aCoordinates) - getDistanceBetween(userCoordinates, bCoordinates);
     })
-  }
-
-  function getCoordsFromPlace(place) {
-    let coordinates;
-    fetch(`https://api.mapbox.com/geocoding/v5/places/${place}.json&access_token=${token}`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (myJson) {
-        if (myJson.features[0]) {
-          coordinates = myJson.features[0].center;
-        }
-      });
-    return coordinates;
   }
 
   //mirar console.log(directions) para usar metros en vez de kms y ser más precisos
@@ -102,3 +88,27 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
   return copyArray;
 }
 
+// export function getCoordsFromPlace(place) {
+//   let coordinates;
+//   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?access_token=pk.eyJ1IjoiaXZhbm1hcHMiLCJhIjoiY2p0dXFoenR2MDBkYTQ1cDhtcXNsbXZmdyJ9.xUz2uqz5N5ydjWTl-p4qCQ`)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (myJson) {
+//       if (myJson.features[0]) {
+//         coordinates = myJson.features[0].center;
+//       }
+//     });
+//   return coordinates;
+// }
+
+
+export async function getCoordsFromPlace(place) {
+  let coordinates;
+  const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?access_token=pk.eyJ1IjoiaXZhbm1hcHMiLCJhIjoiY2p0dXFoenR2MDBkYTQ1cDhtcXNsbXZmdyJ9.xUz2uqz5N5ydjWTl-p4qCQ`)
+  const jsonResponse = await response.json()
+  if (jsonResponse.features[0]) {
+    coordinates = jsonResponse.features[0].center;
+  }
+  return coordinates;
+}
