@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
-import parser from '../lib/file-upload';
 import InfoFields from '../components/signup/InfoFields';
 import Interests from '../components/signup/Interests';
 import Personality from '../components/signup/personality-test/Personality';
 import { questions } from '../data/questions';
+//import parser  from '../helpers/file-upload';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
