@@ -22,6 +22,7 @@ export const withAuth = (Comp) => {
               editUser={authStore.editUser}
               isError={authStore.isError}
               onErrorSolved={authStore.onErrorSolved}
+              getGoogleSignUrl={authStore.getGoogleSignUrl}
               {...this.props} />
           }}
         </Consumer>
@@ -71,6 +72,12 @@ export default class AuthProvider extends Component {
       .then((user) => {
         this.setUser(user);
       })
+      .catch(error => console.log(error))
+  }
+
+  getGoogleSignUrl = () => {
+    return authService.getGoogleSignUpUrl()
+      .then((url) => url)
       .catch(error => console.log(error))
   }
 
@@ -126,6 +133,7 @@ export default class AuthProvider extends Component {
               editUser: this.editUser,
               isError: this.state.isError,
               onErrorSolved: this.onErrorSolved,
+              getGoogleSignUrl: this.getGoogleSignUrl,
             }}>
             {children}
           </Provider>

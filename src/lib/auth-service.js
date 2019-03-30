@@ -13,8 +13,14 @@ class AuthService {
     })
   }
 
+  getGoogleSignUpUrl() {
+
+    return this.auth.get('/auth/google-signup-url')
+      .then(({ data }) => data);
+  }
+
   signup(user) {
-    console.log('USER', user);
+
     return this.auth.post('/auth/signup', user)
       .then(({ data }) => data);
   }

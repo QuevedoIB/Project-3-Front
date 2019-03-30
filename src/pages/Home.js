@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withAuth } from '../providers/AuthProvider';
 
-export default class Home extends Component {
+class Home extends Component {
+
+  state = {
+    googleSignUp: '',
+  }
+
+  componentDidMount = async () => {
+    const url = await this.props.getGoogleSignUrl();
+
+    this.setState({
+      googleSignUp: url.url
+    })
+  }
+
   render() {
     return (
       <section className="page home full">
@@ -17,9 +31,12 @@ export default class Home extends Component {
           <div>
             <Link to='/signup' className="link-button">Sign Up</Link>
             <p>If you already have an account: <Link to='/login' className="link-text">Log In</Link></p>
+            <a href={this.state.googleSignUp} target="_blank">Google Sign Up</a>
           </div>
         </article>
       </section>
     )
   }
 }
+
+export default withAuth(Home)
