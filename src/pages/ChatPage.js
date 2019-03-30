@@ -40,12 +40,13 @@ class ChatPage extends Component {
           message: "",
           chat: data,
         })
+        let socket = socketManager.getSocket();
+        socket.on("NEW_MESSAGE", () => {
+          console.log('AAAAAH');
+          this.handleGetChat();
+        });
       })
-    let socket = socketManager.getSocket();
-    socket.on("NEW_MESSAGE", () => {
-      console.log('AAAAAH');
-      this.handleGetChat();
-    });
+
   }
 
 
