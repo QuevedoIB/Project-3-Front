@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar/Navbar';
 import { Link } from 'react-router-dom';
-import SignUpButton from '../components/buttons/SignUpButton' // <-
 
 export default class Home extends Component {
   render() {
@@ -19,7 +17,6 @@ export default class Home extends Component {
           <div>
             <Link to='/signup' className="link-button">Sign Up</Link>
             <p>If you already have an account: <Link to='/login' className="link-text">Log In</Link></p>
-            
           </div>
         </article>
       </section>

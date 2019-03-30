@@ -20,6 +20,8 @@ export const withAuth = (Comp) => {
               login={authStore.login}
               signup={authStore.signup}
               editUser={authStore.editUser}
+              isError={authStore.isError}
+              onErrorSolved={authStore.onErrorSolved}
               {...this.props} />
           }}
         </Consumer>
@@ -32,7 +34,8 @@ export default class AuthProvider extends Component {
   state = {
     isLogged: false,
     user: {},
-    status: 'loading'
+    status: 'loading',
+    isError: false,
   }
 
   setUser = (user) => {
@@ -58,7 +61,9 @@ export default class AuthProvider extends Component {
       .then((user) => {
         this.setUser(user);
       })
-      .catch(error => console.log(error))
+      .catch(this.setState({
+        isError: true,
+      }))
   }
 
   signupUser = (body) => {
@@ -74,7 +79,15 @@ export default class AuthProvider extends Component {
       .then((user) => {
         this.setUser(user);
       })
-      .catch(error => console.log(error))
+      .catch(this.setState({
+        isError: true,
+      }))
+  }
+
+  onErrorSolved = () => {
+    this.setState({
+      isError: false,
+    })
   }
 
   componentDidMount() {
@@ -111,6 +124,8 @@ export default class AuthProvider extends Component {
               login: this.loginUser,
               signup: this.signupUser,
               editUser: this.editUser,
+              isError: this.state.isError,
+              onErrorSolved: this.onErrorSolved,
             }}>
             {children}
           </Provider>

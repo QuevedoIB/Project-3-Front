@@ -18,24 +18,26 @@ class Signup extends Component {
     username: '',
     password: '',
     email: '',
+    location: '',
     quote: '',
     interests: [],
-    valueInterests: '',
     personality: [],
+    valueInterests: '',
     indexPage: 0,
     allFields: true,
   };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { username, password, email, quote, interests, personality } = this.state;
+    const { username, password, email, quote, interests, personality, location } = this.state;
     const userData = {
       username,
       password,
       email,
       quote,
       interests,
-      personality
+      personality,
+      location
     }
 
     this.props.signup(userData)
@@ -117,6 +119,12 @@ class Signup extends Component {
     });
   }
 
+  getLocation = (locationValue) => {
+    this.setState({
+      location: locationValue
+    })
+  }
+
   editPrevTag = () => {
     let { interests } = this.state;
 
@@ -145,6 +153,7 @@ class Signup extends Component {
             password={password}
             email={email}
             handleChange={this.handleChange}
+            getLocation={this.getLocation}
           />
           <button onClick={this.handleNext} className="link-button">Next</button>
         </div>

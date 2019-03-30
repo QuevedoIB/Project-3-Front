@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
@@ -34,10 +35,17 @@ class ProfileEdit extends Component {
     //     data[prop] = this.state[prop];
     //   }
     // }
+    try {
+      await this.props.editUser(this.state);
 
-    await this.props.editUser(this.state);
+      if (this.props.isError) {
+        this.props.onErrorSolved();
+      }
 
-    this.props.history.push('/profile')
+      this.props.history.push('/profile')
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   handleKeyUp = (e) => {
@@ -88,11 +96,11 @@ class ProfileEdit extends Component {
 
     return (
       <form onSubmit={(e) => this.handleSubmit(e)}>
-        <label htmlFor="username"></label>
+        <label htmlFor="username">New Username:</label>
         <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' />
-        <label htmlFor="new-password"></label>
+        <label htmlFor="new-password">New Password:</label>
         <input type="password" id='new-password' value={password} onChange={(e) => this.handleChange(e)} name='password' />
-        <label htmlFor="new-quote"></label>
+        <label htmlFor="new-quote">New quote:</label>
         <input type="text" id='new-quote' value={quote} onChange={(e) => this.handleChange(e)} name='quote' />
         <div className="tags">
           <ul className="tags-list">
@@ -121,6 +129,8 @@ class ProfileEdit extends Component {
         <label htmlFor="current-password">Current Password: </label>
         <input type="password" id='current-password' value={currentPassword} onChange={(e) => this.handleChange(e)} name='currentPassword' required />
         <button>Save Changes</button>
+        {this.props.isError && <div>Incorrect Password</div>}
+        <Link to='/profile'>Back to Profile</Link>
       </form>
     )
   }

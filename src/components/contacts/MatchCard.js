@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default class MatchCard extends Component {
   render() {
-    console.log(this.props)
+
     const { imageUrl, username, quote, _id } = this.props.match;
     return (
       <div>

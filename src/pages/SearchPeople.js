@@ -5,6 +5,7 @@ import Personality from '../components/signup/personality-test/Personality';
 import SearchCard from '../components/contacts/SearchCard';
 import Spinner from '../components/loading/Spinner';
 import { Link } from 'react-router-dom';
+import { getSortedByDistanceArray } from '../lib/filter-by-location';
 
 class SearchPeople extends Component {
 
@@ -39,9 +40,16 @@ class SearchPeople extends Component {
     }
 
     if (this.state.personality) {
-
-      let sortedUsers = this.sortUsersListByPersonality(resultUsers, this.props.user)
-      this.setState({
+      const sortedUsers = this.sortUsersListByPersonality(resultUsers, this.props.user)
+      return this.setState({
+        listOfUsers: sortedUsers,
+        loading: false,
+        indexUser: 0,
+        noUsers: false
+      })
+    } else if (this.state.location) {
+      const sortedUsers = getSortedByDistanceArray(resultUsers, this.props.user.location);
+      return this.setState({
         listOfUsers: sortedUsers,
         loading: false,
         indexUser: 0,
@@ -55,6 +63,7 @@ class SearchPeople extends Component {
         noUsers: false
       })
     }
+
 
   }
 
@@ -150,6 +159,7 @@ class SearchPeople extends Component {
           </article>
         }
         <Link to='/profile' >Back to Profile</Link>
+        <div id="map" className="map-create-event hide"></div>
       </section>
     )
   }

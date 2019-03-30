@@ -54,7 +54,7 @@ class UserService {
   }
 
   declineMatch(id) {
-    console.log(id);
+
     return this.users.post(`/profile/decline-contact/${id}`)
       .then(({ data }) => data);
   }

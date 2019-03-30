@@ -73,3 +73,7 @@ input{
   display: grid;
   justify-content: center;
 }
+
+.hide {
+  display: none;
+  }
