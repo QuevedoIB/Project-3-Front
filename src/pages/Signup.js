@@ -14,6 +14,22 @@ const ENTER_KEY = 13;
 const COMMA_KEY = 188;
 const BACKSPACE_KEY = 8;
 
+
+// const config = {
+//   apiKey: "<API_KEY>",
+//   authDomain: "<PROJECT_ID>.firebaseapp.com",
+//   databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+//   storageBucket: "<BUCKET>.appspot.com",
+// };
+
+const config = {
+  apiKey: "AIzaSyBPiQmXBjc3QAVnensxPXbuxjeYgm1-kb8",
+  authDomain: "http://localhost:3000",
+  databaseURL: "http://localhost:5000",
+  storageBucket: "<BUCKET>.appspot.com",
+  };
+firebase.initializeApp(config);
+
 class Signup extends Component {
 
   state = {
@@ -151,7 +167,7 @@ class Signup extends Component {
   handleUploadStart = () => {
     this.setState({ isUploading: true, progress: 0 });
   }
-  handleProgress = (progress) =>{ 
+  handleProgress = (progress) => {
     this.setState({ progress });
   }
   handleUploadError = (error) => {

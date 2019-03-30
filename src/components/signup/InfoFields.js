@@ -19,13 +19,6 @@ export default class InfoFields extends Component {
     this.props.getLocation(coords);
   }
 
-
-
-
-
-
-
-
   render() {
     return (
       <div className="column-content form-fields">
