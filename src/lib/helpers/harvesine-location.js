@@ -34,6 +34,8 @@ export function sortArrayByDistance(arrayUsers, userCoords) {
     return d;
   }
 
+  console.log(arrayUsers, 'HEEEELLO', copyArray)
+
   return copyArray;
 }
 
