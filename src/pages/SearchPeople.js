@@ -5,7 +5,7 @@ import Personality from '../components/signup/personality-test/Personality';
 import SearchCard from '../components/contacts/SearchCard';
 import Spinner from '../components/loading/Spinner';
 import { Link } from 'react-router-dom';
-import { getSortedByDistanceArray } from '../lib/filter-by-location';
+import { sortArrayByDistance } from '../lib/helpers/harvesine-location';
 
 class SearchPeople extends Component {
 
@@ -23,6 +23,7 @@ class SearchPeople extends Component {
   }
 
   onChange = (e) => {
+    console.log(e.target.name)
     this.setState({
       [e.target.name]: !this.state[e.target.name],
     })
@@ -47,14 +48,14 @@ class SearchPeople extends Component {
         indexUser: 0,
         noUsers: false
       })
-      // } else if (this.state.location) {
-      //   const sortedUsers = getSortedByDistanceArray(resultUsers, this.props.user.location);
-      //   return this.setState({
-      //     listOfUsers: sortedUsers,
-      //     loading: false,
-      //     indexUser: 0,
-      //     noUsers: false
-      //   })
+    } else if (this.state.location) {
+      const sortedUsers = sortArrayByDistance(resultUsers, this.props.user.location);
+      return this.setState({
+        listOfUsers: sortedUsers,
+        loading: false,
+        indexUser: 0,
+        noUsers: false
+      })
     } else {
       this.setState({
         listOfUsers: this.sortUsersRandom(resultUsers),

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './InfoFields.css';
 import { mainMap, getLocationValue } from '../../lib/autocomplete-location';
+import { getCoordsFromPlace } from '../../lib/filter-by-location';
 
 export default class InfoFields extends Component {
 
@@ -8,8 +9,10 @@ export default class InfoFields extends Component {
     mainMap();
   }
 
-  componentWillUnmount() {
-    this.props.getLocation(getLocationValue());
+  componentWillUnmount = async () => {
+    const coords = await getCoordsFromPlace(getLocationValue());
+    console.log(coords)
+    this.props.getLocation(coords);
   }
 
   render() {

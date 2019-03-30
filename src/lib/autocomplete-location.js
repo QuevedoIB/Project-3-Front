@@ -4,6 +4,7 @@ import MapboxGeocoder from 'mapbox-gl-geocoder';
 export const mainMap = () => {
 
   mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbm1hcHMiLCJhIjoiY2pzeDNkZHo0MGU2ZjQ1bzV3ZGExNXRmMCJ9.Yc4_1JYlXjBEZ-mXzuETgA';
+
   let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
@@ -28,6 +29,7 @@ export const mainMap = () => {
 };
 
 export const getLocationValue = () => {
-  const input = document.querySelector('#location .mapboxgl-ctrl-geocoder input')
+  const input = document.querySelector('#location .mapboxgl-ctrl-geocoder input');
+
   return input.value;
 }

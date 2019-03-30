@@ -5,8 +5,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^7.0.0",
+    "fetch": "^1.1.0",
     "mapbox-gl": "^0.53.1",
     "mapbox-gl-geocoder": "^2.0.1",
+    "node-fetch": "^2.3.0",
     "node-sass": "^4.11.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
