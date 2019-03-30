@@ -8,7 +8,7 @@ class Messages extends Component {
     return (
       <li>
         <div className="Message-content">
-          <div className="text">{message}</div>
+          <div className="text">{message.text}</div>
         </div>
       </li>
     );
