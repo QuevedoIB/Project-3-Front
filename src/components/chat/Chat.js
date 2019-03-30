@@ -22,7 +22,7 @@ class Chat extends Component {
                     <Messages chat={this.props.chat} />
                 </div>
                 <div>
-                    <form onSubmit={(e) => { e.preventDefault(); this.props.handleSendMessage(this.state.message) }} className="message-form">
+                    <form onSubmit={(e) => { e.preventDefault(); this.props.handleSendMessage(this.state.message); this.setState({ message: '', }) }} className="message-form">
                         <input autoComplete="off" className="input message-input" placeholder="Write a message" type="text" name="message" onChange={this.handleChange} value={this.state.message} />
                         <input className="button message-button" type="submit" value="Send" />
                     </form>
