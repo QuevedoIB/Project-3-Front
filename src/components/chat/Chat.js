@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import socketManager from '../../socketManager';
+import Messages from './Messages';
+
 
 class Chat extends Component {
 
@@ -15,12 +17,17 @@ class Chat extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={(e)=> {e.preventDefault(); this.props.handleSendMessage(this.state.message)}} className="message-form">
-                    <input autoComplete="off" className="input message-input" placeholder="Write a message" type="text" name="message" onChange={this.handleChange} value={this.state.message} />
-                    <input className="button message-button" type="submit" value="Send" />
-                </form>
-            </div>
+            <>
+                <div>
+                    <Messages chat={this.props.chat} />
+                </div>
+                <div>
+                    <form onSubmit={(e) => { e.preventDefault(); this.props.handleSendMessage(this.state.message) }} className="message-form">
+                        <input autoComplete="off" className="input message-input" placeholder="Write a message" type="text" name="message" onChange={this.handleChange} value={this.state.message} />
+                        <input className="button message-button" type="submit" value="Send" />
+                    </form>
+                </div>
+            </>
         )
     }
 }

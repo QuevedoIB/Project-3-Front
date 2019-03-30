@@ -6,19 +6,17 @@ class Messages extends Component {
   renderMessage(message) {
     return (
       <li>
-
         <div className="Message-content">
-
-          <div className="text">{message.text}</div>
+          <div className="text">{message}</div>
         </div>
       </li>
     );
   }
   render() {
-    const { messages } = this.props;
+    const { chat } = this.props;
     return (
       <ul className="Messages-list">
-        {messages.map(m => this.renderMessage(m))}
+        {chat.map(m => this.renderMessage(m))}
       </ul>
     );
   }

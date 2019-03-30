@@ -47,7 +47,7 @@ class ChatPage extends Component {
     return (
       <div>
         CHAT
-        < Chat handleSendMessage={this.handleSendMessage} />
+        < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat}/>
       </div >
     )
   }
