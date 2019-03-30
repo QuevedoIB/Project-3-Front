@@ -18,6 +18,7 @@ class Signup extends Component {
     username: '',
     password: '',
     email: '',
+    imageUrl: '',
     location: '',
     quote: '',
     interests: [],
@@ -29,11 +30,12 @@ class Signup extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { username, password, email, quote, interests, personality, location } = this.state;
+    const { username, password, email, imageUrl, quote, interests, personality, location } = this.state;
     const userData = {
       username,
       password,
       email,
+      imageUrl,
       quote,
       interests,
       personality,
@@ -140,7 +142,7 @@ class Signup extends Component {
   }
 
   renderContent() {
-    const { username, password, email, quote, valueInterests, interests, questions, indexPage, personality } = this.state;
+    const { username, password, email, imageUrl, quote, valueInterests, interests, questions, indexPage, personality } = this.state;
     if (indexPage === 0) {
       return (
         <div>
@@ -148,10 +150,10 @@ class Signup extends Component {
           <Link to={"/login"} className="link-text"> Login</Link>
           </p>
           <InfoFields
-
             username={username}
             password={password}
             email={email}
+            imageUrl={imageUrl}
             handleChange={this.handleChange}
             getLocation={this.getLocation}
           />
@@ -187,11 +189,11 @@ class Signup extends Component {
   }
 
   render() {
-
+    console.log(this.state.imageUrl);
     return (
       <div className="page signup">
         <h1>Sign up</h1>
-        <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" >
+        <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
           {this.renderContent()}
           {!this.state.allFields && <h3>Missing Fields</h3>}
         </form>

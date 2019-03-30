@@ -26,7 +26,7 @@ export default class InfoFields extends Component {
 
         {/* comprobar si se suben las imágenes */}
 
-        <span className="image-upload"><input type="file" name="imageUrl" className="input-img" />
+        <span className="image-upload"><input type="file" name="imageUrl" className="input-img" value={this.props.imageUrl} onChange={this.props.handleChange} />
           Choose Image</span>
         <div id="map" className="map-create-event hide"></div>
       </div>

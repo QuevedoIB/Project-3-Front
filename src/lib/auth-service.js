@@ -14,6 +14,7 @@ class AuthService {
   }
 
   signup(user) {
+    console.log('USER', user);
     return this.auth.post('/auth/signup', user)
       .then(({ data }) => data);
   }
