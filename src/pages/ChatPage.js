@@ -4,6 +4,7 @@ import Chat from '../components/chat/Chat';
 import chatService from '../lib/chat-service';
 import { withRouter } from 'react-router-dom';
 import socketManager from '../socketManager';
+import { scrollToBottom } from '.././lib/helpers/scroll-chat-down';
 
 class ChatPage extends Component {
 
@@ -45,6 +46,8 @@ class ChatPage extends Component {
     socket.on("NEW_MESSAGE", () => {
       this.handleGetChat();
     });
+
+    scrollToBottom();
   }
 
 

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import React from "react";
+import './Messages.css';
 
 class Messages extends Component {
 
@@ -15,7 +16,7 @@ class Messages extends Component {
   render() {
     const { chat } = this.props;
     return (
-      <ul className="Messages-list">
+      <ul className="messages-list">
         {chat.map(m => this.renderMessage(m))}
       </ul>
     );
