@@ -18,7 +18,8 @@ class ChatPage extends Component {
     await this.handleGetChat();
     socketManager.initSocket(this.state.chatId);
     let socket = socketManager.getSocket();
-    socket.on("NEW MESSAGE", () => {
+    socket.on("NEW_MESSAGE", () => {
+      console.log('NEW MESSAGE');
       this.handleGetChat();
     });
   }
