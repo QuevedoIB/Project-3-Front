@@ -14,6 +14,7 @@ class SocketManager {
  }
  initSocket = (chatId) => {
    this.socket = io(`${socketURL}/${chatId}`);
+   console.log('SOCKET', this.socket);
  }
 }
 

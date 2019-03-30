@@ -14,8 +14,8 @@ class ChatPage extends Component {
     message: ''
   }
 
-  componentDidMount(){
-    this.handleGetChat();
+  componentDidMount = async () => {
+    await this.handleGetChat();
     socketManager.initSocket(this.state.chatId);
     let socket = socketManager.getSocket();
     socket.on("NEW MESSAGE", () => {
@@ -25,8 +25,7 @@ class ChatPage extends Component {
 
   handleGetChat = async () => {
     const chat = await chatService.getChat(this.props.match.params.id);
-
-    this.setState({
+    await this.setState({
       chatId: chat._id,
       chat: chat.log,
       contact: chat.contact
@@ -48,7 +47,7 @@ class ChatPage extends Component {
     return (
       <div>
         CHAT
-        < Chat handleSendMessage={this.handleSendMessage}/>
+        < Chat handleSendMessage={this.handleSendMessage} />
       </div >
     )
   }
