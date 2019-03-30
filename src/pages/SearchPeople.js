@@ -47,14 +47,14 @@ class SearchPeople extends Component {
         indexUser: 0,
         noUsers: false
       })
-    } else if (this.state.location) {
-      const sortedUsers = getSortedByDistanceArray(resultUsers, this.props.user.location);
-      return this.setState({
-        listOfUsers: sortedUsers,
-        loading: false,
-        indexUser: 0,
-        noUsers: false
-      })
+      // } else if (this.state.location) {
+      //   const sortedUsers = getSortedByDistanceArray(resultUsers, this.props.user.location);
+      //   return this.setState({
+      //     listOfUsers: sortedUsers,
+      //     loading: false,
+      //     indexUser: 0,
+      //     noUsers: false
+      //   })
     } else {
       this.setState({
         listOfUsers: this.sortUsersRandom(resultUsers),
@@ -159,7 +159,7 @@ class SearchPeople extends Component {
           </article>
         }
         <Link to='/profile' >Back to Profile</Link>
-        <div id="map" className="map-create-event hide"></div>
+        {/* <div id="map" className="map-create-event hide"></div> */}
       </section>
     )
   }

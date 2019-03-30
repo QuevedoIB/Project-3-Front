@@ -22,7 +22,7 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
   const mapDiv = document.getElementById('map');
 
   const map = new mapboxgl.Map({
-    container: map,
+    container: mapDiv,
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [-79.4512, 43.6568],
     zoom: 15
