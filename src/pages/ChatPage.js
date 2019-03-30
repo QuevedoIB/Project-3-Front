@@ -41,6 +41,11 @@ class ChatPage extends Component {
           chat: data,
         })
       })
+    let socket = socketManager.getSocket();
+    socket.on("NEW_MESSAGE", () => {
+      console.log('NEW MESSAGE');
+      this.handleGetChat();
+    });
   }
 
 
