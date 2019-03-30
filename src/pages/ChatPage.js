@@ -20,7 +20,7 @@ class ChatPage extends Component {
     await socketManager.initSocket(this.state.chatId);
     let socket = socketManager.getSocket();
     socket.on("NEW_MESSAGE", () => {
-      console.log('NEW MESSAGE');
+
       this.handleGetChat();
     });
   }
@@ -55,7 +55,7 @@ class ChatPage extends Component {
     return (
       <div>
         CHAT
-        < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} />
+        < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} contact={this.state.contact} />
       </div >
     )
   }

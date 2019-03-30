@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import socketManager from '../../socketManager';
 import Messages from './Messages';
 
-
 class Chat extends Component {
 
 
@@ -19,7 +18,7 @@ class Chat extends Component {
         return (
             <>
                 <div>
-                    <Messages chat={this.props.chat} />
+                    <Messages chat={this.props.chat} contact={this.props.contact} />
                 </div>
                 <div>
                     <form onSubmit={(e) => { e.preventDefault(); this.props.handleSendMessage(this.state.message); this.setState({ message: '', }) }} className="message-form">
