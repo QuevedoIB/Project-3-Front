@@ -3,6 +3,10 @@ import './InfoFields.css';
 import { mainMap, getLocationValue } from '../../lib/autocomplete-location';
 import { getCoordsFromPlace } from '../../lib/filter-by-location';
 
+import FileUploader from 'react-firebase-file-uploader';
+import firebase from 'firebase';
+
+
 export default class InfoFields extends Component {
 
   componentDidMount() {
@@ -29,9 +33,19 @@ export default class InfoFields extends Component {
 
         {/* comprobar si se suben las imágenes */}
 
-        <span className="image-upload"><input type="file" name="imageUrl" className="input-img" value={this.props.imageUrl} onChange={this.props.handleChange} />
+        {/* <span className="image-upload"><input type="file" name="imageUrl" className="input-img" value={this.props.imageUrl} onChange={this.props.handleChange} />
           Choose Image</span>
-        <div id="map" className="map-create-event hide"></div>
+        <div id="map" className="map-create-event hide"></div> */}
+        <FileUploader
+          accept="image/*"
+          name="imageUrl"
+          randomizeFilename
+          storageRef={firebase.storage().ref('images')}
+          onUploadStart={this.props.handleUploadStart}
+          onUploadError={this.props.handleUploadError}
+          onUploadSuccess={this.props.handleUploadSuccess}
+          onProgress={this.props.handleProgress}
+        />
       </div>
     )
   }

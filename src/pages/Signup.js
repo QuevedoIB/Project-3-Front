@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
-import parser from '../lib/file-upload';
 import InfoFields from '../components/signup/InfoFields';
 import Interests from '../components/signup/Interests';
 import Personality from '../components/signup/personality-test/Personality';
 import { questions } from '../data/questions';
+//import parser  from '../helpers/file-upload';
+
+import firebase from 'firebase';
+
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
 const BACKSPACE_KEY = 8;
+
+
+// const config = {
+//   apiKey: "<API_KEY>",
+//   authDomain: "<PROJECT_ID>.firebaseapp.com",
+//   databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+//   storageBucket: "<BUCKET>.appspot.com",
+// };
+
+const config = {
+  apiKey: "AIzaSyBPiQmXBjc3QAVnensxPXbuxjeYgm1-kb8",
+  authDomain: "http://localhost:3000",
+  databaseURL: "http://localhost:5000",
+  storageBucket: "<BUCKET>.appspot.com",
+  };
+firebase.initializeApp(config);
 
 class Signup extends Component {
 
@@ -26,6 +45,9 @@ class Signup extends Component {
     valueInterests: '',
     indexPage: 0,
     allFields: true,
+    imageProfile: '',
+    isUploading: false,
+    progress: 0
   };
 
   handleFormSubmit = (event) => {
@@ -141,6 +163,23 @@ class Signup extends Component {
     })
   }
 
+
+  handleUploadStart = () => {
+    this.setState({ isUploading: true, progress: 0 });
+  }
+  handleProgress = (progress) => {
+    this.setState({ progress });
+  }
+  handleUploadError = (error) => {
+    this.setState({ isUploading: false });
+    console.error(error);
+  }
+  handleUploadSuccess = (filename) => {
+    this.setState({ imageProfile: filename, progress: 100, isUploading: false });
+    firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
+  };
+
+
   renderContent() {
     const { username, password, email, imageUrl, quote, valueInterests, interests, questions, indexPage, personality } = this.state;
     if (indexPage === 0) {
@@ -156,6 +195,10 @@ class Signup extends Component {
             imageUrl={imageUrl}
             handleChange={this.handleChange}
             getLocation={this.getLocation}
+            handleUploadStart={this.handleUploadStart}
+            handleProgress={this.handleProgress}
+            handleUploadError={this.handleUploadError}
+            handleUploadSuccess={this.handleUploadSuccess}
           />
           <button onClick={this.handleNext} className="link-button">Next</button>
         </div>
