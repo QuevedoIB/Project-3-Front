@@ -166,8 +166,8 @@ class CompleteProfile extends Component {
       if (personality.length === questions.length) {
         return (
           <>
-            <p>All is ready!</p>
-            <button type='submit' id="sign-up-fade" className="bottomLinks one" className="link-button">Sign Up</button>
+            <p>Everything is ready!</p>
+            <button type='submit' id="sign-up-fade" className="bottomLinks one" className="link-button">Let's meet people</button>
           </>
         );
       } else {

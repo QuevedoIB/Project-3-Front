@@ -1,23 +1,13 @@
 import React, { Component } from 'react'
 import './InfoFields.css';
-import { mainMap, getLocationValue } from '../../lib/autocomplete-location';
-import { getCoordsFromPlace } from '../../lib/filter-by-location';
+// import { mainMap, getLocationValue } from '../../lib/autocomplete-location';
+// import { getCoordsFromPlace } from '../../lib/filter-by-location';
 
 import FileUploader from 'react-firebase-file-uploader';
 import firebase from 'firebase';
 
 
 export default class InfoFields extends Component {
-
-  componentDidMount() {
-    mainMap();
-  }
-
-  componentWillUnmount = async () => {
-    const coords = await getCoordsFromPlace(getLocationValue());
-    this.props.getLocation(coords);
-  }
-
   render() {
     return (
       <div className="column-content form-fields">
@@ -27,8 +17,8 @@ export default class InfoFields extends Component {
         <input type="password" name="password" value={this.props.password} onChange={this.props.handleChange} required />
         <label htmlFor='email'>Email:</label>
         <input type="email" name="email" value={this.props.email} onChange={this.props.handleChange} required />
-        <div id="location" className='geocoder'>
-        </div>
+        {/* <div id="location" className='geocoder'> */}
+        {/* </div> */}
 
         {/* comprobar si se suben las imágenes */}
 
@@ -44,7 +34,7 @@ export default class InfoFields extends Component {
           onUploadSuccess={this.props.handleUploadSuccess}
           onProgress={this.props.handleProgress}
         />
-        <div id="map" className="map-create-event hide"></div>
+        {/* <div id="map" className="map-create-event hide"></div> */}
       </div>
     )
   }
