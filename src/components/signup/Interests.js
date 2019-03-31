@@ -23,9 +23,9 @@ export default class Interests extends Component {
     const { interests, valueInterests, quote } = this.props;
     return (
       <div className="form-interests">
-        <h3>Quote</h3>
+        <label>Quote</label>
         <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" className="quote-form" />
-        <h3>Interests</h3>
+        <label>Interests</label>
         <div className="tags">
           <ul className="tags-list">
             {interests.map((interest, i) => (
@@ -50,6 +50,7 @@ export default class Interests extends Component {
           Press <code>enter</code> or <code>,</code> to add a tag. Press{" "}
           <code>backspace</code> to edit previous tag.
         </small>
+        <label>Your location</label>
         <div id="location" className='geocoder'>
 
         </div>
