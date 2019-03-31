@@ -30,18 +30,17 @@ class Navbar extends Component {
       } else {
         animationBack = 'nav-item-rev'
       }
-    }
-
-    if (isLogged) {
-      return <div className='buttons-navbar'>
-        <Link className={`${animationBack}-2`} to='/login'>Login</Link>
-        <button className={`${animationBack}-3`} onClick={logout}>Logout</button>
-      </div>
-    } else {
-      return <div className='buttons-navbar'>
-        <Link className={`${animationBack}-2`} to='/login'>Login</Link>
-        <Link className={`${animationBack}-3`} to='/signup'>Signup</Link>
-      </div>
+      if (isLogged) {
+        return <div className='buttons-navbar'>
+          <Link className={`${animationBack}-2`} to='/login'>Login</Link>
+          <button className={`${animationBack}-3`} onClick={logout}>Logout</button>
+        </div>
+      } else {
+        return <div className='buttons-navbar'>
+          <Link className={`${animationBack}-2`} to='/login'>Login</Link>
+          <Link className={`${animationBack}-3`} to='/signup'>Signup</Link>
+        </div>
+      }
     }
   }
 
