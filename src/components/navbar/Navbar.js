@@ -3,65 +3,64 @@ import { Link } from 'react-router-dom';
 import { withAuth } from '../../providers/AuthProvider';
 import './Navbar.scss';
 
-const styleEnd = {
-  display: 'none',
-}
-
 class Navbar extends Component {
 
   state = {
     toogled: '',
     classStyle: 'no-animation',
     displayed: false,
-    firstClick: 'first-click',
+    firstClick: false,
   }
 
   handleClick = () => {
     this.state.toogled ?
       this.setState({ toogled: '', classStyle: 'no-animation', displayed: !this.state.displayed }) :
-      this.setState({ firstClick: '', toogled: 'active', classStyle: '', displayed: !this.state.displayed })
+      this.setState({ toogled: 'active', classStyle: '', displayed: !this.state.displayed, firstClick: true })
   }
 
-  handleAnimationEnd() {
-
-  }
 
   checkLogged() {
-    const { classStyle, toogled, displayed, firstClick } = this.state;
+    const { displayed, firstClick } = this.state;
     const { isLogged, logout } = this.props;
     let animationBack;
-    if (displayed) {
-      animationBack = 'nav-item'
-    } else {
-      animationBack = 'nav-item-rev'
+
+    if (firstClick) {
+      if (displayed) {
+        animationBack = 'nav-item'
+      } else {
+        animationBack = 'nav-item-rev'
+      }
     }
 
     if (isLogged) {
-      return <div>
-        <Link id={firstClick} className={`${animationBack}-2`} to='/login'>Login</Link>
-        <button id={firstClick} className={`${animationBack}-3`} onClick={logout}>Logout</button>
+      return <div className='buttons-navbar'>
+        <Link className={`${animationBack}-2`} to='/login'>Login</Link>
+        <button className={`${animationBack}-3`} onClick={logout}>Logout</button>
       </div>
     } else {
-      return <div>
-        <Link id={firstClick} className={`${animationBack}-2`} to='/login'>Login</Link>
-        <Link id={firstClick} className={`${animationBack}-3`} to='/signup'>Signup</Link>
+      return <div className='buttons-navbar'>
+        <Link className={`${animationBack}-2`} to='/login'>Login</Link>
+        <Link className={`${animationBack}-3`} to='/signup'>Signup</Link>
       </div>
     }
   }
 
   render() {
     const { classStyle, toogled } = this.state;
-    return <div class="frame">
-      <div class="center">
-        <div class={`menu-icon ${toogled}`} onClick={this.handleClick}>
-          <div class={`line-1 ${classStyle}`}></div>
-          <div class={`line-2 ${classStyle}`}></div>
-          <div class={`line-3 ${classStyle}`}></div>
-          {this.checkLogged()}
+    return (
+      <>
+        <div class="frame">
+          <div class="center">
+            <div class={`menu-icon ${toogled}`} onClick={this.handleClick}>
+              <div class={`line-1 ${classStyle}`}></div>
+              <div class={`line-2 ${classStyle}`}></div>
+              <div class={`line-3 ${classStyle}`}></div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
+        {this.checkLogged()}
+      </>
+    )
   }
 }
 

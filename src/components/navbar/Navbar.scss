@@ -9,6 +9,9 @@ $secondary-color: #7c3b7c;
 $item-height: 8vh;
 $item-width: 16vw;
 
+.buttons-navbar{
+  z-index: 10;
+}
 
 .frame {
 	position: fixed;
@@ -26,11 +29,10 @@ $item-width: 16vw;
   z-index: 40;
 }
 
-#first-click {
-  display: none;
-} 
-
 .nav-item-1  {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
 	width: $item-width;
 	height: $item-height;
@@ -42,6 +44,9 @@ $item-width: 16vw;
 }
 
 .nav-item-2  {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
 	width: $item-width;
 	height: $item-height;
@@ -53,6 +58,9 @@ $item-width: 16vw;
 }
 
 .nav-item-3  {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
 	width: $item-width;
 	height: $item-height;
@@ -195,9 +203,6 @@ $item-width: 16vw;
 
 @keyframes animate-item-1 {
   0% {
-    display: 'flex';
-    justify-content: 'center';
-    align-items: 'center';
     opacity: 0;
     bottom: 4vh;
     right: 8vw;
@@ -211,9 +216,6 @@ $item-width: 16vw;
 
 @keyframes animate-item-2 {
   0% {
-    display: 'flex';
-    justify-content: 'center';
-    align-items: 'center';
     opacity: 0;
     bottom: 4vh;
 	  right: 8vw;
@@ -227,9 +229,6 @@ $item-width: 16vw;
 
 @keyframes animate-item-3 {
   0% {
-    display: 'flex';
-    justify-content: 'center';
-    align-items: 'center';
     opacity: 0;
     bottom: 4vh;
 	  right: 8vw;
@@ -248,8 +247,7 @@ $item-width: 16vw;
 	  right: 16vw;
   }
   100% {
-    display: 'none';
-    opacity: 0;
+   opacity: 0;
     bottom: 4vh;
     right: 8vw;
   }
@@ -262,7 +260,6 @@ $item-width: 16vw;
 	  right: 28vw;
   }
   100% {
-    display: 'none';
     opacity: 0;
     bottom: 4vh;
 	  right: 8vw;
@@ -276,7 +273,6 @@ $item-width: 16vw;
 	  right: 6vw;
   }
   100% {
-    display: 'none';
     opacity: 0;
     bottom: 4vh;
 	  right: 8vw;
@@ -310,6 +306,9 @@ animation: animate-item-3 2s forwards;
 
 
 .nav-item-rev-2  {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
 	width: $item-width;
 	height: $item-height;
@@ -321,6 +320,9 @@ animation: animate-item-3 2s forwards;
 }
 
 .nav-item-rev-3  {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
 	width: $item-width;
   height: $item-height;
