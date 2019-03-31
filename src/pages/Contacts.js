@@ -4,6 +4,7 @@ import MatchCard from '../components/contacts/MatchCard';
 import { withAuth } from '../providers/AuthProvider';
 import { withContacts } from '../providers/ContactProvider';
 import { Link } from 'react-router-dom';
+import './pages-scss/contacts.scss';
 
 class Contacts extends Component {
 
@@ -14,6 +15,15 @@ class Contacts extends Component {
     // loadingMatches: true,
     // loadingContacts: true,
     showContacts: true,
+  }
+
+  buttonContactStyle = {
+    backgroundImage: 'linear-gradient(-90deg, #ffffff, #fff5f5e8)',
+    color: '#ff8080'
+  }
+  buttonMatchesStyle = {
+    backgroundImage: 'linear-gradient(-90deg, #646464, #777777)',
+    color: 'white'
   }
 
   componentDidMount() {
@@ -165,11 +175,19 @@ class Contacts extends Component {
     //}
   }
 
-  showMatches = () => {
+  showMatches = (e) => {
     if (this.state.showContacts) {
       this.setState({
         showContacts: false,
       })
+    }
+    this.buttonContactStyle = {
+      backgroundImage: 'linear-gradient(-90deg, #646464, #777777)',
+      color: 'white'
+    }
+    this.buttonMatchesStyle = {
+      backgroundImage: 'linear-gradient(-90deg, #ffffff, #fff5f5e8)',
+      color: '#ff8080'
     }
   }
 
@@ -179,6 +197,14 @@ class Contacts extends Component {
         showContacts: true,
       })
     }
+    this.buttonContactStyle = {
+      backgroundImage: 'linear-gradient(-90deg,#ffffff, #fff5f5e8)',
+      color: '#ff8080'
+    }
+    this.buttonMatchesStyle = {
+      backgroundImage: 'linear-gradient(-90deg, #646464, #777777)',
+      color: 'white'
+    }
   }
 
   render() {
@@ -186,19 +212,22 @@ class Contacts extends Component {
     const { text, matches } = this.state;
 
     return (
-      <section>
-        <input value={text} type='text' placeholder='Search User' onChange={this.onChange}></input>
-        <div className='contacts-buttons'>
-          <button onClick={this.showContacts}>Show contacts</button>
-          <div className='contacts-matches-button'>
-            <button onClick={this.showMatches}>Show matches</button>{matches.length > 0 && <div className='notifications'>{matches.length}</div>}
+      <>
+        <img src={process.env.PUBLIC_URL+'/images/bg-pages.png'} className="bg-image"/>
+        <div className="contacts-header">
+          <input value={text} type='text' placeholder='Search User' onChange={this.onChange} className="contacts-input"></input>
+          <div className='contacts-buttons'>
+            <button onClick={this.showContacts} className="contacts-button" style={this.buttonContactStyle}>Contacts</button>
+            <div className='contacts-matches-button'>
+              <button onClick={this.showMatches} className="contacts-button" style={this.buttonMatchesStyle}>Matches</button>{matches.length > 0 && <div className='notifications'>{matches.length}</div>}
+            </div>
           </div>
         </div>
-        <ul>
+        <ul className="contacts-list">
           {this.renderList()}
         </ul>
-        <Link to='/profile' >Back to Profile</Link>
-      </section>
+        <Link to='/profile' className="link-button button-margin">Back to Profile</Link>
+      </>
     )
   }
 }

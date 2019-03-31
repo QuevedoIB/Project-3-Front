@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import chatService from '../../lib/chat-service';
 import { withRouter } from 'react-router-dom';
+import './ContactCard.scss';
 
 class ContactCard extends Component {
 
@@ -14,22 +15,22 @@ class ContactCard extends Component {
   render() {
     const { imageUrl, username, quote, _id } = this.props.contact;
     return (
-      <div>
-        <img src={imageUrl} alt={username} />
-        <div>
-          <Link to={`/contact/${_id}`}><h3>{username}</h3></Link>
-          <p>{quote}</p>
+      <div className="contact-card">
+        <img src={imageUrl} alt={username} className="user-image"/>
+        <div className="contact-info">
+          <Link to={`/contact/${_id}`} className="text-link username"><h3>{username}</h3></Link>
         </div>
-        <div>
+        <div className="button-container">
           <form onSubmit={this.handleSubmit}>
-            <button type="submit">Chat</button>
+            <button type="submit"><img src={process.env.PUBLIC_URL+'/images/chat.png'} alt="chat"/></button>
           </form>
-
         </div>
-        <button onClick={() => {
-          this.props.deleteContact(this.props.userId, _id)
-          this.props.updateContacts(_id)
-        }}>Delete Contact</button>
+        <div className="button-container">
+          <button onClick={() => {
+            this.props.deleteContact(this.props.userId, _id)
+            this.props.updateContacts(_id)
+          }}><img src={process.env.PUBLIC_URL+'/images/delete.png'} alt="delete"/></button>
+        </div>
       </div>
     )
   }

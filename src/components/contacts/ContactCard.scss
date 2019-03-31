@@ -1,0 +1,36 @@
+.contact-card{
+  display: flex;
+  border-bottom: 1px solid rgb(136, 99, 99);
+
+  .user-image{
+    height: 10vh;
+    align-self: center;
+    margin: 0;
+    border-radius: 100px;
+    padding: 2vh;
+  }
+
+  div{
+    align-self: center;
+  }
+  .contact-info{
+    width: 70%;
+  }
+
+  .username{
+    text-decoration: none;
+    color: #ff8080;
+
+  }
+
+  .button-container{
+    margin: 0 1vh;
+    button{
+      background: none;
+      border: none;
+      img{
+        height: 5vh;
+      }
+    }
+  }
+}
