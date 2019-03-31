@@ -1,11 +1,17 @@
 .home {
   article{
-    margin-top: 25vh;
+    height: 100vh;
+  }
+  h1{
+    font-size: 48px;
+    color: white;
+    margin-top: 5vh;
   }
   h3{
     color: #6d5454;
     margin-top: 0;
-    margin-bottom: 8vh;
+    margin-top: 30vh;
+    margin-bottom: 10vh;
   }
   .google-signup{
     display: flex;
