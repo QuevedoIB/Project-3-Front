@@ -2,20 +2,33 @@ import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar';
+import './pages-scss/profile.scss';
 
 class Profile extends Component {
 
   checkUserData() {
     const { interests, location, personality, quote } = this.props.user;
     if (interests.length && location.length && personality.length && quote) {
-      return <div>
-        <Link to='search-people'>Search People</Link>
-        <Link to='contacts'>Contacts</Link>
+      return <div className='completed-profile-box'>
+        <Link className='link-button' to='contacts'>Contacts</Link>
+        <Link className='link-button' to='search-people'>Search People</Link>
       </div>
     } else {
-      return <div>
-        <h3>Complete your profile and start meeting people!</h3>
-        <Link to='/profile/complete'>Get Ready!</Link>
+      return <div className='need-complete-box'>
+        <div className='alert-div'>
+          <div className="notification-box">
+            <div className="notification-bell">
+              <span className="bell-top"></span>
+              <span className="bell-middle"></span>
+              <span className="bell-bottom"></span>
+              <span className="bell-rad"></span>
+            </div>
+          </div>
+          <div className='title-button'>
+            <h3 className='complete-box-title'>Complete your profile and start meeting people!</h3>
+            <Link className='link-button' to='/profile/complete'>Get Ready!</Link>
+          </div>
+        </div>
       </div>
     }
   }
@@ -23,20 +36,21 @@ class Profile extends Component {
   render() {
     const { username, imageUrl, quote } = this.props.user;
     return (
-      <>
-        <Navbar />
-        <section>
-          <Link to='/profile/edit'><img src={process.env.PUBLIC_URL + '/images/settings.png'} alt='edit-profile' width="80px" /></Link>
-          <div>
-            <img src={imageUrl} alt={username} />
+      <section className='profile-section'>
+        <header>
+          <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-profile.png'} alt='profile'></img>
+          <Link id='edit-profile-image' to='/profile/edit'><img src={process.env.PUBLIC_URL + '/images/settings.png'} alt='edit-profile' width="80px" /></Link>
+          <div className='info-profile'>
             <div>
+              <img src={imageUrl} alt={username} />
               <h1>{username}</h1>
-              <p>{quote}</p>
             </div>
+            <p>{quote}</p>
           </div>
-          {this.checkUserData()}
-        </section >
-      </>
+        </header>
+        {this.checkUserData()}
+        <Navbar />
+      </section >
     )
   }
 }
