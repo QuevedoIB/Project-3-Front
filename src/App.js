@@ -14,7 +14,7 @@ import Home from './pages/Home'; // <-
 import Profile from './pages/Profile'; // <-
 import ProfileEdit from './pages/ProfileEdit';
 import SearchPeople from './pages/SearchPeople';
-import './App.css';
+import './App.scss';
 import ContactProvider from './providers/ContactProvider';
 import CompleteProfile from './pages/ProfileComplete';
 

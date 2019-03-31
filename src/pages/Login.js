@@ -32,10 +32,9 @@ class Login extends Component {
     return (
       <div className="page">
         <form onSubmit={this.handleFormSubmit} className="column-content">
-          <h1>Log in</h1>
-          <label>Username:</label>
+          <label>Username</label>
           <input type="text" name="username" value={username} onChange={this.handleChange} />
-          <label>Password:</label>
+          <label>Password</label>
           <input type="password" name="password" value={password} onChange={this.handleChange} />
           <input type="submit" value="Login" className="link-button" />
         </form>

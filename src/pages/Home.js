@@ -20,6 +20,7 @@ class Home extends Component {
     return (
       <section className="page home full">
         {/* <Navbar data='data' /> */}
+        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-home.png'} />
         <article>
           <div>
             <h1>Project Title</h1>
