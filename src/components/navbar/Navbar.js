@@ -48,12 +48,12 @@ class Navbar extends Component {
     const { classStyle, toogled } = this.state;
     return (
       <>
-        <div class="frame">
-          <div class="center">
-            <div class={`menu-icon ${toogled}`} onClick={this.handleClick}>
-              <div class={`line-1 ${classStyle}`}></div>
-              <div class={`line-2 ${classStyle}`}></div>
-              <div class={`line-3 ${classStyle}`}></div>
+        <div className="frame">
+          <div className="center">
+            <div className={`menu-icon ${toogled}`} onClick={this.handleClick}>
+              <div className={`line-1 ${classStyle}`}></div>
+              <div className={`line-2 ${classStyle}`}></div>
+              <div className={`line-3 ${classStyle}`}></div>
             </div>
           </div>
         </div>

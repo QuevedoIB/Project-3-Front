@@ -5,6 +5,7 @@ import chatService from '../lib/chat-service';
 import { withRouter } from 'react-router-dom';
 import socketManager from '../socketManager';
 import { scrollToBottom } from '.././lib/helpers/scroll-chat-down';
+import { translateMessage, languagesArray } from '.././lib/helpers/get-languages';
 
 class ChatPage extends Component {
 
@@ -12,7 +13,9 @@ class ChatPage extends Component {
     chatId: '',
     chat: [],
     contact: {},
-    message: ''
+    message: '',
+    languagesList: languagesArray,
+    language: '',
   }
 
   componentDidMount = async () => {
@@ -25,6 +28,13 @@ class ChatPage extends Component {
     });
   }
 
+  handleLanguageSelect = (e) => {
+    e.preventDefault();
+    this.setState({
+      language: e.target.value,
+    })
+  }
+
   handleGetChat = async () => {
     const chat = await chatService.getChat(this.props.match.params.id);
     await this.setState({
@@ -35,7 +45,22 @@ class ChatPage extends Component {
   }
 
   handleSendMessage = async (message) => {
-    const chatData = await chatService.sendMessage(this.state.chatId, message)
+    const { language } = this.state;
+
+    let chatData;
+
+    if (language) {
+      const messageTranslated = await translateMessage(message, language);
+      let messageToSend = messageTranslated[0]
+      console.log(messageToSend);
+      chatData = await chatService.sendMessage(this.state.chatId, messageTranslated);
+    } else {
+      chatData = await chatService.sendMessage(this.state.chatId, message);
+    }
+
+    // const messageReceived = await translateMessage(message, language);
+
+    // const chatData = await chatService.sendMessage(this.state.chatId, translatedMessage);
 
     await this.setState({
       message: '',
@@ -56,6 +81,13 @@ class ChatPage extends Component {
       <div>
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
         <div className="contact-header">
+          <form>
+            <select onChange={this.handleLanguageSelect}>
+              {this.state.languagesList.map(language => {
+                return <option key={language.short} value={language.short}>{language.language}</option>
+              })}
+            </select>
+          </form>
           <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />
           <h1>{this.state.contact.username}</h1>
         </div>
