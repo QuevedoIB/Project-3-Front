@@ -1,0 +1,27 @@
+.home {
+  article{
+    height: 100vh;
+  }
+  h1{
+    font-size: 48px;
+    color: white;
+    margin-top: 5vh;
+  }
+  h3{
+    color: #6d5454;
+    margin-top: 0;
+    margin-top: 30vh;
+    margin-bottom: 10vh;
+  }
+  .google-signup{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #6d5454;
+    img{
+      width: 10vw;
+      align-self: center;
+      padding-right: 2vw;
+    }
+  }
+}

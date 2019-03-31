@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import chatService from '../../lib/chat-service';
 import { withRouter } from 'react-router-dom';
-import './ContactCard.scss';
+import '../components-scss/ContactCard.scss';
 
 class ContactCard extends Component {
 

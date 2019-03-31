@@ -31,9 +31,17 @@ class Contact extends Component {
     const { loading, contact } = this.state;
 
     if (loading) {
-      return <Spinner />
+      return <div className="page">
+        <Spinner />
+      </div>
     } else {
-      return <ContactProfile contact={contact} />;
+      return (
+        <div className="page">
+          <img src={process.env.PUBLIC_URL + '/images/bg-profile.png'} className="bg-image" />
+          <ContactProfile contact={contact} />;
+      </div>
+      );
+
     }
   }
 }

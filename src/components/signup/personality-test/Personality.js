@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Question from '../personality-test/Question';
-import './Personality.css';
+import './Personality.scss';
 
 export default class Personality extends Component {
 
@@ -32,9 +32,10 @@ export default class Personality extends Component {
     const currentQuestion = questions[index];
 
     return (
-      <div>
-        <Question question={currentQuestion} onClick={this.handleMe} />
+      <div className="personality-page">
+        <p className="personality-explain">Finally, do this personality test</p>
         <p className="counter-test">{index}/{questions.length}</p>
+        <Question question={currentQuestion} onClick={this.handleMe} />
       </div>
     )
   }

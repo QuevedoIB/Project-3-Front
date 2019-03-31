@@ -6,6 +6,8 @@ import InfoFields from '../components/signup/InfoFields';
 // import Personality from '../components/signup/personality-test/Personality';
 // import { questions } from '../data/questions';
 
+import './pages-scss/signup.scss';
+
 import firebase from 'firebase';
 
 
@@ -214,12 +216,13 @@ class Signup extends Component {
     const { username, password, email, imageUrl } = this.state;
     return (
       <div className="page signup">
-        <h1>Sign up</h1>
-        <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
+         <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-pages.png'} />
+        <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" className="user-form">
           <div>
-            <p>Already have account?
-          <Link to={"/login"} className="link-text"> Login</Link>
+            <p className="login-text">Already have account?
+          <Link to={"/login"} className="link-white"> Login</Link>
             </p>
+            <h1 className="title">Sign up</h1>
             <InfoFields
               username={username}
               password={password}

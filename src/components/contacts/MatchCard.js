@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './ContactCard.scss';
+import '../components-scss/ContactCard.scss';
+
 
 export default class MatchCard extends Component {
   render() {

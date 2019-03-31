@@ -7,6 +7,7 @@ import Personality from '../components/signup/personality-test/Personality';
 import { questions } from '../data/questions';
 import Spinner from '../components/loading/Spinner';
 
+import './pages-scss/profileComplete.scss';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
@@ -166,7 +167,7 @@ class CompleteProfile extends Component {
       if (personality.length === questions.length) {
         return (
           <>
-            <p>Everything is ready!</p>
+            <p className="ready-text">Everything is ready!</p>
             <button type='submit' id="sign-up-fade" className="bottomLinks one" className="link-button">Let's meet people</button>
           </>
         );
@@ -178,14 +179,17 @@ class CompleteProfile extends Component {
 
   render() {
     return (
-      <div className="page signup">
-        <h1>Complete Profile</h1>
-        <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
-          {this.renderContent()}
-          {!this.state.allFields && <h3>Missing Fields</h3>}
-        </form>
-        <Link to='/profile'>Back to Profile</Link>
-      </div>
+      <>
+        <img src={process.env.PUBLIC_URL + '/images/bg-pages.png'} className="bg-image" />
+        <h1 className="complete-title">Complete Profile</h1>
+        <div className="page signup profile-complete">
+          <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
+            {this.renderContent()}
+            {!this.state.allFields && <h3>Missing Fields</h3>}
+          </form>
+          <Link to='/profile'>Back to Profile</Link>
+        </div>
+      </>
     )
   }
 }

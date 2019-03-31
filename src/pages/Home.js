@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
+import './pages-scss/home.scss';
 
 class Home extends Component {
 
@@ -21,18 +22,18 @@ class Home extends Component {
       <section className="page home full">
         {/* <Navbar data='data' /> */}
         <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-home.png'} />
+        
         <article>
           <div>
-            <h1>Project Title</h1>
-            <img src='' alt='home' />
+          <h1>Title</h1>
           </div>
           <div>
-            <h3>Slogan</h3>
+            <h3>Find people like you</h3>
           </div>
           <div>
             <Link to='/signup' className="link-button">Sign Up</Link>
             <p>If you already have an account: <Link to='/login' className="link-text">Log In</Link></p>
-            <a href={this.state.googleSignUp} target="_blank">Google Sign Up</a>
+            <a href={this.state.googleSignUp} target="_blank" className="google-signup"><img src={process.env.PUBLIC_URL + '/images/google.png'} /><p>Google Sign up</p></a>
           </div>
         </article>
       </section>
