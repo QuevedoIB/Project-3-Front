@@ -54,7 +54,11 @@ class ChatPage extends Component {
   render() {
     return (
       <div>
-        CHAT
+        <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
+        <div className="contact-header">
+          <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />
+          <h1>{this.state.contact.username}</h1>
+        </div>
         < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} contact={this.state.contact} />
       </div >
     )
