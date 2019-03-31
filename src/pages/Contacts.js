@@ -120,13 +120,13 @@ class Contacts extends Component {
       if (this.state.contacts.length > 0) {
         return contacts
       } else {
-        return <p>No contacts</p>
+        return <p className="not-found">No contacts</p>
       }
     } else {
       if (this.state.matches.length > 0) {
         return matches
       } else {
-        return <p>No matches</p>
+        return <p className="not-found">No matches</p>
       }
 
     }
