@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import './pages-scss/profileEdit.scss';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
@@ -95,42 +96,47 @@ class ProfileEdit extends Component {
     const { username, password, quote, valueInterests, currentPassword, interests } = this.state;
 
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
-        <label htmlFor="username">New Username:</label>
-        <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' />
-        <label htmlFor="new-password">New Password:</label>
-        <input type="password" id='new-password' value={password} onChange={(e) => this.handleChange(e)} name='password' />
-        <label htmlFor="new-quote">New quote:</label>
-        <input type="text" id='new-quote' value={quote} onChange={(e) => this.handleChange(e)} name='quote' />
-        <div className="tags">
-          <ul className="tags-list">
-            {interests.map((interest, i) => (
-              <li key={interest + i} className="tag">
-                {interest}
-              </li>
-            ))}
-          </ul>
-          <input
-            type="text"
-            name="valueInterests"
-            placeholder="Interests, hobbies..."
-            value={valueInterests}
-            onChange={this.handleChange}
-            ref="tag"
-            className="tag-input"
-            onKeyUp={this.handleKeyUp}
-            onKeyDown={this.handleKeyDown}
-          />
-        </div>
-        <small>
-          Press <code>enter</code> or <code>,</code> to add a tag. Press{" "}
-          <code>backspace</code> to edit previous tag.
+      <form onSubmit={(e) => this.handleSubmit(e)} className="profile-edit">
+        <img src={process.env.PUBLIC_URL + '/images/bg-pages.png'} className="bg-image" />
+        <h1>EDIT PROFILE</h1>
+        <div className="page">
+          <label htmlFor="username">New username</label>
+          <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' />
+          <label htmlFor="new-password">New password</label>
+          <input type="password" id='new-password' value={password} onChange={(e) => this.handleChange(e)} name='password' />
+          <label htmlFor="new-quote">New quote</label>
+          <input type="text" id='new-quote' value={quote} onChange={(e) => this.handleChange(e)} name='quote' />
+          <label htmlFor="username">Interests</label>
+          <div className="tags">
+            <ul className="tags-list">
+              {interests.map((interest, i) => (
+                <li key={interest + i} className="tag">
+                  {interest}
+                </li>
+              ))}
+            </ul>
+            <input
+              type="text"
+              name="valueInterests"
+              placeholder="Interests, hobbies..."
+              value={valueInterests}
+              onChange={this.handleChange}
+              ref="tag"
+              className="tag-input"
+              onKeyUp={this.handleKeyUp}
+              onKeyDown={this.handleKeyDown}
+            />
+          </div>
+          <small>
+            Press <code>enter</code> or <code>,</code> to add a tag. Press{" "}
+            <code>backspace</code> to edit previous tag.
         </small>
-        <label htmlFor="current-password">Current Password: </label>
-        <input type="password" id='current-password' value={currentPassword} onChange={(e) => this.handleChange(e)} name='currentPassword' required />
-        <button>Save Changes</button>
-        {this.props.isError && <div>Incorrect Password</div>}
-        <Link to='/profile'>Back to Profile</Link>
+          <label htmlFor="current-password">Current Password: </label>
+          <input type="password" id='current-password' value={currentPassword} onChange={(e) => this.handleChange(e)} name='currentPassword' required />
+          <button className="link-button">Save Changes</button>
+          {this.props.isError && <div>Incorrect Password</div>}
+        </div>
+        <Link to='/profile' className="back-button">Back</Link>
       </form>
     )
   }
