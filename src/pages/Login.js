@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 
+import './pages-scss/login.scss';
+
 class Login extends Component {
   state = {
     username: "",
@@ -31,16 +33,21 @@ class Login extends Component {
     const { username, password } = this.state;
     return (
       <div className="page">
-        <form onSubmit={this.handleFormSubmit} className="column-content">
-          <label>Username</label>
-          <input type="text" name="username" value={username} onChange={this.handleChange} />
-          <label>Password</label>
-          <input type="password" name="password" value={password} onChange={this.handleChange} />
-          <button type="submit" className="link-button">Log in</button>
+        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-pages.png'} />
+        <form onSubmit={this.handleFormSubmit} className="login-form">
+          <div>
+            <p className="signup-text">Need an Account? <Link to='/signup' className="link-white">Sign Up</Link></p>
+          </div>
+          <h1 className="title">Log in</h1>
+          <div className="column-content login-fields">
+            <label>Username</label>
+            <input type="text" name="username" value={username} onChange={this.handleChange} />
+            <label>Password</label>
+            <input type="password" name="password" value={password} onChange={this.handleChange} />
+          </div>
+            <button type="submit" className="link-button login-button">Log in</button>
         </form>
-        <div>
-          <p>Need an Account? <Link to='/signup'>Sign Up</Link></p>
-        </div>
+
         {this.props.isError && <div>Incorrect User</div>}
       </div>
     )
