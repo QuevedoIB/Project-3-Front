@@ -41,11 +41,13 @@ class Profile extends Component {
           <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-profile.png'} alt='profile'></img>
           <Link id='edit-profile-image' to='/profile/edit'><img src={process.env.PUBLIC_URL + '/images/settings.png'} alt='edit-profile' width="80px" /></Link>
           <div className='info-profile'>
-            <div>
+            <div className='header-profile'>
               <img src={imageUrl} alt={username} />
-              <h1>{username}</h1>
+              <div className='text-profile'>
+                <h1>{username}</h1>
+                <p>{quote}</p>
+              </div>
             </div>
-            <p>{quote}</p>
           </div>
         </header>
         {this.checkUserData()}
