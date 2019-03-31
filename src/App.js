@@ -16,6 +16,7 @@ import ProfileEdit from './pages/ProfileEdit';
 import SearchPeople from './pages/SearchPeople';
 import './App.css';
 import ContactProvider from './providers/ContactProvider';
+import CompleteProfile from './pages/ProfileComplete';
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
               <AnonRoute exact path='/login' component={Login} />
               <PrivateRoute exact path='/profile' component={Profile} />
               <PrivateRoute path='/profile/edit' component={ProfileEdit} />
+              <PrivateRoute path='/profile/complete' component={CompleteProfile} />
               <PrivateRoute exact path='/contacts' component={Contacts} />
               <PrivateRoute exact path='/search-people' component={SearchPeople} />
               <PrivateRoute exact path='/chat/:id' component={ChatPage} />

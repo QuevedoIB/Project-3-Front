@@ -15,7 +15,6 @@ export default class InfoFields extends Component {
 
   componentWillUnmount = async () => {
     const coords = await getCoordsFromPlace(getLocationValue());
-    console.log(coords)
     this.props.getLocation(coords);
   }
 
@@ -34,8 +33,7 @@ export default class InfoFields extends Component {
         {/* comprobar si se suben las imágenes */}
 
         {/* <span className="image-upload"><input type="file" name="imageUrl" className="input-img" value={this.props.imageUrl} onChange={this.props.handleChange} />
-          Choose Image</span>
-        <div id="map" className="map-create-event hide"></div> */}
+          Choose Image</span> */}
         <FileUploader
           accept="image/*"
           name="imageUrl"
@@ -46,6 +44,7 @@ export default class InfoFields extends Component {
           onUploadSuccess={this.props.handleUploadSuccess}
           onProgress={this.props.handleProgress}
         />
+        <div id="map" className="map-create-event hide"></div>
       </div>
     )
   }

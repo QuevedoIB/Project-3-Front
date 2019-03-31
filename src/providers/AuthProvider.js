@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import authService from '../lib/auth-service';
+import Spinner from '../components/loading/Spinner';
 
 export const AuthContext = React.createContext(
   // authStore // default value
@@ -23,6 +24,7 @@ export const withAuth = (Comp) => {
               isError={authStore.isError}
               onErrorSolved={authStore.onErrorSolved}
               getGoogleSignUrl={authStore.getGoogleSignUrl}
+              completeProfile={authStore.completeProfile}
               {...this.props} />
           }}
         </Consumer>
@@ -75,6 +77,12 @@ export default class AuthProvider extends Component {
       .catch(error => console.log(error))
   }
 
+  completeProfile = (body) => {
+    return authService.completeProfile(body)
+      .then(user => this.setUser(user))
+      .catch(err => console.log(err));
+  }
+
   getGoogleSignUrl = () => {
     return authService.getGoogleSignUpUrl()
       .then((url) => url)
@@ -120,7 +128,7 @@ export default class AuthProvider extends Component {
     const { children } = this.props;
     switch (status) {
       case 'loading':
-        return <div>Loading</div>
+        return <Spinner />
       default:
         return (
           <Provider value={
@@ -134,6 +142,7 @@ export default class AuthProvider extends Component {
               isError: this.state.isError,
               onErrorSolved: this.onErrorSolved,
               getGoogleSignUrl: this.getGoogleSignUrl,
+              completeProfile: this.completeProfile,
             }}>
             {children}
           </Provider>

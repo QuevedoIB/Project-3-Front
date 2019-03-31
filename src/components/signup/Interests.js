@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Interests.css';
+import { mainMap, getLocationValue } from '../../lib/autocomplete-location';
+import { getCoordsFromPlace } from '../../lib/filter-by-location';
 
 // const ENTER_KEY = 13;
 // const COMMA_KEY = 188;
@@ -7,6 +9,15 @@ import './Interests.css';
 
 
 export default class Interests extends Component {
+
+  componentDidMount() {
+    mainMap();
+  }
+
+  componentWillUnmount = async () => {
+    const coords = await getCoordsFromPlace(getLocationValue());
+    this.props.getLocation(coords);
+  }
 
   render() {
     const { interests, valueInterests, quote } = this.props;
@@ -39,6 +50,11 @@ export default class Interests extends Component {
           Press <code>enter</code> or <code>,</code> to add a tag. Press{" "}
           <code>backspace</code> to edit previous tag.
         </small>
+        <div id="location" className='geocoder'>
+
+        </div>
+
+        <div id="map" className="map-create-event hide"></div>
       </div>
     );
   }

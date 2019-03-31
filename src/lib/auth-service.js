@@ -19,6 +19,13 @@ class AuthService {
       .then(({ data }) => data);
   }
 
+  completeProfile(object) {
+
+    return this.auth.post('/auth/complete-profile', object)
+      .then(({ data }) => data);
+
+  }
+
   signup(user) {
 
     return this.auth.post('/auth/signup', user)

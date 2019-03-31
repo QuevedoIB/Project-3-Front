@@ -1,34 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
-import InfoFields from '../components/signup/InfoFields';
+import { Link } from 'react-router-dom';
+import Navbar from '../components/navbar/Navbar';
 import Interests from '../components/signup/Interests';
 import Personality from '../components/signup/personality-test/Personality';
 import { questions } from '../data/questions';
-
-import firebase from 'firebase';
+import Spinner from '../components/loading/Spinner';
 
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
 const BACKSPACE_KEY = 8;
 
-const config = {
-  apiKey: "AIzaSyBPiQmXBjc3QAVnensxPXbuxjeYgm1-kb8",
-  authDomain: "http://localhost:3000",
-  databaseURL: "http://localhost:5000",
-  storageBucket: "<BUCKET>.appspot.com",
-};
-firebase.initializeApp(config);
 
-class Signup extends Component {
+class CompleteProfile extends Component {
 
   state = {
     questions: questions,
-    username: '',
-    password: '',
-    email: '',
-    imageUrl: '',
     location: [],
     quote: '',
     interests: [],
@@ -38,28 +26,36 @@ class Signup extends Component {
     allFields: true,
     imageProfile: '',
     isUploading: false,
-    progress: 0
+    progress: 0,
+    isLoaded: false,
   };
 
-  handleFormSubmit = (event) => {
+  componentDidMount() {
+    this.setState({
+      isLoaded: true,
+    })
+  }
+
+  //   this.props.signup(userData)
+  //   .then(() => {
+  //     this.props.history.push('/profile')
+  //   })
+  //   .catch(error => console.log(error))
+  // }
+
+  handleFormSubmit = async (event) => {
     event.preventDefault();
-    const { username, password, email, imageUrl, quote, interests, personality, location } = this.state;
+    const { quote, interests, personality, location } = this.state;
     const userData = {
-      username,
-      password,
-      email,
-      imageUrl,
       quote,
       interests,
       personality,
       location
     }
 
-    this.props.signup(userData)
-      .then(() => {
-        this.props.history.push('/profile')
-      })
-      .catch(error => console.log(error))
+    await this.props.completeProfile(userData);
+
+    this.props.history.push('/profile');
   }
 
   handleChange = (event) => {
@@ -69,34 +65,23 @@ class Signup extends Component {
 
   handleNext = (e) => {
     e.preventDefault();
-    const { indexPage, username, password, email, quote, interests } = this.state;
-    switch (indexPage) {
-      case 0:
-        if (!username || !password || !email) {
-          return this.setState({
-            allFields: false,
-          })
-        } else {
-          return this.setState({
-            indexPage: this.state.indexPage + 1,
-            allFields: true,
-          });
-        }
-      case 1:
-        if (!quote || !interests.length) {
-          return this.setState({
-            allFields: false,
-          })
-        } else {
-          return this.setState({
-            indexPage: this.state.indexPage + 1,
-            allFields: true,
-          });
-        }
-      default:
+    const { indexPage, location, quote, interests } = this.state;
+
+    if (indexPage === 0) {
+      if (!location || !quote || !interests.length) {
+        return this.setState({
+          allFields: false,
+        })
+      } else {
         return this.setState({
           indexPage: this.state.indexPage + 1,
+          allFields: true,
         });
+      }
+    } else {
+      return this.setState({
+        indexPage: this.state.indexPage + 1,
+      });
     }
   }
 
@@ -154,46 +139,15 @@ class Signup extends Component {
     })
   }
 
-  handleUploadStart = () => {
-    this.setState({ isUploading: true, progress: 0 });
-  }
-  handleProgress = (progress) => {
-    this.setState({ progress });
-  }
-  handleUploadError = (error) => {
-    this.setState({ isUploading: false });
-    console.error(error);
-  }
-  handleUploadSuccess = (filename) => {
-    this.setState({ imageProfile: filename, progress: 100, isUploading: false });
-    firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
-  };
-
 
   renderContent() {
-    const { username, password, email, imageUrl, quote, valueInterests, interests, questions, indexPage, personality } = this.state;
+    const { quote, valueInterests, interests, questions, indexPage, personality } = this.state;
+
+    if (!this.state.isLoaded) {
+      return <Spinner />
+    }
+
     if (indexPage === 0) {
-      return (
-        <div>
-          <p>Already have account?
-          <Link to={"/login"} className="link-text"> Login</Link>
-          </p>
-          <InfoFields
-            username={username}
-            password={password}
-            email={email}
-            imageUrl={imageUrl}
-            handleChange={this.handleChange}
-            getLocation={this.getLocation}
-            handleUploadStart={this.handleUploadStart}
-            handleProgress={this.handleProgress}
-            handleUploadError={this.handleUploadError}
-            handleUploadSuccess={this.handleUploadSuccess}
-          />
-          <button onClick={this.handleNext} className="link-button">Next</button>
-        </div>
-      );
-    } else if (indexPage === 1) {
       return (
         <>
           <Interests
@@ -203,11 +157,12 @@ class Signup extends Component {
             handleKeyUp={this.handleKeyUp}
             handleKeyDown={this.handleKeyDown}
             interests={interests}
+            getLocation={this.getLocation}
           />
           <button onClick={this.handleNext} className="link-button">Next</button>
         </>
       );
-    } else if (indexPage === 2) {
+    } else if (indexPage === 1) {
       if (personality.length === questions.length) {
         return (
           <>
@@ -222,19 +177,17 @@ class Signup extends Component {
   }
 
   render() {
-
     return (
       <div className="page signup">
-        <h1>Sign up</h1>
+        <h1>Complete Profile</h1>
         <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
           {this.renderContent()}
           {!this.state.allFields && <h3>Missing Fields</h3>}
         </form>
-
-
+        <Link to='/profile'>Back to Profile</Link>
       </div>
     )
   }
 }
 
-export default withAuth(Signup);
+export default withAuth(CompleteProfile);
