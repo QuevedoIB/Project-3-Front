@@ -106,19 +106,21 @@
 a#edit-profile-image img {
   position: fixed;
   top: 2vh;
-  right: 2vh;
+  right: 6vw;
   width: 12vw;
   height: auto;
 }
 
 .info-profile {
-  margin: 9vh 0 0 3vh;
+  margin: 4vh 0 0 3vh;
   $width: 40vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+  img {
+    border-radius: 50%;
+  }
   .header-profile {
     display: flex;
     align-items: center;
@@ -200,14 +202,14 @@ a#edit-profile-image img {
 }
 
 .completed-profile-box {
-  margin-top: 5vh;
+  margin-top: 15vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   .link-button {
     margin: 0;
-    margin: 3vh 0;
+    margin: 4vh 0;
     text-align: center;
   }
 }
