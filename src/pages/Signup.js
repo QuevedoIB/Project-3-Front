@@ -216,7 +216,7 @@ class Signup extends Component {
     const { username, password, email, imageUrl } = this.state;
     return (
       <div className="page signup">
-         <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-pages.png'} />
+        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-pages.png'} alt='header' />
         <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" className="user-form">
           <div>
             <p className="login-text">Already have account?

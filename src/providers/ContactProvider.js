@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import userService from '../lib/user-service';
-import authService from '../lib/auth-service';
 
 export const ContactContext = React.createContext(
   // authStore // default value
@@ -115,21 +114,21 @@ export default class ContactProvider extends Component {
     //   case 'loading':
     //     return <div>Loading</div>
     //   default:
-        return (
-          <Provider value={
-            {
-              
-              getUsers: this.getUsers,
-              getContacts: this.getContacts,
-              getMatches: this.getMatches,
-              deleteContact: this.deleteContact,
-              matchUser: this.matchUser,
-              getOneContact: this.getOneContact,
-              acceptMatch: this.acceptMatch,
-              declineMatch: this.declineMatch,
-            }}>
-            {children}
-          </Provider>
-        );
-    }
+    return (
+      <Provider value={
+        {
+
+          getUsers: this.getUsers,
+          getContacts: this.getContacts,
+          getMatches: this.getMatches,
+          deleteContact: this.deleteContact,
+          matchUser: this.matchUser,
+          getOneContact: this.getOneContact,
+          acceptMatch: this.acceptMatch,
+          declineMatch: this.declineMatch,
+        }}>
+        {children}
+      </Provider>
+    );
   }
+}

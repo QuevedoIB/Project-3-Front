@@ -61,7 +61,7 @@ class Contacts extends Component {
 
   handleDelete = async (deletedContactId) => {
 
-    const newContacts = this.state.contacts.filter(contact => contact.id !== deletedContactId);
+    //const newContacts = this.state.contacts.filter(contact => contact.id !== deletedContactId);
 
     try {
 
@@ -213,7 +213,7 @@ class Contacts extends Component {
 
     return (
       <>
-        <img src={process.env.PUBLIC_URL+'/images/bg-pages.png'} className="bg-image"/>
+        <img src={process.env.PUBLIC_URL + '/images/bg-pages.png'} className="bg-image" alt='header' />
         <div className="contacts-header">
           <input value={text} type='text' placeholder='Search User' onChange={this.onChange} className="contacts-input"></input>
           <div className='contacts-buttons'>

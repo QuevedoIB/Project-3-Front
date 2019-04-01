@@ -77,7 +77,7 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
         let directions = myJson;
         if (directions) {
           const kms = directions.routes[0].distance / 1000;
-          let distanceInKms = Math.round((kms) * 100) / 100;
+          distanceInKms = Math.round((kms) * 100) / 100;
         }
       });
     return distanceInKms;

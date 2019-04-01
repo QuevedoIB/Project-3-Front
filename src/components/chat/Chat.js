@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import socketManager from '../../socketManager';
 import Messages from './Messages';
 
 class Chat extends Component {

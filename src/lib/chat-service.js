@@ -4,13 +4,13 @@ class ChatService {
   constructor() {
     this.chat = axios.create({
       baseURL: 'http://localhost:5000',
-      baseURL: process.env.REACT_APP_BACKEND_URL,
+      //baseURL: process.env.REACT_APP_BACKEND_URL,
       withCredentials: true,
     })
   }
 
   createChat(contactId) {
-    console.log(contactId);
+
     return this.chat.post('/chat/create', { contactId })
       .then(({ data }) => data);
   }

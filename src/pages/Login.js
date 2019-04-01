@@ -33,7 +33,7 @@ class Login extends Component {
     const { username, password } = this.state;
     return (
       <div className="page">
-        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-pages.png'} />
+        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-pages.png'} alt='header' />
         <form onSubmit={this.handleFormSubmit} className="login-form">
           <div>
             <p className="signup-text">Need an Account? <Link to='/signup' className="link-white">Sign Up</Link></p>
@@ -45,7 +45,7 @@ class Login extends Component {
             <label>Password</label>
             <input type="password" name="password" value={password} onChange={this.handleChange} />
           </div>
-            <button type="submit" className="link-button login-button">Log in</button>
+          <button type="submit" className="link-button login-button">Log in</button>
         </form>
 
         {this.props.isError && <div>Incorrect User</div>}
