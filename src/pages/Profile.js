@@ -8,6 +8,7 @@ class Profile extends Component {
 
   checkUserData() {
     const { interests, location, personality, quote } = this.props.user;
+    console.log('LOCATION ', location);
     if (interests.length && location.length && personality.length && quote) {
       return <div className='completed-profile-box'>
         <Link className='link-button' to='contacts'>Contacts</Link>

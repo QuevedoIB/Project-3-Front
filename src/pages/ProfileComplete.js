@@ -180,9 +180,9 @@ class CompleteProfile extends Component {
   render() {
     return (
       <>
-        <img src={process.env.PUBLIC_URL + '/images/bg-pages.png'} className="bg-image" alt='header' />
-        <h1 className="complete-title">Complete Profile</h1>
+        <img src={process.env.PUBLIC_URL + '/images/bg-edit.png'} className="bg-image" alt='header' />
         <div className="page signup profile-complete">
+        <h1 className="complete-title">Complete your profile</h1>
           <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
             {this.renderContent()}
             {!this.state.allFields && <h3>Missing Fields</h3>}

@@ -97,9 +97,9 @@ class ProfileEdit extends Component {
 
     return (
       <form onSubmit={(e) => this.handleSubmit(e)} className="profile-edit">
-        <img src={process.env.PUBLIC_URL + '/images/bg-pages.png'} className="bg-image" alt='header' />
-        <h1>EDIT PROFILE</h1>
+        <img src={process.env.PUBLIC_URL + '/images/bg-edit.png'} className="bg-image" alt='header' />
         <div className="page">
+        <h1>Edit profile</h1>
           <label htmlFor="username">New username</label>
           <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' />
           <label htmlFor="new-password">New password</label>

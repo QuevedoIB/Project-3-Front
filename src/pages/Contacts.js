@@ -226,7 +226,7 @@ class Contacts extends Component {
         <ul className="contacts-list">
           {this.renderList()}
         </ul>
-        <Link to='/profile' className="link-button button-margin">Back to Profile</Link>
+        <Link to='/profile' className="back-button">Back to Profile</Link>
       </>
     )
   }
