@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withContacts } from '../providers/ContactProvider';
 import { withAuth } from '../providers/AuthProvider';
-import Personality from '../components/signup/personality-test/Personality';
 import SearchCard from '../components/contacts/SearchCard';
 import Spinner from '../components/loading/Spinner';
 import { Link } from 'react-router-dom';

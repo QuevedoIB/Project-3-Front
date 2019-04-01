@@ -20,7 +20,7 @@ export const mainMap = () => {
 
   div.appendChild(geocoder.onAdd(map));
 
-  const input = document.querySelector('#location .mapboxgl-ctrl-geocoder input').setAttribute('name', 'location');
+  document.querySelector('#location .mapboxgl-ctrl-geocoder input').setAttribute('name', 'location');
 
   document.querySelector('#location .mapboxgl-ctrl-geocoder input');
 

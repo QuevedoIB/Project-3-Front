@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import PrivateRoute from './components/route-protection/PrivateRoute';
 import AnonRoute from './components/route-protection/AnonRoute';
-import Navbar from './components/navbar/Navbar';
 import Private from './pages/Private';
 import Signup from './pages/Signup';
 import Login from './pages/Login';

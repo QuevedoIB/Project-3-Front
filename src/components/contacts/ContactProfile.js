@@ -16,7 +16,7 @@ class ContactProfile extends Component {
   }
 
   render() {
-    const { username, imageUrl, quote, interests } = this.props.contact;
+    const { username, imageUrl, quote } = this.props.contact;
 
     return (
 

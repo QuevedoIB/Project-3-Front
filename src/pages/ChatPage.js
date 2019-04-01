@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import InputChat from '../components/chat/InputChat';
 import Chat from '../components/chat/Chat';
 import chatService from '../lib/chat-service';
 import { withRouter } from 'react-router-dom';
@@ -42,6 +41,7 @@ class ChatPage extends Component {
       chat: chat.log,
       contact: chat.contact
     });
+    scrollToBottom();
   }
 
   handleSendMessage = async (message) => {
@@ -51,8 +51,8 @@ class ChatPage extends Component {
 
     if (language) {
       const messageTranslated = await translateMessage(message, language);
-      let messageToSend = messageTranslated[0]
-      console.log(messageToSend);
+      //let messageToSend = messageTranslated[0]
+
       chatData = await chatService.sendMessage(this.state.chatId, messageTranslated);
     } else {
       chatData = await chatService.sendMessage(this.state.chatId, message);
@@ -72,7 +72,7 @@ class ChatPage extends Component {
       this.handleGetChat();
     });
 
-    scrollToBottom();
+    // scrollToBottom();
   }
 
 

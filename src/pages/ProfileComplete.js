@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/navbar/Navbar';
+//import Navbar from '../components/navbar/Navbar';
 import Interests from '../components/signup/Interests';
 import Personality from '../components/signup/personality-test/Personality';
 import { questions } from '../data/questions';
@@ -168,7 +168,7 @@ class CompleteProfile extends Component {
         return (
           <>
             <p className="ready-text">Everything is ready!</p>
-            <button type='submit' id="sign-up-fade" className="bottomLinks one" className="link-button">Let's meet people</button>
+            <button type='submit' id="sign-up-fade" className="bottomLinks one link-button">Let's meet people</button>
           </>
         );
       } else {
@@ -180,7 +180,7 @@ class CompleteProfile extends Component {
   render() {
     return (
       <>
-        <img src={process.env.PUBLIC_URL + '/images/bg-pages.png'} className="bg-image" />
+        <img src={process.env.PUBLIC_URL + '/images/bg-pages.png'} className="bg-image" alt='header' />
         <h1 className="complete-title">Complete Profile</h1>
         <div className="page signup profile-complete">
           <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">

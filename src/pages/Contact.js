@@ -37,7 +37,7 @@ class Contact extends Component {
     } else {
       return (
         <div className="page">
-          <img src={process.env.PUBLIC_URL + '/images/bg-profile.png'} className="bg-image" />
+          <img src={process.env.PUBLIC_URL + '/images/bg-profile.png'} className="bg-image" alt='header' />
           <ContactProfile contact={contact} />;
       </div>
       );
