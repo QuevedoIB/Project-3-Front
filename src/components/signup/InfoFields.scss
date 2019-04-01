@@ -15,49 +15,39 @@ meter {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  position: fixed;
-  left: 50vw - $meter-width/2;
+  margin: 0 auto;
 }
 
 .worst-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(224, 78, 78);
-  top: 61vh;
 }
 
 .bad-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(255, 146, 57);
-  top: 61vh;
 }
 
 .weak-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(251, 233, 63);
-  top: 61vh;
 }
 
 .good-meter {
   width: $meter-width;
   height: $meter-height;
   background: greenyellow;
-  top: 61vh;
 }
 
 .strong-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(91, 238, 91);
-  top: 61vh;
 }
 
 .hide-meter {
   display: none;
-}
-
-#pass {
-  margin-bottom: 4vh;
 }

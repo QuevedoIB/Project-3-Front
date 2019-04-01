@@ -55,6 +55,12 @@ class AuthService {
         return response.data
       })
   }
+
+  reportUser(contactId) {
+
+    return this.auth.post(`/profile/report`, { contactId })
+      .then(({ data }) => data);
+  }
 }
 
 const authService = new AuthService();

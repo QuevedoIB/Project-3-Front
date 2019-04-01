@@ -106,7 +106,6 @@ export default class ContactProvider extends Component {
       .catch(error => console.log(error))
   }
 
-
   render() {
     // const { isLogged, user, status } = this.state;
     const { children } = this.props;
