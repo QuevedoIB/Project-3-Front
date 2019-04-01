@@ -11,11 +11,16 @@ import { getCoordsFromPlace } from '../../lib/filter-by-location';
 export default class Interests extends Component {
 
   componentDidMount() {
-    mainMap();
+    mainMap(this.setLocation);
+  }
+
+  setLocation = ()=>{
+    this.props.getLocationText(getLocationValue());
+    console.log(getLocationValue());
   }
 
   componentWillUnmount =() => {
-    this.props.getLocationText(getLocationValue());
+    
     console.log('UNMOUNT ', getLocationValue());
     // const coords = await getCoordsFromPlace(getLocationValue());
     // this.props.getLocation(coords);
