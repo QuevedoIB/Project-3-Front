@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './InfoFields.css';
+import './InfoFields.scss';
 import { passwordStrengthCheck } from '../../lib/helpers/password-strength';
 // import { mainMap, getLocationValue } from '../../lib/autocomplete-location';
 // import { getCoordsFromPlace } from '../../lib/filter-by-location';
@@ -21,6 +21,9 @@ export default class InfoFields extends Component {
         <input type="text" name="username" value={this.props.username} onChange={this.props.handleChange} required />
         <label htmlFor='password'>Password:</label>
         <input id='pass' type="password" name="password" value={this.props.password} onChange={(e) => { this.props.handleChange(e); this.checkPasswordStrength() }} required />
+        <meter className="hide" max="4" id="password-strength-meter">
+          <p id="password-strength-text"></p>
+        </meter>
         <label htmlFor='email'>Email:</label>
         <input type="email" name="email" value={this.props.email} onChange={this.props.handleChange} required />
         {/* <div id="location" className='geocoder'> */}
@@ -40,9 +43,6 @@ export default class InfoFields extends Component {
           onUploadSuccess={this.props.handleUploadSuccess}
           onProgress={this.props.handleProgress}
         />
-        <meter className="hide" max="4" id="password-strength-meter">
-          <p id="password-strength-text"></p>
-        </meter>
         {/* <div id="map" className="map-create-event hide"></div> */}
       </div>
     )

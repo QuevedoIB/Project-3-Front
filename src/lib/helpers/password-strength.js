@@ -39,7 +39,7 @@ export const passwordStrengthCheck = () => {
       meter.className = 'strong-meter';
       break;
     default:
-      meter.className = 'hide';
+      meter.className = 'hide-meter';
   }
   meter.value = result.score;
 
@@ -48,5 +48,6 @@ export const passwordStrengthCheck = () => {
     strengthText.innerText = 'Password Strength: ' + strength[result.score];
   } else {
     strengthText.innerText = '';
+    meter.className = 'hide-meter';
   }
 };

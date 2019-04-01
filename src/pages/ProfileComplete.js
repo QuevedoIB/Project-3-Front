@@ -7,10 +7,9 @@ import Personality from '../components/signup/personality-test/Personality';
 import { questions } from '../data/questions';
 import Spinner from '../components/loading/Spinner';
 import Navbar from '../components/navbar/Navbar';
-
+import Error from '../components/error/Error';
 import './pages-scss/profileComplete.scss';
 
-import { mainMap, getLocationValue } from '../lib/autocomplete-location';
 import { getCoordsFromPlace } from '../lib/filter-by-location';
 
 
@@ -43,17 +42,10 @@ class CompleteProfile extends Component {
     })
   }
 
-  //   this.props.signup(userData)
-  //   .then(() => {
-  //     this.props.history.push('/profile')
-  //   })
-  //   .catch(error => console.log(error))
-  // }
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
-    //const coords = await getCoordsFromPlace(getLocationValue());
-    //this.getLocation(coords)
+
     await this.getLocation(this.state.locationText)
     const { quote, interests, personality, location } = this.state;
     const userData = {
@@ -62,7 +54,7 @@ class CompleteProfile extends Component {
       personality,
       location
     }
-    console.log('COORDS SENT: ', location);
+
     await this.props.completeProfile(userData);
 
     this.props.history.push('/profile');
@@ -197,8 +189,14 @@ class CompleteProfile extends Component {
     }
   }
 
+  onErrorClose = () => {
+    this.setState({
+      allFields: true,
+    })
+  }
+
   render() {
-    console.log('LOCATION TEXT', this.state.locationText);
+
     return (
       <>
         <img src={process.env.PUBLIC_URL + '/images/bg-edit.png'} className="bg-image" alt='header' />
@@ -206,7 +204,7 @@ class CompleteProfile extends Component {
           <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
 
             {this.renderContent()}
-            {!this.state.allFields && <h3>Missing Fields</h3>}
+            {!this.state.allFields && <Error error='Missing Fields' onErrorClose={this.onErrorClose} />}
           </form>
           <Navbar />
           <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>

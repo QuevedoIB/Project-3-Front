@@ -1,23 +1,13 @@
-.profile-edit{
-  height: 100vh;
-  label{
-    margin-top: 5vh;
-  }
-
-  h1{
-    margin-top: 4vh;
-    margin-bottom: 10vh;
-    color: white;
-    font-size: 48px;
-    text-align: center;
-  }
-  .tags{
-    margin-top: 3vh;
-  }
-}
-
 $meter-width: 50vw;
 $meter-height: 5vh;
+
+.form-fields{
+  margin: 0 5vh;
+}
+
+.form-fields label{
+  margin-top: 3vh;
+}
 
 meter {
   appearance: none;
@@ -27,39 +17,47 @@ meter {
   font-weight: bold;
   position: fixed;
   left: 50vw - $meter-width/2;
-  top: 61vh;
 }
 
 .worst-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(224, 78, 78);
+  top: 61vh;
 }
 
 .bad-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(255, 146, 57);
+  top: 61vh;
 }
 
 .weak-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(251, 233, 63);
+  top: 61vh;
 }
 
 .good-meter {
   width: $meter-width;
   height: $meter-height;
   background: greenyellow;
+  top: 61vh;
 }
 
 .strong-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(91, 238, 91);
+  top: 61vh;
 }
 
 .hide-meter {
   display: none;
+}
+
+#pass {
+  margin-bottom: 4vh;
 }
