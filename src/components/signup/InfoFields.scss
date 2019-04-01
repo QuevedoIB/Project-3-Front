@@ -1,15 +1,16 @@
-$meter-width: 50vw;
-$meter-height: 5vh;
 
-.form-fields{
+ .form-fields{
   margin: 0 5vh;
 }
 
-.form-fields label{
+ .form-fields label{
   margin-top: 3vh;
 }
 
-meter {
+$meter-width: 50vw;
+$meter-height: 5vh;
+
+ meter {
   appearance: none;
   display: flex;
   justify-content: center;
@@ -18,36 +19,36 @@ meter {
   margin: 0 auto;
 }
 
-.worst-meter {
+ .worst-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(224, 78, 78);
 }
 
-.bad-meter {
+ .bad-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(255, 146, 57);
 }
 
-.weak-meter {
+ .weak-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(251, 233, 63);
 }
 
-.good-meter {
+ .good-meter {
   width: $meter-width;
   height: $meter-height;
   background: greenyellow;
 }
 
-.strong-meter {
+ .strong-meter {
   width: $meter-width;
   height: $meter-height;
   background: rgb(91, 238, 91);
 }
 
-.hide-meter {
+ .hide-meter {
   display: none;
-}
+} 	

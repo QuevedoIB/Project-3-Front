@@ -49,7 +49,9 @@ class SearchPeople extends Component {
         noUsers: false
       })
     } else if (this.state.location) {
-      const sortedUsers = sortArrayByDistance(resultUsers, this.props.user.location);
+
+      const sortedUsers = sortArrayByDistance(resultUsers, this.props.user.location.coords);
+
       return this.setState({
         listOfUsers: sortedUsers,
         loading: false,

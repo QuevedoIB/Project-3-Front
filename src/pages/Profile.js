@@ -8,8 +8,9 @@ class Profile extends Component {
 
   checkUserData() {
     const { interests, location, personality, quote } = this.props.user;
+    console.log(this.props.user.location)
 
-    if (interests.length && location.length && personality.length && quote) {
+    if (interests.length && location.coords.length && personality.length && quote) {
       return <div className='completed-profile-box'>
         <Link className='link-button profile-button' to='contacts'>Contacts</Link>
         <Link className='link-button profile-button' to='search-people'>Search People</Link>
@@ -37,7 +38,7 @@ class Profile extends Component {
   render() {
 
     const { username, imageUrl, quote } = this.props.user;
-    console.log('IMAGE '+ imageUrl);
+
     return (
       <section className='profile-section'>
         <header>
@@ -47,7 +48,7 @@ class Profile extends Component {
             <img src={imageUrl} alt={username} />
             <h1>{username}</h1>
           </div>
-        <p className="user-quote">{quote}</p>
+          <p className="user-quote">{quote}</p>
         </header>
         {this.checkUserData()}
         <Navbar />

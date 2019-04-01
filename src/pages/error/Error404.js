@@ -16,7 +16,7 @@ export default class Error404 extends Component {
         <div class="mouth"></div>
       </div>
 
-      <h1>Oops! Something went wrong!</h1>
+      <h1 className='title-error'>Oops! Something went wrong!</h1>
       <div class="btn"><Link to='/' >Return to Home</Link></div>
     </>
     )

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
-//import Navbar from '../components/navbar/Navbar';
 import Interests from '../components/signup/Interests';
 import Personality from '../components/signup/personality-test/Personality';
 import { questions } from '../data/questions';
@@ -46,13 +45,18 @@ class CompleteProfile extends Component {
   handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    await this.getLocation(this.state.locationText)
+    const { locationText } = this.state;
+
+    await this.getLocation(locationText)
+
     const { quote, interests, personality, location } = this.state;
+
     const userData = {
       quote,
       interests,
       personality,
-      location
+      location,
+      locationText,
     }
 
     await this.props.completeProfile(userData);
