@@ -47,7 +47,6 @@ class Login extends Component {
           </div>
           <button type="submit" className="link-button login-button">Log in</button>
         </form>
-
         {this.props.isError && <div>Incorrect User</div>}
       </div>
     )

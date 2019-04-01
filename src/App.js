@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import PrivateRoute from './components/route-protection/PrivateRoute';
 import AnonRoute from './components/route-protection/AnonRoute';
 import Private from './pages/Private';
@@ -16,6 +16,7 @@ import SearchPeople from './pages/SearchPeople';
 import './App.scss';
 import ContactProvider from './providers/ContactProvider';
 import CompleteProfile from './pages/ProfileComplete';
+import Error404 from './pages/error/Error404';
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
             <PrivateRoute exact path='/chat/:id' component={ChatPage} />
             <PrivateRoute exact path='/contact/:id' component={Contact} />
             <PrivateRoute path='/private' component={Private} />
+            <Route path='*' component={Error404} />
           </Switch>
         </ContactProvider>
       </AuthProvider>
