@@ -85,16 +85,15 @@ div.question-to-left figure {
 
 .me-button{
   text-decoration: none;
-  background-color: rgb(98, 255, 255);
+  background-color: rgb(109, 228, 192);
   border-radius: 5px;
   padding: 10px 15px;
   color: white;
   border: none;
-  margin: 5vh 0;
+  margin: 2vh 2vh;
   font-size: 20px;
   width: 20vh;
   justify-self: center;
-  margin: 5vh 10px;
 }
 
 .not-me-button{
@@ -104,11 +103,10 @@ div.question-to-left figure {
   padding: 10px 15px;
   color: white;
   border: none;
-  margin: 5vh 0;
+  margin: 2vh 2vh;
   font-size: 20px;
   width: 20vh;
   justify-self: center;
-  margin: 5vh 10px;
 }
 
 .personality-text{
@@ -120,7 +118,7 @@ div.question-to-left figure {
 .personality-card{
   display: grid;
   justify-content: center;
-  width: 80vw;
+  width: 90vw;
 }
 
 .personality-card p{
@@ -130,9 +128,8 @@ div.question-to-left figure {
 }
 
 .personality-card img{
-  text-align: center;
-  border-bottom-left-radius: 5px; 
-  border-bottom-right-radius: 5px; 
+  text-align: center; 
+  border-radius: 10px;
 }
 
 .slider-question{

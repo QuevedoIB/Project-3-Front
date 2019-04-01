@@ -34,8 +34,8 @@ export default class Personality extends Component {
     return (
       <div className="personality-page">
         <p className="personality-explain">Finally, do this personality test</p>
-        <p className="counter-test">{index}/{questions.length}</p>
         <Question question={currentQuestion} onClick={this.handleMe} />
+        <p className="counter-test">{index}/{questions.length}</p>
       </div>
     )
   }
