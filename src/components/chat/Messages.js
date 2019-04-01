@@ -1,16 +1,28 @@
 import { Component } from "react";
 import React from "react";
-import './Messages.css';
+import './Messages.scss';
 import { withAuth } from '../../providers/AuthProvider';
 
 const meStyle = {
-  background: 'gray',
+  background: '#d6d6d6',
   textAlign: 'right',
+  width: '50vw'
 }
 
 const contactStyle = {
-  background: 'orange',
-  textAlign: 'left'
+  background: '#ff9c9c',
+  textAlign: 'left',
+  width: '50vw'
+}
+
+const leftStyle = {
+  display:'flex',
+  justifyContent:'flex-start'
+}
+
+const rightStyle = {
+  display:'flex',
+  justifyContent:'flex-end'
 }
 
 class Messages extends Component {
@@ -23,11 +35,20 @@ class Messages extends Component {
     }
   }
 
+  assignPosition(message) {
+    if (message.user === this.props.user._id) {
+      return rightStyle;
+    } else {
+      return leftStyle;
+    }
+  }
+
   renderMessage = (message) => {
     const messageStyle = this.assignMessage(message);
+    const messagePosition = this.assignPosition(message);
     return (
-      <li style={messageStyle} key={message._id}>
-        <div className="Message-content">
+      <li style={messagePosition} key={message._id}>
+        <div className="message-content" style={messageStyle}>
           <div className="text">{message.text}</div>
           <p>{message.date}</p>
         </div>

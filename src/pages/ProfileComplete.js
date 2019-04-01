@@ -180,8 +180,10 @@ class CompleteProfile extends Component {
       if (personality.length === questions.length) {
         return (
           <div className="ready-content">
-            <p className="ready-text">Everything is ready!</p>
-            <button type='submit' id="sign-up-fade" className="bottomLinks one link-button">Let's meet people</button>
+            <div>
+              <p className="ready-text">Everything is ready!</p>
+              <button type='submit' id="sign-up-fade" className="bottomLinks one link-button">Let's meet people</button>
+            </div>
           </div>
         );
       } else {

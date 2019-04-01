@@ -23,13 +23,15 @@
 
 
 .ready-content{
+  display: grid;
+  align-items: center;
+  height: 100vh;
   p{
-    margin-top: 20vh;
     font-size: 20px;
   }
 }
 
 .form-complete-profile{
   height: 100vh;
-  
+
 }

@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import socketManager from '../socketManager';
 import { scrollToBottom } from '.././lib/helpers/scroll-chat-down';
 import { translateMessage, languagesArray } from '.././lib/helpers/get-languages';
+import './pages-scss/chatPage.scss';
 import Navbar from '../components/navbar/Navbar';
 
 class ChatPage extends Component {
@@ -23,7 +24,6 @@ class ChatPage extends Component {
     await socketManager.initSocket(this.state.chatId);
     let socket = socketManager.getSocket();
     socket.on("NEW_MESSAGE", () => {
-
       this.handleGetChat();
     });
   }
@@ -83,11 +83,11 @@ class ChatPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
         <div className="contact-header">
           <form>
-            <select onChange={this.handleLanguageSelect}>
+            <select onChange={this.handleLanguageSelect} className="select-language">
               {this.state.languagesList.map(language => {
                 return <option key={language.short} value={language.short}>{language.language}</option>
               })}

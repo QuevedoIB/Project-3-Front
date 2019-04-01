@@ -38,7 +38,7 @@ class Contact extends Component {
     } else {
       return (
         <div className="page">
-          <img src={process.env.PUBLIC_URL + '/images/bg-profile.png'} className="bg-image" alt='header' />
+          <img src={process.env.PUBLIC_URL + '/images/bg-profile-contact.png'} className="bg-image" alt='header' />
           <ContactProfile contact={contact} />;
           <Navbar />
           <Link to='/contacts' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
