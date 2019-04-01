@@ -1,0 +1,40 @@
+.chat-page{
+  height: 100vh;
+
+  .select-language{
+    position: absolute;
+    right: 0;
+    top: 0; 
+    padding: 5px;
+    font-size: 20px;
+    border: none; 
+    color: white;
+    background: none;
+
+    option{
+      color: black;
+    }
+  }
+
+  
+}
+
+
+.contact-header{
+  display: flex;
+  height: 20vh;
+  img{
+    height: 15vh;
+    align-self: center;
+    margin: 0 10vw;
+    border-radius: 100px;
+  }
+  h1{
+    font-family: Roboto Condensed, Arial, Helvetica, sans-serif;
+    color: white;
+    align-self: center;
+    margin: 0;
+    text-transform: none;
+  }
+
+}

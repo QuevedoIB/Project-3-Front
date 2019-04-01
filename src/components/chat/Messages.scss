@@ -1,0 +1,18 @@
+.messages-list {
+  margin-top: 5vh;
+  height: 60vh;
+  overflow: scroll;
+  width: 90vw;
+}
+
+.message-content{
+  margin: 10px;
+  border-radius: 5px;
+  padding: 2vh;
+  font-size: 18px;
+
+  p{
+    margin-bottom: 2px;
+    font-size: 14px;
+  }
+}
