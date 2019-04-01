@@ -201,7 +201,7 @@ class CompleteProfile extends Component {
       <>
         <img src={process.env.PUBLIC_URL + '/images/bg-edit.png'} className="bg-image" alt='header' />
         <div className="page profile-complete">
-          <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
+          <form onSubmit={this.handleFormSubmit} encType="multipart/form-data" className="form-complete-profile">
 
             {this.renderContent()}
             {!this.state.allFields && <Error error='Missing Fields' onErrorClose={this.onErrorClose} />}

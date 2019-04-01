@@ -4,18 +4,19 @@
 
   .header-profile{
     display: flex;
-    height: 30vh;
+    height: 20vh;
+    margin-top: 2vh;
     img{
       height: 15vh;
-      align-self: center;
-      margin: 0 10vw;
+      align-self: flex-end;
+      margin: 1vh 10vw;
       border-radius: 100px;
     }
     h1{
       font-family: Roboto Condensed, Arial, Helvetica, sans-serif;
       color: white;
-      align-self: center;
-      margin: 0 5vw;
+      align-self: flex-end;
+      margin: 1vh 0;
       text-transform: none;
     }
   }
@@ -30,7 +31,10 @@
     font-size: 20px;
     text-align: center;
     font-style: italic;
-    padding: 0 5vw;
+    padding: 2vh 5vw;
+    margin: 0; 
+    color: white;
+    height: 10vh;
   }
 }
 
@@ -223,7 +227,7 @@ a#edit-profile-image img {
 }
 
 .completed-profile-box {
-  margin-top: 15vh;
+  margin-top: 12vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

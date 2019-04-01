@@ -120,14 +120,14 @@ class ProfileEdit extends Component {
           <h1>Edit profile</h1>
           {this.handleErrorMessage()}
           <label htmlFor="username">New username</label>
-          <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' />
+          <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' required maxLength="15"/>
           <label htmlFor="pass">New password</label>
-          <input type="password" id='pass' value={password} onChange={(e) => { this.handleChange(e); this.checkPasswordStrength() }} name='password' />
+          <input type="password" id='pass' value={password} onChange={(e) => { this.handleChange(e); this.checkPasswordStrength() }} name='password' maxLength="100"/>
           <meter className="hide" max="4" id="password-strength-meter">
             <p id="password-strength-text"></p>
           </meter>
           <label htmlFor="new-quote">New quote</label>
-          <input type="text" id='new-quote' value={quote} onChange={(e) => this.handleChange(e)} name='quote' />
+          <input type="text" id='new-quote' value={quote} onChange={(e) => this.handleChange(e)} name='quote' required maxLength="100"/>
           <label htmlFor="username">Interests</label>
           <div className="tags">
             <ul className="tags-list">

@@ -47,8 +47,8 @@ class Profile extends Component {
             <img src={imageUrl} alt={username} />
             <h1>{username}</h1>
           </div>
-        </header>
         <p className="user-quote">{quote}</p>
+        </header>
         {this.checkUserData()}
         <Navbar />
       </section >
