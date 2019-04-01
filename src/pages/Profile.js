@@ -37,6 +37,7 @@ class Profile extends Component {
   render() {
 
     const { username, imageUrl, quote } = this.props.user;
+    console.log('IMAGE '+ imageUrl);
     return (
       <section className='profile-section'>
         <header>
@@ -47,7 +48,7 @@ class Profile extends Component {
             <h1>{username}</h1>
           </div>
         </header>
-        <p className="user-quote">"{quote}"</p>
+        <p className="user-quote">{quote}</p>
         {this.checkUserData()}
         <Navbar />
       </section >

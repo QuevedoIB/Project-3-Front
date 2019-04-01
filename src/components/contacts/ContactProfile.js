@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import '../components-scss/ContactProfile.scss';
 
 
@@ -27,12 +27,11 @@ class ContactProfile extends Component {
         </div>
         <div className="contact-text">
           <h3>About {username}</h3>
-          <p>"{quote}"</p>
+          <p className="contact-quote">{quote}</p>
           <h3>Interests</h3>
           <ul className="interests-list">
             {this.renderInterests()}
           </ul>
-          <button onClick={this.onBack} className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></button>
         </div>
       </div>
 
