@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import '../components-scss/ContactProfile.scss';
-
-
+import { withAuth } from '../../providers/AuthProvider';
+import Report from '../report/Report';
 
 class ContactProfile extends Component {
   renderInterests() {
@@ -16,12 +16,14 @@ class ContactProfile extends Component {
   }
 
   render() {
-    const { username, imageUrl, quote } = this.props.contact;
+    const { username, imageUrl, quote, _id } = this.props.contact;
 
     return (
 
       <div className="contact-profile">
         <div className="contact-header">
+          <Report clickAction={() => { this.props.reportUser(_id); this.props.history.push('/profile') }} username={username} />
+          {/* <button onClick={() => { this.props.reportUser(_id); this.props.history.push('/profile') }}>Report</button> */}
           <img src={imageUrl} alt={imageUrl} />
           <h1>{username}</h1>
         </div>
@@ -34,9 +36,8 @@ class ContactProfile extends Component {
           </ul>
         </div>
       </div>
-
     )
   }
 }
 
-export default withRouter(ContactProfile);
+export default withAuth(withRouter(ContactProfile));

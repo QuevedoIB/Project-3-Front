@@ -26,6 +26,7 @@ export const withAuth = (Comp) => {
               getGoogleSignUrl={authStore.getGoogleSignUrl}
               completeProfile={authStore.completeProfile}
               errorType={authStore.errorType}
+              reportUser={authStore.reportUser}
               {...this.props} />
           }}
         </Consumer>
@@ -102,6 +103,14 @@ export default class AuthProvider extends Component {
       }))
   }
 
+  reportUser = (id) => {
+    return authService.reportUser(id)
+      .then((user) => {
+        this.setUser(user);
+      })
+      .catch(error => console.log(error))
+  }
+
   onErrorSolved = () => {
     this.setState({
       isError: false,
@@ -147,6 +156,7 @@ export default class AuthProvider extends Component {
               getGoogleSignUrl: this.getGoogleSignUrl,
               completeProfile: this.completeProfile,
               errorType: this.state.errorType,
+              reportUser: this.reportUser,
             }}>
             {children}
           </Provider>
