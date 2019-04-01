@@ -8,7 +8,7 @@ class Profile extends Component {
 
   checkUserData() {
     const { interests, location, personality, quote } = this.props.user;
-    console.log('LOCATION ', location);
+
     if (interests.length && location.length && personality.length && quote) {
       return <div className='completed-profile-box'>
         <Link className='link-button' to='contacts'>Contacts</Link>
@@ -60,6 +60,3 @@ class Profile extends Component {
 }
 
 export default withAuth(Profile);
-
-//componente profile, si el this.props.user no tiene alguna de las propiedades -> personality, interest, quote -> 
-//que se renderice solo un boton/link para que complete esos pasos

@@ -14,16 +14,8 @@ export default class Interests extends Component {
     mainMap(this.setLocation);
   }
 
-  setLocation = ()=>{
+  setLocation = () => {
     this.props.getLocationText(getLocationValue());
-    console.log(getLocationValue());
-  }
-
-  componentWillUnmount =() => {
-    
-    console.log('UNMOUNT ', getLocationValue());
-    // const coords = await getCoordsFromPlace(getLocationValue());
-    // this.props.getLocation(coords);
   }
 
   render() {
@@ -31,7 +23,7 @@ export default class Interests extends Component {
     return (
       <div className="form-interests">
         <label>Quote</label>
-        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" className="quote-form" />
+        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" className="quote-form" required />
         <label>Interests</label>
         <div className="tags">
           <ul className="tags-list">
@@ -51,6 +43,7 @@ export default class Interests extends Component {
             className="tag-input"
             onKeyUp={this.props.handleKeyUp}
             onKeyDown={this.props.handleKeyDown}
+            required
           />
         </div>
         <small>

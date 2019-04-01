@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import './pages-scss/profileEdit.scss';
+import { getErrorMessage } from '../lib/helpers/error-handler';
+import Error from '../components/error/Error';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
@@ -16,6 +18,7 @@ class ProfileEdit extends Component {
     valueInterests: '',
     interests: this.props.user.interests,
     currentPassword: '',
+    error: '',
   }
 
   handleChange = (e) => {
@@ -45,7 +48,10 @@ class ProfileEdit extends Component {
 
       this.props.history.push('/profile')
     } catch (err) {
-      console.log(err);
+      this.setState({
+        error: getErrorMessage(err),
+      })
+      console.log(err['response'].data.message);
     }
   }
 
@@ -91,6 +97,21 @@ class ProfileEdit extends Component {
     this.setState({ interests, valueInterests: interest });
   }
 
+
+  onErrorClose = () => {
+    this.setState({
+      error: '',
+    })
+  }
+
+  handleErrorMessage = () => {
+    const { error } = this.state;
+    if (error) {
+      return <Error error={error} onErrorClose={this.onErrorClose} />
+    }
+  }
+
+
   render() {
 
     const { username, password, quote, valueInterests, currentPassword, interests } = this.state;
@@ -99,7 +120,8 @@ class ProfileEdit extends Component {
       <form onSubmit={(e) => this.handleSubmit(e)} className="profile-edit">
         <img src={process.env.PUBLIC_URL + '/images/bg-edit.png'} className="bg-image" alt='header' />
         <div className="page">
-        <h1>Edit profile</h1>
+          <h1>Edit profile</h1>
+          {this.handleErrorMessage()}
           <label htmlFor="username">New username</label>
           <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' />
           <label htmlFor="new-password">New password</label>
