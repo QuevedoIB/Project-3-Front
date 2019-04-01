@@ -40,7 +40,7 @@ export default class InfoFields extends Component {
           onUploadSuccess={this.props.handleUploadSuccess}
           onProgress={this.props.handleProgress}
         />
-        <meter class="hide" max="4" id="password-strength-meter">
+        <meter className="hide" max="4" id="password-strength-meter">
           <p id="password-strength-text"></p>
         </meter>
         {/* <div id="map" className="map-create-event hide"></div> */}

@@ -25,6 +25,7 @@ export const withAuth = (Comp) => {
               onErrorSolved={authStore.onErrorSolved}
               getGoogleSignUrl={authStore.getGoogleSignUrl}
               completeProfile={authStore.completeProfile}
+              errorType={authStore.errorType}
               {...this.props} />
           }}
         </Consumer>
@@ -39,6 +40,7 @@ export default class AuthProvider extends Component {
     user: {},
     status: 'loading',
     isError: false,
+    errorType: '',
   }
 
   setUser = (user) => {
@@ -74,7 +76,8 @@ export default class AuthProvider extends Component {
       .then((user) => {
         this.setUser(user);
       })
-      .catch(error => console.log(error))
+      .catch(error => { this.setState({ errorType: error }) });
+
   }
 
   completeProfile = (body) => {
@@ -143,6 +146,7 @@ export default class AuthProvider extends Component {
               onErrorSolved: this.onErrorSolved,
               getGoogleSignUrl: this.getGoogleSignUrl,
               completeProfile: this.completeProfile,
+              errorType: this.state.errorType,
             }}>
             {children}
           </Provider>
