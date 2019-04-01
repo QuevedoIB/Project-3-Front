@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
 import InfoFields from '../components/signup/InfoFields';
 import { getErrorMessage } from '../lib/helpers/error-handler';
+import Error from '.././components/error/Error';
 
 import './pages-scss/signup.scss';
 
@@ -84,11 +85,7 @@ class Signup extends Component {
   handleErrorMessage = () => {
     const { error } = this.state;
     if (error) {
-      return <div className='error-square'>
-        <button className='error-square-close' onClick={this.onErrorClose}>X</button>
-        <img className='error-square-warning' src={process.env.PUBLIC_URL + '/images/warning.png'} alt='warning' />
-        <h3>{error}</h3>
-      </div>
+      return <Error error={error} onErrorClose={this.onErrorClose} />
     }
   }
 
