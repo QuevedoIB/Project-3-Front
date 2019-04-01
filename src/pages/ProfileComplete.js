@@ -128,7 +128,7 @@ class CompleteProfile extends Component {
     });
   }
 
-  getLocationText = (locationValue) =>{
+  getLocationText = (locationValue) => {
     this.setState({
       locationText: locationValue
     });
@@ -166,6 +166,7 @@ class CompleteProfile extends Component {
     if (indexPage === 0) {
       return (
         <>
+          <h1 className="complete-title interests-title">Complete your profile</h1>
           <Interests
             quote={quote}
             valueInterests={valueInterests}
@@ -181,13 +182,16 @@ class CompleteProfile extends Component {
     } else if (indexPage === 1) {
       if (personality.length === questions.length) {
         return (
-          <>
+          <div className="ready-content">
             <p className="ready-text">Everything is ready!</p>
             <button type='submit' id="sign-up-fade" className="bottomLinks one link-button">Let's meet people</button>
-          </>
+          </div>
         );
       } else {
-        return <Personality questions={questions} onData={this.handleData} />
+        return <>
+          <h1 className="complete-title personality-title">Complete your profile</h1>
+          <Personality questions={questions} onData={this.handleData} />
+        </>
       }
     }
   }
@@ -197,9 +201,9 @@ class CompleteProfile extends Component {
     return (
       <>
         <img src={process.env.PUBLIC_URL + '/images/bg-edit.png'} className="bg-image" alt='header' />
-        <div className="page signup profile-complete">
-        <h1 className="complete-title">Complete your profile</h1>
+        <div className="page profile-complete">
           <form onSubmit={this.handleFormSubmit} encType="multipart/form-data">
+
             {this.renderContent()}
             {!this.state.allFields && <h3>Missing Fields</h3>}
           </form>

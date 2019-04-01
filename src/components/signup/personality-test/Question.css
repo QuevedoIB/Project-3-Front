@@ -134,3 +134,8 @@ div.question-to-left figure {
   border-bottom-left-radius: 5px; 
   border-bottom-right-radius: 5px; 
 }
+
+.slider-question{
+  display: grid;
+  justify-content: center;
+}

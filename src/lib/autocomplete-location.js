@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from 'mapbox-gl-geocoder';
 
-export const mainMap = () => {
+export const mainMap = (callback) => {
 
   mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbm1hcHMiLCJhIjoiY2pzeDNkZHo0MGU2ZjQ1bzV3ZGExNXRmMCJ9.Yc4_1JYlXjBEZ-mXzuETgA';
 
@@ -22,10 +22,14 @@ export const mainMap = () => {
 
   document.querySelector('#location .mapboxgl-ctrl-geocoder input').setAttribute('name', 'location');
 
-  document.querySelector('#location .mapboxgl-ctrl-geocoder input');
+  let input = document.querySelector('#location .mapboxgl-ctrl-geocoder input')
+
+  input.addEventListener("change", callback);
 
   document.querySelector('#location .mapboxgl-ctrl-geocoder input').placeholder = 'Location';
 
+  document.querySelector('.geocoder-icon-close').setAttribute('type', 'button');
+  
 };
 
 export const getLocationValue = () => {
