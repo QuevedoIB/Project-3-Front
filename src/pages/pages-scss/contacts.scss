@@ -24,6 +24,27 @@
   width: 35vw;
 }
 
+.contacts-matches-button{
+  position:relative;
+}
+
+.notification{
+  position:absolute;
+  top:0;
+  right: 0;
+  background: #ff5050;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  p{
+    margin: 0;
+  }
+}
+
+
 .contacts-buttons {
   display: flex;
   justify-content: space-between;

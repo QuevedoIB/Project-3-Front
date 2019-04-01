@@ -32,6 +32,9 @@
     }
   }
   
+  .contact-quote{
+    font-style: italic;
+  }
 
   .interests-list{
     display: flex;
@@ -40,10 +43,11 @@
     margin-top:  5vh;
     li{
       span{
-        background-image: linear-gradient(-90deg, #ff8080, #ffa4a4);
+        background-image: linear-gradient(-90deg, #ff8080, #ff8585);
         padding: 10px 20px;
         border-radius: 5px;
         color: white;
+        margin: 1vw;
       }
     }
   }

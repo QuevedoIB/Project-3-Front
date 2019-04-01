@@ -220,7 +220,7 @@ class Contacts extends Component {
           <div className='contacts-buttons'>
             <button onClick={this.showContacts} className="contacts-button" style={this.buttonContactStyle}>Contacts</button>
             <div className='contacts-matches-button'>
-              <button onClick={this.showMatches} className="contacts-button" style={this.buttonMatchesStyle}>Matches</button>{matches.length > 0 && <div className='notifications'>{matches.length}</div>}
+              <button onClick={this.showMatches} className="contacts-button" style={this.buttonMatchesStyle}>Matches</button>{matches.length > 0 && <div className='notification'><p>{matches.length}</p></div>}
             </div>
           </div>
         </div>

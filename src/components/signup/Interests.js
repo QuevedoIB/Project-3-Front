@@ -23,7 +23,7 @@ export default class Interests extends Component {
     return (
       <div className="form-interests">
         <label>Quote</label>
-        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" className="quote-form" required />
+        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" className="quote-form" required maxLength="100"/>
         <label>Interests</label>
         <div className="tags">
           <ul className="tags-list">

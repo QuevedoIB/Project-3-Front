@@ -76,6 +76,10 @@ class ChatPage extends Component {
     // scrollToBottom();
   }
 
+  onBack = () => {
+    this.props.history.goBack();
+  }
+
 
   render() {
     return (
@@ -93,6 +97,7 @@ class ChatPage extends Component {
           <h1>{this.state.contact.username}</h1>
         </div>
         < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} contact={this.state.contact} />
+        <Link to='/contacts' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></Link>
       </div >
     )
   }

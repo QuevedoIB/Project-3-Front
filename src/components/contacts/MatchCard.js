@@ -11,7 +11,7 @@ export default class MatchCard extends Component {
       <div className="contact-card">
         <img src={imageUrl} alt={username} className="user-image" />
         <div className="contact-info">
-          <Link to={`/contact/${_id}`}><h3>{username}</h3></Link>
+          <Link to={`/contact/${_id}`} className="username"><h3>{username}</h3></Link>
         </div>
         <div className="button-container">
           <button onClick={() => {

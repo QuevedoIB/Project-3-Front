@@ -3,8 +3,7 @@ import axios from 'axios';
 class ChatService {
   constructor() {
     this.chat = axios.create({
-      baseURL: 'http://localhost:5000',
-      //baseURL: process.env.REACT_APP_BACKEND_URL,
+      baseURL: process.env.REACT_APP_BACKEND_URL,
       withCredentials: true,
     })
   }
