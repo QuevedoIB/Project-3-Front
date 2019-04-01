@@ -9,6 +9,10 @@ import Spinner from '../components/loading/Spinner';
 
 import './pages-scss/profileComplete.scss';
 
+import { mainMap, getLocationValue } from '../lib/autocomplete-location';
+import { getCoordsFromPlace } from '../lib/filter-by-location';
+
+
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
 const BACKSPACE_KEY = 8;
@@ -19,6 +23,7 @@ class CompleteProfile extends Component {
   state = {
     questions: questions,
     location: [],
+    locationText: '',
     quote: '',
     interests: [],
     personality: [],
@@ -46,6 +51,9 @@ class CompleteProfile extends Component {
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
+    //const coords = await getCoordsFromPlace(getLocationValue());
+    //this.getLocation(coords)
+    await this.getLocation(this.state.locationText)
     const { quote, interests, personality, location } = this.state;
     const userData = {
       quote,
@@ -53,7 +61,7 @@ class CompleteProfile extends Component {
       personality,
       location
     }
-
+    console.log('COORDS SENT: ', location);
     await this.props.completeProfile(userData);
 
     this.props.history.push('/profile');
@@ -66,10 +74,10 @@ class CompleteProfile extends Component {
 
   handleNext = (e) => {
     e.preventDefault();
-    const { indexPage, location, quote, interests } = this.state;
+    const { indexPage, locationText, quote, interests } = this.state;
 
     if (indexPage === 0) {
-      if (!location || !quote || !interests.length) {
+      if (!locationText || !quote || !interests.length) {
         return this.setState({
           allFields: false,
         })
@@ -120,9 +128,16 @@ class CompleteProfile extends Component {
     });
   }
 
-  getLocation = (locationValue) => {
+  getLocationText = (locationValue) =>{
     this.setState({
-      location: locationValue
+      locationText: locationValue
+    });
+  }
+
+  getLocation = async (locationText) => {
+    const coords = await getCoordsFromPlace(locationText);
+    this.setState({
+      location: coords
     })
   }
 
@@ -158,7 +173,7 @@ class CompleteProfile extends Component {
             handleKeyUp={this.handleKeyUp}
             handleKeyDown={this.handleKeyDown}
             interests={interests}
-            getLocation={this.getLocation}
+            getLocationText={this.getLocationText}
           />
           <button onClick={this.handleNext} className="link-button">Next</button>
         </>
@@ -178,6 +193,7 @@ class CompleteProfile extends Component {
   }
 
   render() {
+    console.log('LOCATION TEXT', this.state.locationText);
     return (
       <>
         <img src={process.env.PUBLIC_URL + '/images/bg-edit.png'} className="bg-image" alt='header' />

@@ -14,9 +14,11 @@ export default class Interests extends Component {
     mainMap();
   }
 
-  componentWillUnmount = async () => {
-    const coords = await getCoordsFromPlace(getLocationValue());
-    this.props.getLocation(coords);
+  componentWillUnmount =() => {
+    this.props.getLocationText(getLocationValue());
+    console.log('UNMOUNT ', getLocationValue());
+    // const coords = await getCoordsFromPlace(getLocationValue());
+    // this.props.getLocation(coords);
   }
 
   render() {
