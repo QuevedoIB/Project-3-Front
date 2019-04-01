@@ -20,7 +20,18 @@
     }
   }
 
+  .profile-button{
+    width: 40vw;
+    height: 4vh;
+    vertical-align: center;
+  }
 
+  .user-quote{
+    font-size: 20px;
+    text-align: center;
+    font-style: italic;
+    padding: 0 5vw;
+  }
 }
 
 .need-complete-box {
@@ -47,10 +58,6 @@
     line-height: 5vh;
     font-weight: bold;
     text-align: center;
-  }
-  .link-button {
-    margin: 0;
-    margin-top: 3vh;
   }
 }
 

@@ -11,8 +11,8 @@ class Profile extends Component {
 
     if (interests.length && location.length && personality.length && quote) {
       return <div className='completed-profile-box'>
-        <Link className='link-button' to='contacts'>Contacts</Link>
-        <Link className='link-button' to='search-people'>Search People</Link>
+        <Link className='link-button profile-button' to='contacts'>Contacts</Link>
+        <Link className='link-button profile-button' to='search-people'>Search People</Link>
       </div>
     } else {
       return <div className='need-complete-box'>
@@ -41,15 +41,13 @@ class Profile extends Component {
       <section className='profile-section'>
         <header>
           <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-profile.png'} alt='profile'></img>
-          <Link id='edit-profile-image' to='/profile/edit'><img src={process.env.PUBLIC_URL + '/images/settings.png'} alt='edit-profile' width="80px" /></Link>
-          <div className='info-profile'>
-            <div className='header-profile'>
-              <img src={imageUrl} alt={username} />
-              <h1>{username}</h1>
-            </div>
+          <Link id='edit-profile-image' to='/profile/edit'><img src={process.env.PUBLIC_URL + '/images/edit-profile.png'} alt='edit-profile' width="80px" /></Link>
+          <div className='header-profile'>
+            <img src={imageUrl} alt={username} />
+            <h1>{username}</h1>
           </div>
         </header>
-            <p className="user-quote">{quote}</p>
+        <p className="user-quote">"{quote}"</p>
         {this.checkUserData()}
         <Navbar />
       </section >
