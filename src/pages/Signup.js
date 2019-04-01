@@ -7,11 +7,13 @@ import './pages-scss/signup.scss';
 
 import firebase from 'firebase';
 
-const config = {
+var config = {
   apiKey: "AIzaSyBPiQmXBjc3QAVnensxPXbuxjeYgm1-kb8",
-  authDomain: "http://localhost:3000",
-  databaseURL: "http://localhost:5000",
-  storageBucket: "<BUCKET>.appspot.com",
+  authDomain: "tinder-sorpresa-e6911.firebaseapp.com",
+  databaseURL: "https://tinder-sorpresa-e6911.firebaseio.com",
+  projectId: "tinder-sorpresa-e6911",
+  storageBucket: "tinder-sorpresa-e6911.appspot.com",
+  messagingSenderId: "418490957792"
 };
 firebase.initializeApp(config);
 
