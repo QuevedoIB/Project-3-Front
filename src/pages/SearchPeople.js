@@ -6,6 +6,7 @@ import Spinner from '../components/loading/Spinner';
 import { Link } from 'react-router-dom';
 import { sortArrayByDistance } from '../lib/helpers/harvesine-location';
 import Navbar from '../components/navbar/Navbar';
+import './pages-scss/search-people.scss';
 
 class SearchPeople extends Component {
 
@@ -40,7 +41,16 @@ class SearchPeople extends Component {
       })
     }
 
-    if (this.state.personality) {
+    if (this.state.personality && this.state.location) {
+      let sortedUsersByPersonality = this.sortUsersListByPersonality(resultUsers, this.props.user)
+      let sortedUserByBoth = sortArrayByDistance(sortedUsersByPersonality, this.props.user.location.coords);
+      return this.setState({
+        listOfUsers: sortedUserByBoth,
+        loading: false,
+        indexUser: 0,
+        noUsers: false
+      })
+    } else if (this.state.personality) {
       const sortedUsers = this.sortUsersListByPersonality(resultUsers, this.props.user)
       return this.setState({
         listOfUsers: sortedUsers,
@@ -66,7 +76,6 @@ class SearchPeople extends Component {
         noUsers: false
       })
     }
-
 
   }
 
@@ -143,28 +152,42 @@ class SearchPeople extends Component {
 
   render() {
     const { location, personality, listOfUsers, loading, indexUser, noUsers } = this.state;
+
+    const personalityMark = personality ? 'search-sort-marked' : '';
+    const locationMark = location ? 'search-sort-marked' : ''
+
     return (
       <section>
+        <h1 className='search-title'>Search Friends</h1>
         <header>
-          <form>
-            <h3>Match by :</h3>
-            <label htmlFor="personality">Personality </label>
-            <input type="checkbox" value={personality} name="personality" id="personality" onChange={this.onChange} />
-            <label htmlFor="location">Location </label>
-            <input type="checkbox" value={location} name="location" id="location" onChange={this.onChange} />
-          </form>
+          <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-pages.png'} alt='header' />
+          <div>
+            <form className='search-form'>
+              <h3>Sort by</h3>
+              <div className='search-items-container'>
+                <div>
+                  <input className={personalityMark} type="checkbox" value={personality} name="personality" id="personality" onChange={this.onChange} />
+                  <label htmlFor="personality">Personality </label>
+                </div>
+                <div>
+                  <input className={locationMark} type="checkbox" value={location} name="location" id="location" onChange={this.onChange} />
+                  <label htmlFor="location">Location </label>
+                </div>
+              </div>
+            </form>
+          </div>
         </header>
-        {noUsers ? <h1>No Users Avaliable</h1> :
-          <article>
-            {loading ? <Spinner /> : <SearchCard user={listOfUsers[indexUser]} />}
-            <button onClick={this.getNext}>Next</button>
-            <button onClick={this.matchUser}>Add</button>
-          </article>
-        }
+        <article className='search-info-box'>
+          {noUsers ? <h1>No Users Avaliable</h1> :
+            <div>
+              {loading ? <Spinner /> : <SearchCard user={listOfUsers[indexUser]} />}
+              <button onClick={this.getNext}>Next</button>
+              <button onClick={this.matchUser}>Add</button>
+            </div>
+          }
+        </article>
         <Navbar />
         <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
-
-        {/* <div id="map" className="map-create-event hide"></div> */}
       </section>
     )
   }

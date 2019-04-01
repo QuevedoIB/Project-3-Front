@@ -1,0 +1,32 @@
+ul {
+  list-style-type: none;
+}
+
+.search-card-head {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 3vw;
+  height: 12vh;
+
+  h3 {
+    text-align: center;
+  }
+
+  p {
+    text-align: justify;
+    margin-right: 0;
+    width: 50%;
+  }
+}
+
+.search-card-quote {
+  font-style: italic;
+  text-align: center;
+  width: 80%;
+}
+
+li {
+  margin: 0 3vw;
+  display: inline-block;
+  width: 20%;
+}
