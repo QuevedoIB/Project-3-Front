@@ -2,10 +2,24 @@
   width: 100vw;
   height: 100vh;
 
-  header {
+  .header-profile{
     display: flex;
-    justify-content: center;
+    height: 30vh;
+    img{
+      height: 15vh;
+      align-self: center;
+      margin: 0 10vw;
+      border-radius: 100px;
+    }
+    h1{
+      font-family: Roboto Condensed, Arial, Helvetica, sans-serif;
+      color: white;
+      align-self: center;
+      margin: 0 5vw;
+      text-transform: none;
+    }
   }
+
 
 }
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import Chat from '../components/chat/Chat';
 import chatService from '../lib/chat-service';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import socketManager from '../socketManager';
 import { scrollToBottom } from '.././lib/helpers/scroll-chat-down';
 import { translateMessage, languagesArray } from '.././lib/helpers/get-languages';
+import Navbar from '../components/navbar/Navbar';
 
 class ChatPage extends Component {
 

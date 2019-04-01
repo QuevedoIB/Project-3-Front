@@ -32,8 +32,8 @@ class Navbar extends Component {
       }
       if (isLogged) {
         return <div className='buttons-navbar'>
-          <Link className={`${animationBack}-2`} to='/login'>Login</Link>
-          <button className={`${animationBack}-3`} onClick={logout}>Logout</button>
+          <Link className={`${animationBack}-2`} to='/profile'><img src={process.env.PUBLIC_URL + '/images/man-user.png'} alt='profile' width="30px"/></Link>
+          <button className={`${animationBack}-3`} onClick={logout}><img src={process.env.PUBLIC_URL + '/images/logout.png'} alt='logout' width="30px"/></button>
         </div>
       } else {
         return <div className='buttons-navbar'>

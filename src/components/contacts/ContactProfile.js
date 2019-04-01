@@ -32,7 +32,7 @@ class ContactProfile extends Component {
           <ul className="interests-list">
             {this.renderInterests()}
           </ul>
-          <button onClick={this.onBack} className="back-button">Back</button>
+          <button onClick={this.onBack} className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></button>
         </div>
       </div>
 

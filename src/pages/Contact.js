@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withContacts } from '../providers/ContactProvider';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import ContactProfile from '../components/contacts/ContactProfile'; // <-
 import Spinner from '../components/loading/Spinner';
+import Navbar from '../components/navbar/Navbar';
 
 class Contact extends Component {
 
@@ -39,6 +40,9 @@ class Contact extends Component {
         <div className="page">
           <img src={process.env.PUBLIC_URL + '/images/bg-profile.png'} className="bg-image" alt='header' />
           <ContactProfile contact={contact} />;
+          <Navbar />
+        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></Link>
+     
       </div>
       );
 

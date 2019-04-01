@@ -4,6 +4,7 @@ import MatchCard from '../components/contacts/MatchCard';
 import { withAuth } from '../providers/AuthProvider';
 import { withContacts } from '../providers/ContactProvider';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/navbar/Navbar';
 import './pages-scss/contacts.scss';
 
 class Contacts extends Component {
@@ -226,7 +227,8 @@ class Contacts extends Component {
         <ul className="contacts-list">
           {this.renderList()}
         </ul>
-        <Link to='/profile' className="back-button">Back to Profile</Link>
+        <Navbar />
+        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></Link>
       </>
     )
   }

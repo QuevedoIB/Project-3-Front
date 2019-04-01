@@ -136,19 +136,22 @@ label{
 }
 
 .back-button{
+  display: grid;
+  justify-items: center;
+  align-items: center;
   text-decoration: none;
   background-image: linear-gradient(-90deg, #ff8080, #ffa4a4);
-  border-radius: 50px;
-  padding: 10px 30px;
+  border-radius: 50%;
   color: white;
   border: none;
-  margin: 2vh;
   font-size: 16px;
   justify-self: center;
   text-transform: uppercase;
   font-weight: 300;
   box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
   position: fixed;
-  bottom: 2vh;
-  left: 0;
+  bottom: 1vw;
+  left: 1vw;
+	width: 20vw;
+	height: 20vw;
 }

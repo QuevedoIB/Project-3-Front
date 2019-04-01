@@ -45,13 +45,11 @@ class Profile extends Component {
           <div className='info-profile'>
             <div className='header-profile'>
               <img src={imageUrl} alt={username} />
-              <div className='text-profile'>
-                <h1>{username}</h1>
-                <p>{quote}</p>
-              </div>
+              <h1>{username}</h1>
             </div>
           </div>
         </header>
+            <p className="user-quote">{quote}</p>
         {this.checkUserData()}
         <Navbar />
       </section >

@@ -6,6 +6,7 @@ import Interests from '../components/signup/Interests';
 import Personality from '../components/signup/personality-test/Personality';
 import { questions } from '../data/questions';
 import Spinner from '../components/loading/Spinner';
+import Navbar from '../components/navbar/Navbar';
 
 import './pages-scss/profileComplete.scss';
 
@@ -207,7 +208,9 @@ class CompleteProfile extends Component {
             {this.renderContent()}
             {!this.state.allFields && <h3>Missing Fields</h3>}
           </form>
-          <Link to='/profile'>Back to Profile</Link>
+          <Navbar />
+          <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
+
         </div>
       </>
     )

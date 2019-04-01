@@ -4,24 +4,26 @@ $menu-icon-line-offsetY: $menu-icon-line-height + $menu-icon-line-space;
 $menu-icon-height: (3*$menu-icon-line-height) + (2*$menu-icon-line-space);
 $cubic-bezier-in: cubic-bezier(0.30,1,0.70,1);
 $cubic-bezier-out: cubic-bezier(1,0.70,1,0.30);
-$main-color: #643a7a;
-$secondary-color: #7c3b7c;
+$main-color: #ffffff;
+$secondary-color: #ffffff;
 $item-height: 8vh;
-$item-width: 16vw;
+$item-width: 8vh;
+$box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
+$bg-gradient: linear-gradient(-90deg, #ff8080, #ffa4a4);
 
 .buttons-navbar{
   z-index: 10;
 }
 
 .frame {
-	position: fixed;
-	bottom: 4vh;
-	right: 8vw;
+  position: fixed;
+  bottom: 1vh;
+  right: 1vh;
 	width: 20vw;
-	height: 11vh;
+	height: 20vw;
 	border-radius: 50%;
-  box-shadow: .5rem 1rem 1rem rgba(0,0,0,0.6);
-	background: #201c29;
+  box-shadow: $box-shadow;
+	background: $bg-gradient;
 	color: #fff;
 	display: flex;
 	justify-content: center;
@@ -37,10 +39,11 @@ $item-width: 16vw;
 	width: $item-width;
 	height: $item-height;
 	border-radius: 50%;
-  box-shadow: .5rem 1rem 1rem rgba(0,0,0,0.6);
-	background: #201c29;
+  box-shadow: $box-shadow;
+	background: $bg-gradient;
 	color: #fff;
   z-index: 10;
+  border: none;
 }
 
 .nav-item-2  {
@@ -51,10 +54,11 @@ $item-width: 16vw;
 	width: $item-width;
 	height: $item-height;
 	border-radius: 50%;
-  box-shadow: .5rem 1rem 1rem rgba(0,0,0,0.6);
-	background: #201c29;
+  box-shadow: $box-shadow;
+	background: $bg-gradient;
 	color: #fff;
   z-index: 10;
+  border: none;
 }
 
 .nav-item-3  {
@@ -65,10 +69,11 @@ $item-width: 16vw;
 	width: $item-width;
 	height: $item-height;
 	border-radius: 50%;
-  box-shadow: .5rem 1rem 1rem rgba(0,0,0,0.6);
-	background: #201c29;
+  box-shadow: $box-shadow;
+	background: $bg-gradient;
 	color: #fff;
   z-index: 10;
+  border: none;
 }
 
 .menu-icon {
@@ -84,7 +89,6 @@ $item-width: 16vw;
     background-color: $main-color;
     border-radius: 3px;
     z-index: 40;
-		box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     transition: background-color .2s ease-in-out;
   }
   .line-1 {
@@ -217,13 +221,13 @@ $item-width: 16vw;
 @keyframes animate-item-2 {
   0% {
     opacity: 0;
-    bottom: 4vh;
-	  right: 8vw;
+    bottom: 1vh;
+	  right: 3vw;
   }
   100% {
     opacity: 1;
-    bottom: 11vh;
-	  right: 28vw;
+    bottom: 8vh;
+	  right: 22vw;
   }
 }
 
@@ -231,12 +235,12 @@ $item-width: 16vw;
   0% {
     opacity: 0;
     bottom: 4vh;
-	  right: 8vw;
+	  right: 5vw;
   }
   100% {
     opacity: 1;
-    bottom: 18vh;
-	  right: 6vw;
+    bottom: 14vh;
+	  right: 5vw;
   }
 }
 
@@ -248,7 +252,7 @@ $item-width: 16vw;
   }
   100% {
    opacity: 0;
-    bottom: 4vh;
+    bottom: 3vh;
     right: 8vw;
   }
 }
@@ -256,26 +260,26 @@ $item-width: 16vw;
 @keyframes animate-item-2-rev {
   0% {
     opacity: 1;
-    bottom: 11vh;
-	  right: 28vw;
+    bottom: 8vh;
+	  right: 22vw;
   }
   100% {
     opacity: 0;
-    bottom: 4vh;
-	  right: 8vw;
+    bottom: 1vh;
+	  right: 3vw;
   }
 }
 
 @keyframes animate-item-3-rev {
   0% {
     opacity: 1;
-    bottom: 18vh;
-	  right: 6vw;
+    bottom: 14vh;
+	  right: 5vw;
   }
   100% {
     opacity: 0;
-    bottom: 4vh;
-	  right: 8vw;
+    bottom: 3vh;
+	  right: 5vw;
   }
 }
 
@@ -313,10 +317,11 @@ animation: animate-item-3 1.5s forwards;
 	width: $item-width;
 	height: $item-height;
 	border-radius: 50%;
-  box-shadow: .5rem 1rem 1rem rgba(0,0,0,0.6);
-	background: #201c29;
+  box-shadow: $box-shadow;
+	background: $bg-gradient;
 	color: #fff;
   z-index: 10;
+  border: none;
 }
 
 .nav-item-rev-3  {
@@ -327,8 +332,9 @@ animation: animate-item-3 1.5s forwards;
 	width: $item-width;
   height: $item-height;
 	border-radius: 50%;
-  box-shadow: .5rem 1rem 1rem rgba(0,0,0,0.6);
-	background: #201c29;
+  box-shadow: $box-shadow;
+	background: $bg-gradient;
 	color: #fff;
   z-index: 10;
+  border: none;
 }

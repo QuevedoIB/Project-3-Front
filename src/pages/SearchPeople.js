@@ -5,6 +5,7 @@ import SearchCard from '../components/contacts/SearchCard';
 import Spinner from '../components/loading/Spinner';
 import { Link } from 'react-router-dom';
 import { sortArrayByDistance } from '../lib/helpers/harvesine-location';
+import Navbar from '../components/navbar/Navbar';
 
 class SearchPeople extends Component {
 
@@ -158,7 +159,9 @@ class SearchPeople extends Component {
             <button onClick={this.matchUser}>Add</button>
           </article>
         }
-        <Link to='/profile' >Back to Profile</Link>
+        <Navbar />
+        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
+
         {/* <div id="map" className="map-create-event hide"></div> */}
       </section>
     )

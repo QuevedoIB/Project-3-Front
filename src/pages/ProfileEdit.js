@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import './pages-scss/profileEdit.scss';
+import Navbar from '../components/navbar/Navbar';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
@@ -136,7 +137,9 @@ class ProfileEdit extends Component {
           <button className="link-button">Save Changes</button>
           {this.props.isError && <div>Incorrect Password</div>}
         </div>
-        <Link to='/profile' className="back-button">Back</Link>
+        <Navbar />
+        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></Link>
+     
       </form>
     )
   }
