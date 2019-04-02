@@ -7,7 +7,6 @@ import { scrollToBottom } from '.././lib/helpers/scroll-chat-down';
 import { translateMessage, languagesArray } from '.././lib/helpers/get-languages';
 import './pages-scss/chatPage.scss';
 import { withAuth } from '../providers/AuthProvider';
-import Navbar from '../components/navbar/Navbar';
 
 class ChatPage extends Component {
 

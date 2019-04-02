@@ -17,7 +17,7 @@ export default class Error404 extends Component {
       </div>
 
       <h1 className='title-error'>Oops! Something went wrong!</h1>
-      <div class="btn"><Link to='/' >Return to Home</Link></div>
+      <div className="btn"><Link to='/'>Return to HOME</Link></div>
     </>
     )
   }

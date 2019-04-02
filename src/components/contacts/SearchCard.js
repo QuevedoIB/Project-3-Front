@@ -11,17 +11,28 @@ class SearchCard extends Component {
   }
 
   getPersonalityCoincidence(){
-    // console.log(this.state.user.personality);
-    // console.log(this.user);
+    const personalityUser = this.props.user.personality;
+    const personalityCard = this.props.userCard.personality;
+    let counter = 0;
+    personalityUser.forEach((p) => {
+      if (personalityCard.includes(p)) {
+        counter++;
+      }
+    })
+    const coincidence = counter * 10;
+
+    return (
+      <p>Personality coincidence: {coincidence}%</p>
+    );
   }
 
   render() {
-    const { username, quote, interests } = this.props.user;
-    const location = this.props.user.location.name;
+    const { username, quote, interests } = this.props.userCard;
+    const location = this.props.userCard.location.name;
     return (
       <div id='search-contact-info'>
         <div className='search-card-head'>
-        <p>{this.getPersonalityCoincidence()}</p>
+        <div>{this.getPersonalityCoincidence()}</div>
           <h2>{username}</h2>
           <p>{location}</p>
         </div>
