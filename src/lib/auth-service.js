@@ -57,8 +57,7 @@ class AuthService {
   }
 
   changeImage(image) {
-    console.log('ALREADY FOR BACK END: ', image);
-    return this.auth.post('/profile/change-image', image)
+    return this.auth.post('/profile/change-image', {image})
       .then(response => {
         return response.data
       })
