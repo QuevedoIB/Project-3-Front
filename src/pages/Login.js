@@ -38,7 +38,7 @@ class Login extends Component {
           <div>
             <p className="signup-text">Need an Account? <Link to='/signup' className="link-white">Sign Up</Link></p>
           </div>
-          <h1 className="title">Log in</h1>
+          <h1 className="title-login">Log in</h1>
           <div className="column-content login-fields">
             <label>Username</label>
             <input type="text" name="username" value={username} onChange={this.handleChange} />

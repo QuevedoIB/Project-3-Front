@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withContacts } from '../../providers/ContactProvider';
+import { withAuth } from '../../providers/AuthProvider';
 import '../components-scss/SearchCard.scss';
 import { startDragControl } from '../../lib/helpers/drag-card';
 
@@ -9,12 +10,18 @@ class SearchCard extends Component {
     startDragControl();
   }
 
+  getPersonalityCoincidence(){
+    // console.log(this.state.user.personality);
+    // console.log(this.user);
+  }
+
   render() {
     const { username, quote, interests } = this.props.user;
     const location = this.props.user.location.name;
     return (
       <div id='search-contact-info'>
         <div className='search-card-head'>
+        <p>{this.getPersonalityCoincidence()}</p>
           <h2>{username}</h2>
           <p>{location}</p>
         </div>
@@ -27,4 +34,4 @@ class SearchCard extends Component {
   }
 }
 
-export default withContacts(SearchCard);
+export default withAuth(withContacts(SearchCard));

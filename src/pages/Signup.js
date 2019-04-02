@@ -9,15 +9,6 @@ import './pages-scss/signup.scss';
 
 import firebase from 'firebase';
 
-var config = {
-  apiKey: "AIzaSyBPiQmXBjc3QAVnensxPXbuxjeYgm1-kb8",
-  authDomain: "tinder-sorpresa-e6911.firebaseapp.com",
-  databaseURL: "https://tinder-sorpresa-e6911.firebaseio.com",
-  projectId: "tinder-sorpresa-e6911",
-  storageBucket: "tinder-sorpresa-e6911.appspot.com",
-  messagingSenderId: "418490957792"
-};
-firebase.initializeApp(config);
 
 class Signup extends Component {
 
@@ -25,22 +16,17 @@ class Signup extends Component {
     username: '',
     password: '',
     email: '',
-    imageUrl: '',
     allFields: true,
-    imageProfile: '',
-    isUploading: false,
-    progress: 0,
     error: '',
   };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { username, password, email, imageUrl } = this.state;
+    const { username, password, email} = this.state;
     const userData = {
       username,
       password,
-      email,
-      imageUrl,
+      email
     }
 
     this.props.signup(userData)
@@ -61,20 +47,22 @@ class Signup extends Component {
     this.setState({ [name]: value });
   }
 
-  handleUploadStart = () => {
-    this.setState({ isUploading: true, progress: 0 });
-  }
-  handleProgress = (progress) => {
-    this.setState({ progress });
-  }
-  handleUploadError = (error) => {
-    this.setState({ isUploading: false });
-    console.error(error);
-  }
-  handleUploadSuccess = (filename) => {
-    this.setState({ imageProfile: filename, progress: 100, isUploading: false });
-    firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
-  };
+  // handleUploadStart = () => {
+  //   console.log('start upload');
+  //   this.setState({ isUploading: true, progress: 0 });
+  // }
+  // handleProgress = (progress) => {
+  //   this.setState({ progress });
+  // }
+  // handleUploadError = (error) => {
+  //   this.setState({ isUploading: false });
+  //   console.error(error);
+  // }
+  // handleUploadSuccess = (filename) => {
+  //   console.log('upload success');
+  //   this.setState({ imageProfile: filename, progress: 100, isUploading: false });
+  //   firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
+  // };
 
   onErrorClose = () => {
     this.setState({

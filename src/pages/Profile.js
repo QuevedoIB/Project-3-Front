@@ -2,9 +2,40 @@ import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar';
+import Spinner from '../components/loading/Spinner';
 import './pages-scss/profile.scss';
 
+import FileUploader from 'react-firebase-file-uploader';
+import firebase from 'firebase';
+
+
 class Profile extends Component {
+
+
+  state = {
+    imageUrl: this.props.user.imageUrl,
+    imageProfile: '',
+    isUploading: false,
+    progress: 0,
+  };
+
+
+  handleUploadStart = () => {
+    console.log('start upload');
+    this.setState({ isUploading: true, progress: 0 });
+  }
+  handleProgress = (progress) => {
+    this.setState({ progress });
+  }
+  handleUploadError = (error) => {
+    this.setState({ isUploading: false});
+    console.error(error);
+  }
+  handleUploadSuccess = (filename) => {
+    console.log('upload success');
+    this.setState({ imageProfile: filename, progress: 100, isUploading: false });
+    firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
+  };
 
   checkUserData() {
     const { interests, location, personality, quote } = this.props.user;
@@ -36,8 +67,12 @@ class Profile extends Component {
   }
 
   render() {
+    const changeButtonHidden = this.state.isUploading ? 'hidden-button-image' : '';
 
-    const { username, imageUrl, quote} = this.props.user;
+    const { username, quote } = this.props.user;
+    const { imageUrl } = this.state;
+    console.log(this.state.progress);
+    console.log(imageUrl);
     return (
       <section className='profile-section'>
         <div>
@@ -45,7 +80,21 @@ class Profile extends Component {
             <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-profile.png'} alt='profile'></img>
             <Link id='edit-profile-image' to='/profile/edit'><img src={process.env.PUBLIC_URL + '/images/edit-profile.png'} alt='edit-profile' width="80px" /></Link>
             <div className='header-profile'>
-              <img src={imageUrl} alt={username} />
+              <div className="image-container">
+                <label className={`file-uploader ${changeButtonHidden}`}>
+                  <FileUploader
+                    hidden
+                    accept="image/*"
+                    name="imageUrl"
+                    randomizeFilename
+                    storageRef={firebase.storage().ref('images')}
+                    onUploadStart={this.handleUploadStart}
+                    onUploadError={this.handleUploadError}
+                    onUploadSuccess={this.handleUploadSuccess}
+                    onProgress={this.handleProgress} />
+                </label>
+                {this.state.isUploading ? <Spinner className="spinner-image" /> : <img src={imageUrl} alt={username} />}
+              </div>
               <h1>{username}</h1>
             </div>
             <p className="user-quote">{quote}</p>
