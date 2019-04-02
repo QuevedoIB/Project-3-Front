@@ -8,7 +8,7 @@ class Profile extends Component {
 
   checkUserData() {
     const { interests, location, personality, quote } = this.props.user;
-    console.log(this.props.user.location)
+
 
     if (interests.length && location.coords.length && personality.length && quote) {
       return <div className='completed-profile-box'>

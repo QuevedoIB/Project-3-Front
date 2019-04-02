@@ -47,7 +47,7 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
     .then(function (myJson) {
       if (myJson.features[0]) {
         userCoordinates = myJson.features[0].center;
-        console.log(userCoordinates);
+
       }
 
       if (!userCoordinates) {
