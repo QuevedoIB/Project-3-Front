@@ -13,7 +13,7 @@ class ContactProfile extends Component {
 
   componentDidMount = () => {
 
-    if (!this.props.contact.contacts.includes(this.props.user._id)) {
+    if (!this.props.contact.contacts.includes(this.props.user._id) && !this.props.user.matches.includes(this.props.contact._id)) {
       this.props.history.push('/profile');
     }
 
