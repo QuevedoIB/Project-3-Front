@@ -19,7 +19,6 @@ class Profile extends Component {
     progress: 0,
   };
 
-
   handleUploadStart = () => {
     console.log('start upload');
     this.setState({ isUploading: true, progress: 0 });
@@ -31,10 +30,15 @@ class Profile extends Component {
     this.setState({ isUploading: false});
     console.error(error);
   }
-  handleUploadSuccess = (filename) => {
+  handleUploadSuccess = async(filename) => {
     console.log('upload success');
     this.setState({ imageProfile: filename, progress: 100, isUploading: false });
-    firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
+    try {
+      await firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
+      await this.props.changeImage(this.state.imageUrl);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   checkUserData() {
@@ -68,11 +72,9 @@ class Profile extends Component {
 
   render() {
     const changeButtonHidden = this.state.isUploading ? 'hidden-button-image' : '';
-
     const { username, quote } = this.props.user;
     const { imageUrl } = this.state;
-    console.log(this.state.progress);
-    console.log(imageUrl);
+    
     return (
       <section className='profile-section'>
         <div>

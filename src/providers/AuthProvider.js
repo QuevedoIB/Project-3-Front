@@ -21,6 +21,7 @@ export const withAuth = (Comp) => {
               login={authStore.login}
               signup={authStore.signup}
               editUser={authStore.editUser}
+              changeImage={authStore.changeImage}
               isError={authStore.isError}
               onErrorSolved={authStore.onErrorSolved}
               getGoogleSignUrl={authStore.getGoogleSignUrl}
@@ -103,6 +104,16 @@ export default class AuthProvider extends Component {
       }))
   }
 
+  changeImage = (body) => {
+    return authService.changeImage(body)
+      .then((user) => {
+        this.setUser(user);
+      })
+      .catch(this.setState({
+        isError: true,
+      }))
+  }
+
   reportUser = (id) => {
     return authService.reportUser(id)
       .then((user) => {
@@ -151,6 +162,7 @@ export default class AuthProvider extends Component {
               login: this.loginUser,
               signup: this.signupUser,
               editUser: this.editUser,
+              changeImage: this.changeImage,
               isError: this.state.isError,
               onErrorSolved: this.onErrorSolved,
               getGoogleSignUrl: this.getGoogleSignUrl,
