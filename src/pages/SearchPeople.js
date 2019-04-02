@@ -181,7 +181,7 @@ class SearchPeople extends Component {
           <article className='search-info-box'>
             {noUsers ? <h1 className="no-users">No Users Available</h1> :
               <div>
-                {loading ? <Spinner /> : <SearchCard user={listOfUsers[indexUser]} />}
+                {loading ? <Spinner /> : <SearchCard userCard={listOfUsers[indexUser]} />}
                 <button onClick={this.getNext}>Next</button>
                 <button onClick={this.matchUser}>Add</button>
               </div>
