@@ -110,5 +110,6 @@ export async function getCoordsFromPlace(place) {
   if (jsonResponse.features[0]) {
     coordinates = jsonResponse.features[0].center;
   }
+  console.log(place, coordinates)
   return coordinates;
 }

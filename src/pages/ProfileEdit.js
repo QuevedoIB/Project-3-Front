@@ -6,6 +6,8 @@ import { getErrorMessage } from '../lib/helpers/error-handler';
 import Error from '../components/error/Error';
 import { passwordStrengthCheck } from '.././lib/helpers/password-strength';
 import Navbar from '../components/navbar/Navbar';
+import { mainMap, getLocationValue } from '.././lib/autocomplete-location';
+import { getCoordsFromPlace } from '../lib/filter-by-location';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
@@ -19,8 +21,18 @@ class ProfileEdit extends Component {
     quote: this.props.user.quote,
     valueInterests: '',
     interests: this.props.user.interests,
+    locationCoords: [],
+    locationText: '',
     currentPassword: '',
     error: '',
+  }
+
+  componentDidMount() {
+    mainMap(this.setLocation);
+  }
+
+  setLocation = () => {
+    this.getLocationText(getLocationValue());
   }
 
   handleChange = (e) => {
@@ -37,8 +49,24 @@ class ProfileEdit extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { locationText } = this.state;
+
+    await this.getLocation(locationText)
+
+    const { username, password, quote, interests, locationCoords, currentPassword } = this.state;
+
+    const newData = {
+      username,
+      password,
+      quote,
+      interests,
+      locationCoords,
+      locationText,
+      currentPassword
+    }
+
     try {
-      await this.props.editUser(this.state);
+      await this.props.editUser(newData);
 
       if (this.props.isError) {
         this.props.onErrorSolved();
@@ -94,6 +122,18 @@ class ProfileEdit extends Component {
     this.setState({ interests, valueInterests: interest });
   }
 
+  getLocationText = (locationValue) => {
+    this.setState({
+      locationText: locationValue
+    });
+  }
+
+  getLocation = async (locationText) => {
+    const coords = await getCoordsFromPlace(locationText);
+    this.setState({
+      locationCoords: coords
+    })
+  }
 
   onErrorClose = () => {
     this.setState({
@@ -120,14 +160,14 @@ class ProfileEdit extends Component {
           <h1>Edit profile</h1>
           {this.handleErrorMessage()}
           <label htmlFor="username">New username</label>
-          <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' required maxLength="12"/>
+          <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' required maxLength="12" />
           <label htmlFor="pass">New password</label>
-          <input type="password" id='pass' value={password} onChange={(e) => { this.handleChange(e); this.checkPasswordStrength() }} name='password' maxLength="100"/>
+          <input type="password" id='pass' value={password} onChange={(e) => { this.handleChange(e); this.checkPasswordStrength() }} name='password' maxLength="100" />
           <meter className="hide" max="4" id="password-strength-meter">
             <p id="password-strength-text"></p>
           </meter>
           <label htmlFor="new-quote">New quote</label>
-          <input type="text" id='new-quote' value={quote} onChange={(e) => this.handleChange(e)} name='quote' required maxLength="100"/>
+          <input type="text" id='new-quote' value={quote} onChange={(e) => this.handleChange(e)} name='quote' required maxLength="100" />
           <label htmlFor="username">Interests</label>
           <div className="tags">
             <ul className="tags-list">
@@ -153,14 +193,17 @@ class ProfileEdit extends Component {
             Press <code>enter</code> or <code>,</code> to add a tag. Press{" "}
             <code>backspace</code> to edit previous tag.
         </small>
+          <div id="location" className='geocoder'>
+
+          </div>
           <label htmlFor="current-password">Current Password: </label>
           <input type="password" id='current-password' value={currentPassword} onChange={(e) => this.handleChange(e)} name='currentPassword' required />
           <button className="link-button">Save Changes</button>
           {this.props.isError && <div>Incorrect Password</div>}
         </div>
         <Navbar />
-        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></Link>
-     
+        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
+        <div id="map" className="map-create-event hide"></div>
       </form>
     )
   }
