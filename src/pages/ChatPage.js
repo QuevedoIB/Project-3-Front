@@ -56,16 +56,11 @@ class ChatPage extends Component {
 
     if (language) {
       const messageTranslated = await translateMessage(message, language);
-      //let messageToSend = messageTranslated[0]
 
       chatData = await chatService.sendMessage(this.state.chatId, messageTranslated);
     } else {
       chatData = await chatService.sendMessage(this.state.chatId, message);
     }
-
-    // const messageReceived = await translateMessage(message, language);
-
-    // const chatData = await chatService.sendMessage(this.state.chatId, translatedMessage);
 
     await this.setState({
       message: '',
@@ -82,10 +77,8 @@ class ChatPage extends Component {
     this.props.history.goBack();
   }
 
-  //COSAS TEST
-
   onEnableImagesClick = async (chatId, contactId) => {
-    console.log(this.state.imagesStatus)
+
 
     if (this.state.imagesStatus) {
       await chatService.disableImageRequest(chatId);
