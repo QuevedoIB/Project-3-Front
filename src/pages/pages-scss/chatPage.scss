@@ -1,21 +1,27 @@
 .chat-page{
   height: 100vh;
 
-  .select-language{
+  .translate-text{
     position: absolute;
+    top: 0;
     right: 0;
-    top: 0; 
-    padding: 5px;
-    font-size: 20px;
-    border: none; 
-    color: white;
-    background: none;
-
-    option{
-      color: black;
+    display: flex;
+    label{
+      color: white;
+      font-family: Roboto, Arial, Helvetica, sans-serif;
+      padding: 5px;
+    }
+    .select-language{
+      font-size: 18px;
+      border: none; 
+      color: white;
+      background: none;
+  
+      option{
+        color: rgb(8, 8, 8);
+      }
     }
   }
-
 }
 
 .contact-header{

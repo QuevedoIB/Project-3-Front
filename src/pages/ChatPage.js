@@ -32,9 +32,16 @@ class ChatPage extends Component {
 
   handleLanguageSelect = (e) => {
     e.preventDefault();
-    this.setState({
-      language: e.target.value,
-    })
+    console.log(e.target.value);
+    if (e.target.value !== "none") {
+      this.setState({
+        language: e.target.value,
+      })
+    }else{
+      this.setState({
+        language: '',
+      })
+    }
   }
 
   handleGetChat = async () => {
@@ -55,6 +62,7 @@ class ChatPage extends Component {
     let chatData;
 
     if (language) {
+      console.log('translation');
       const messageTranslated = await translateMessage(message, language);
       //let messageToSend = messageTranslated[0]
 
@@ -142,8 +150,10 @@ class ChatPage extends Component {
       <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
         <div className="contact-header">
-          <form>
+          <form className="translate-text">
+            <label>Translate my messages to:</label>
             <select onChange={this.handleLanguageSelect} className="select-language">
+              <option key="none-language" value="none">None</option>
               {this.state.languagesList.map(language => {
                 return <option key={language.short} value={language.short}>{language.language}</option>
               })}
