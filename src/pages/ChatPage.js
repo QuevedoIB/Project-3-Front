@@ -17,6 +17,8 @@ class ChatPage extends Component {
     message: '',
     languagesList: languagesArray,
     language: '',
+    imagesStatus: false,
+    imageRequest: false,
   }
 
   componentDidMount = async () => {
@@ -80,12 +82,44 @@ class ChatPage extends Component {
     this.props.history.goBack();
   }
 
+  //COSAS TEST
+
+  onEnableImagesClick = () => {
+    let socket = socketManager.getSocket();
+    socket.on("ENABLE-IMAGES-REQUEST", () => {
+      this.handleEnableImageRequest();
+    });
+  }
+
+  handleEnableImageRequest = () => {
+    this.setState({
+      imageRequest: true,
+    })
+  }
+
+  handleRejectEnableImageRequest = () => {
+    this.setState({
+      imageRequest: false,
+    })
+  }
+
+  handleAcceptEnableImageRequest = () => {
+
+    // await petición al servidor para habilitar el chat
+
+    // emit que haga que se actualice el chat
+
+  }
 
   render() {
     return (
       <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
         <div className="contact-header">
+          {this.state.imageRequest && <div>
+            <h1>ESTA LA PETICIÓN</h1>
+          </div>}
+          <button onClick={() => this.onEnableImagesClick()}>INVITE</button>
           <form>
             <select onChange={this.handleLanguageSelect} className="select-language">
               {this.state.languagesList.map(language => {
@@ -97,7 +131,7 @@ class ChatPage extends Component {
           <h1>{this.state.contact.username}</h1>
         </div>
         < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} contact={this.state.contact} />
-        <Link to='/contacts' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></Link>
+        <Link to='/contacts' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
       </div >
     )
   }
