@@ -56,6 +56,13 @@ class AuthService {
       })
   }
 
+  changeImage(image) {
+    return this.auth.post('/profile/change-image', {image})
+      .then(response => {
+        return response.data
+      })
+  }
+
   reportUser(contactId) {
 
     return this.auth.post(`/profile/report`, { contactId })
