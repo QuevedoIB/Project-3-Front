@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import './InfoFields.scss';
 import { passwordStrengthCheck } from '../../lib/helpers/password-strength';
-// import { mainMap, getLocationValue } from '../../lib/autocomplete-location';
-// import { getCoordsFromPlace } from '../../lib/filter-by-location';
-
-import FileUploader from 'react-firebase-file-uploader';
-import firebase from 'firebase';
 
 
 export default class InfoFields extends Component {
@@ -26,14 +21,6 @@ export default class InfoFields extends Component {
         </meter>
         <label htmlFor='email' >Email:</label>
         <input type="email" name="email" value={this.props.email} onChange={this.props.handleChange} required maxLength="100"/>
-        {/* <div id="location" className='geocoder'> */}
-        {/* </div> */}
-
-        {/* comprobar si se suben las imágenes */}
-
-        {/* <span className="image-upload"><input type="file" name="imageUrl" className="input-img" value={this.props.imageUrl} onChange={this.props.handleChange} />
-          Choose Image</span> */}
-        {/* <div id="map" className="map-create-event hide"></div> */}
       </div>
     )
   }

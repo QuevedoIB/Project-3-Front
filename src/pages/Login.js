@@ -46,7 +46,7 @@ class Login extends Component {
   }
 
   render() {
-    const { username, password, error } = this.state;
+    const { username, password} = this.state;
     return (
       <div className="page">
         <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-pages.png'} alt='header' />

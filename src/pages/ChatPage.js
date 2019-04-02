@@ -6,7 +6,6 @@ import socketManager from '../socketManager';
 import { scrollToBottom } from '.././lib/helpers/scroll-chat-down';
 import { translateMessage, languagesArray } from '.././lib/helpers/get-languages';
 import './pages-scss/chatPage.scss';
-import Navbar from '../components/navbar/Navbar';
 
 class ChatPage extends Component {
 

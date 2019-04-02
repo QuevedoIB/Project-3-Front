@@ -7,8 +7,6 @@ import Error from '.././components/error/Error';
 
 import './pages-scss/signup.scss';
 
-import firebase from 'firebase';
-
 
 class Signup extends Component {
 
@@ -46,23 +44,6 @@ class Signup extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   }
-
-  // handleUploadStart = () => {
-  //   console.log('start upload');
-  //   this.setState({ isUploading: true, progress: 0 });
-  // }
-  // handleProgress = (progress) => {
-  //   this.setState({ progress });
-  // }
-  // handleUploadError = (error) => {
-  //   this.setState({ isUploading: false });
-  //   console.error(error);
-  // }
-  // handleUploadSuccess = (filename) => {
-  //   console.log('upload success');
-  //   this.setState({ imageProfile: filename, progress: 100, isUploading: false });
-  //   firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
-  // };
 
   onErrorClose = () => {
     this.setState({

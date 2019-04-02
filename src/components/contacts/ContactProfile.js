@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import '../components-scss/ContactProfile.scss';
 import { withAuth } from '../../providers/AuthProvider';
 import Report from '../report/Report';
