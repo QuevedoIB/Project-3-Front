@@ -6,6 +6,7 @@ import socketManager from '../socketManager';
 import { scrollToBottom } from '.././lib/helpers/scroll-chat-down';
 import { translateMessage, languagesArray } from '.././lib/helpers/get-languages';
 import './pages-scss/chatPage.scss';
+import { withAuth } from '../providers/AuthProvider';
 import Navbar from '../components/navbar/Navbar';
 
 class ChatPage extends Component {
@@ -18,7 +19,7 @@ class ChatPage extends Component {
     languagesList: languagesArray,
     language: '',
     imagesStatus: false,
-    imageRequest: false,
+    imagesRequest: false,
   }
 
   componentDidMount = async () => {
@@ -42,7 +43,9 @@ class ChatPage extends Component {
     await this.setState({
       chatId: chat._id,
       chat: chat.log,
-      contact: chat.contact
+      contact: chat.contact,
+      imagesRequest: chat.enabledImagesRequest,
+
     });
     scrollToBottom();
   }
@@ -84,26 +87,45 @@ class ChatPage extends Component {
 
   //COSAS TEST
 
-  onEnableImagesClick = () => {
+  onEnableImagesClick = async (chatId, contactId) => {
+
+    await chatService.enableImageRequest(chatId, contactId);
+
+
     let socket = socketManager.getSocket();
-    socket.on("ENABLE-IMAGES-REQUEST", () => {
-      this.handleEnableImageRequest();
+    socket.on("ENABLE-IMAGES", () => {
+      this.handleGetChat();
     });
   }
 
-  handleEnableImageRequest = () => {
-    this.setState({
-      imageRequest: true,
-    })
+  checkImagesRequestStatus = () => {
+
+    if (this.state.imagesRequest.includes(this.props.user._id)) {
+      return <div>
+        <h1>ESTA LA PETICIÓN</h1>
+        <button onClick={() => this.handleAcceptEnableImageRequest(this.state.chatId)}>Accept</button><button onClick={() => this.handleRejectEnableImageRequest(this.state.chatId)}>Decline</button>
+      </div>
+    }
   }
 
-  handleRejectEnableImageRequest = () => {
-    this.setState({
-      imageRequest: false,
-    })
+  handleRejectEnableImageRequest = async (id) => {
+
+    await chatService.enableImageDeclineRequest(id);
+
+    let socket = socketManager.getSocket();
+    socket.on("ENABLE-IMAGES", () => {
+      this.getChatImagesStatus();
+    });
   }
 
-  handleAcceptEnableImageRequest = () => {
+  handleAcceptEnableImageRequest = async (id) => {
+
+    await chatService.enableImageAcceptRequest(id);
+
+    let socket = socketManager.getSocket();
+    socket.on("ENABLE-IMAGES", () => {
+      this.getChatImagesStatus();
+    });
 
     // await petición al servidor para habilitar el chat
 
@@ -111,15 +133,18 @@ class ChatPage extends Component {
 
   }
 
+  // this.getChatImagesStatus
+
+  // this.getChatImagesRequestStatus
+
   render() {
+    const { chatId, contact } = this.state;
     return (
       <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
         <div className="contact-header">
-          {this.state.imageRequest && <div>
-            <h1>ESTA LA PETICIÓN</h1>
-          </div>}
-          <button onClick={() => this.onEnableImagesClick()}>INVITE</button>
+          {chatId && this.checkImagesRequestStatus()}
+          <button onClick={() => this.onEnableImagesClick(chatId, contact._id)}>INVITE</button>
           <form>
             <select onChange={this.handleLanguageSelect} className="select-language">
               {this.state.languagesList.map(language => {
@@ -137,4 +162,4 @@ class ChatPage extends Component {
   }
 }
 
-export default withRouter(ChatPage);
+export default withAuth(withRouter(ChatPage));

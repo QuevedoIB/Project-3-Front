@@ -24,6 +24,11 @@ class ChatService {
       .then(({ data }) => data);
   }
 
+  enableImageRequest(id, contactId) {
+    console.log(id, contactId)
+    return this.chat.post('/chat/enable-images-request', { id, contactId })
+      .then(({ data }) => data);
+  }
 
   // getAllMessages(id){
   //   return this.chat.get(`/chat/${id}`)

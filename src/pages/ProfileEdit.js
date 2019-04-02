@@ -201,7 +201,6 @@ class ProfileEdit extends Component {
           <label htmlFor="current-password">Current Password: </label>
           <input type="password" id='current-password' value={currentPassword} onChange={(e) => this.handleChange(e)} name='currentPassword' required />
           <button className="link-button">Save Changes</button>
-          {this.props.isError && <div>Incorrect Password</div>}
         </div>
         <Navbar />
         <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
