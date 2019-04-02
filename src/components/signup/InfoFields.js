@@ -18,7 +18,7 @@ export default class InfoFields extends Component {
     return (
       <div className="column-content form-fields">
         <label htmlFor='username'>Username:</label>
-        <input type="text" name="username" value={this.props.username} onChange={this.props.handleChange} required maxLength="15"/>
+        <input type="text" name="username" value={this.props.username} onChange={this.props.handleChange} required maxLength="12"/>
         <label htmlFor='password'>Password:</label>
         <input id='pass' type="password" name="password" value={this.props.password} onChange={(e) => { this.props.handleChange(e); this.checkPasswordStrength() }} required maxLength="100"/>
         <meter className="hide" max="4" id="password-strength-meter">
