@@ -44,7 +44,7 @@ class ChatPage extends Component {
       chat: chat.log,
       contact: chat.contact,
       imagesRequest: chat.enabledImagesRequest,
-
+      imagesStatus: chat.enabledImages,
     });
     scrollToBottom();
   }
@@ -76,8 +76,6 @@ class ChatPage extends Component {
     socket.on("NEW_MESSAGE", () => {
       this.handleGetChat();
     });
-
-    // scrollToBottom();
   }
 
   onBack = () => {
@@ -87,14 +85,24 @@ class ChatPage extends Component {
   //COSAS TEST
 
   onEnableImagesClick = async (chatId, contactId) => {
+    console.log(this.state.imagesStatus)
 
-    await chatService.enableImageRequest(chatId, contactId);
+    if (this.state.imagesStatus) {
+      await chatService.disableImageRequest(chatId);
+      let socket = socketManager.getSocket();
+      socket.on("ENABLE-IMAGES", () => {
+        this.handleGetChat();
+      });
+
+    } else {
+      await chatService.enableImageRequest(chatId, contactId);
 
 
-    let socket = socketManager.getSocket();
-    socket.on("ENABLE-IMAGES", () => {
-      this.handleGetChat();
-    });
+      let socket = socketManager.getSocket();
+      socket.on("ENABLE-IMAGES", () => {
+        this.handleGetChat();
+      });
+    }
   }
 
   checkImagesRequestStatus = () => {
@@ -113,7 +121,7 @@ class ChatPage extends Component {
 
     let socket = socketManager.getSocket();
     socket.on("ENABLE-IMAGES", () => {
-      this.getChatImagesStatus();
+      this.handleGetChat();
     });
   }
 
@@ -123,21 +131,12 @@ class ChatPage extends Component {
 
     let socket = socketManager.getSocket();
     socket.on("ENABLE-IMAGES", () => {
-      this.getChatImagesStatus();
+      this.handleGetChat();
     });
-
-    // await petición al servidor para habilitar el chat
-
-    // emit que haga que se actualice el chat
-
   }
 
-  // this.getChatImagesStatus
-
-  // this.getChatImagesRequestStatus
-
   render() {
-    const { chatId, contact } = this.state;
+    const { chatId, contact, imagesStatus } = this.state;
     return (
       <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
@@ -151,7 +150,7 @@ class ChatPage extends Component {
               })}
             </select>
           </form>
-          <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />
+          {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />}
           <h1>{this.state.contact.username}</h1>
         </div>
         < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} contact={this.state.contact} />

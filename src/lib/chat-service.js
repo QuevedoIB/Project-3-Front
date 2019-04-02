@@ -25,8 +25,22 @@ class ChatService {
   }
 
   enableImageRequest(id, contactId) {
-    console.log(id, contactId)
     return this.chat.post('/chat/enable-images-request', { id, contactId })
+      .then(({ data }) => data);
+  }
+
+  enableImageDeclineRequest(id) {
+    return this.chat.post('/chat/decline-request', { id })
+      .then(({ data }) => data);
+  }
+
+  enableImageAcceptRequest(id) {
+    return this.chat.post('/chat/accept-request', { id })
+      .then(({ data }) => data);
+  }
+
+  disableImageRequest(id) {
+    return this.chat.post('/chat/disable-images-request', { id })
       .then(({ data }) => data);
   }
 
