@@ -108,9 +108,10 @@ class ChatPage extends Component {
   checkImagesRequestStatus = () => {
 
     if (this.state.imagesRequest.includes(this.props.user._id)) {
-      return <div>
-        <h1>ESTA LA PETICIÓN</h1>
-        <button onClick={() => this.handleAcceptEnableImageRequest(this.state.chatId)}>Accept</button><button onClick={() => this.handleRejectEnableImageRequest(this.state.chatId)}>Decline</button>
+      return <div className='chat-invite-image-box'>
+        <h3>{this.state.contact.username}<br></br> wants to share images</h3>
+        <button className='accept-decline-chat-invite-image' onClick={() => this.handleAcceptEnableImageRequest(this.state.chatId)}><img src={process.env.PUBLIC_URL + '/images/checked.png'} alt='accept-sharing'></img></button>
+        <button className='accept-decline-chat-invite-image' onClick={() => this.handleRejectEnableImageRequest(this.state.chatId)}><img src={process.env.PUBLIC_URL + '/images/x-button .png'} alt='decline-sharing'></img></button>
       </div>
     }
   }
@@ -141,8 +142,6 @@ class ChatPage extends Component {
       <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
         <div className="contact-header">
-          {chatId && this.checkImagesRequestStatus()}
-          <button onClick={() => this.onEnableImagesClick(chatId, contact._id)}>INVITE</button>
           <form>
             <select onChange={this.handleLanguageSelect} className="select-language">
               {this.state.languagesList.map(language => {
@@ -150,8 +149,14 @@ class ChatPage extends Component {
               })}
             </select>
           </form>
-          {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />}
-          <h1>{this.state.contact.username}</h1>
+          <div className='chat-page-header'>
+            {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />}
+            <div className='chat-page-header-info'>
+              <h1>{this.state.contact.username}</h1>
+              <button className='chat-invite-image-button' onClick={() => this.onEnableImagesClick(chatId, contact._id)}>{imagesStatus ? "Don't Share Image" : 'Share Image'}</button>
+              {chatId && this.checkImagesRequestStatus()}
+            </div>
+          </div>
         </div>
         < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} contact={this.state.contact} />
         <Link to='/contacts' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
