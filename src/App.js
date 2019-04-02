@@ -18,6 +18,22 @@ import ContactProvider from './providers/ContactProvider';
 import CompleteProfile from './pages/ProfileComplete';
 import Error404 from './pages/error/Error404';
 
+
+
+import firebase from 'firebase';
+
+var config = {
+  apiKey: "AIzaSyBPiQmXBjc3QAVnensxPXbuxjeYgm1-kb8",
+  authDomain: "tinder-sorpresa-e6911.firebaseapp.com",
+  databaseURL: "https://tinder-sorpresa-e6911.firebaseio.com",
+  projectId: "tinder-sorpresa-e6911",
+  storageBucket: "tinder-sorpresa-e6911.appspot.com",
+  messagingSenderId: "418490957792"
+};
+firebase.initializeApp(config);
+
+
+
 class App extends Component {
   render() {
     return (

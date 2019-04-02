@@ -7,12 +7,37 @@
     display: flex;
     height: 20vh;
     margin-top: 2vh;
-    img{
-      height: 15vh;
-      align-self: flex-end;
-      margin: 1vh 10vw;
-      border-radius: 100px;
+
+    .image-container{
+
+      width: 40vw;
+      margin-left: 5vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        height: 15vh;
+        width: 15vh;
+        border-radius: 100px;
+      }
+
+      .spinner-image{
+        height: 10vh;
+        // margin: 1vh 10vw;
+      }
+
+      .file-uploader{
+        opacity: 0;
+        height: 15vh;
+        width: 15vh;
+        border-radius: 100px;
+      }
+
+      .hidden-button-image{
+        display: none;
+      }
     }
+
     h1{
       font-family: Roboto Condensed, Arial, Helvetica, sans-serif;
       color: white;
@@ -65,6 +90,8 @@
     text-align: center;
   }
 }
+
+
 
 .notification-box {
   z-index: 99;
@@ -238,4 +265,9 @@ a#edit-profile-image img {
     margin: 4vh 0;
     text-align: center;
   }
+}
+
+
+.file-uploader{
+  position: absolute;
 }
