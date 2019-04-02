@@ -24,7 +24,7 @@
   img{
     height: 15vh;
     align-self: center;
-    margin: 0 10vw;
+    margin: 0 5vw;
     border-radius: 100px;
   }
   h1{
@@ -35,4 +35,61 @@
     text-transform: none;
   }
 
+}
+
+.chat-invite-image-box {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgba(75, 75, 75, 0.4);
+  box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
+  width: 40vw;
+  height: 12vh;
+  position: fixed;
+  top: 16vh;
+  right: 4.5vw;
+
+  h3 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bolder;
+  }
+
+  .accept-decline-chat-invite-image {
+    background: none;
+    border: none;
+    img {
+      margin-bottom: 1vh;
+      box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
+      margin-top: 1vh;
+      width: 7vw;
+      height: 7vw;
+    }
+  } 
+}
+
+.chat-invite-image-button {
+  box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
+  margin-top: 1vh;
+  height: 5vh;
+  width: 25vw;
+  text-decoration: none;
+  background-image: linear-gradient(-90deg, #ff8080, #ffa4a4);
+  border-radius: 50px;
+  color: white;
+  border: none;
+  justify-self: center;
+  text-transform: uppercase;
+  font-weight: 300;
+  box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
+}
+
+.chat-page-header {
+  display: flex;
+}
+
+.chat-page-header-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
