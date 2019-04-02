@@ -1,6 +1,7 @@
 .profile-section {
   width: 100vw;
-  height: 100vh;
+  display: grid;
+  align-items: flex-start;
 
   .header-profile{
     display: flex;
@@ -129,7 +130,7 @@
 }
 
 a#edit-profile-image img {
-  position: fixed;
+  position: absolute;
   top: 2vh;
   right: 6vw;
   width: 12vw;

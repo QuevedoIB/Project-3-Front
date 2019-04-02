@@ -158,36 +158,38 @@ class SearchPeople extends Component {
 
     return (
       <section>
-        <h1 className='search-title'>Search Friends</h1>
-        <header>
-          <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-pages.png'} alt='header' />
-          <div>
-            <form className='search-form'>
-              <h3>Sort by</h3>
-              <div className='search-items-container'>
-                <div>
-                  <input className={personalityMark} type="checkbox" value={personality} name="personality" id="personality" onChange={this.onChange} />
-                  <label htmlFor="personality">Personality </label>
-                </div>
-                <div>
-                  <input className={locationMark} type="checkbox" value={location} name="location" id="location" onChange={this.onChange} />
-                  <label htmlFor="location">Location </label>
-                </div>
-              </div>
-            </form>
-          </div>
-        </header>
-        <article className='search-info-box'>
-          {noUsers ? <h1>No Users Avaliable</h1> :
+        <div>
+          <h1 className='search-title'>Search Friends</h1>
+          <header>
+            <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-edit.png'} alt='header' />
             <div>
-              {loading ? <Spinner /> : <SearchCard user={listOfUsers[indexUser]} />}
-              <button onClick={this.getNext}>Next</button>
-              <button onClick={this.matchUser}>Add</button>
+              <form className='search-form'>
+                <h3>Sort by</h3>
+                <div className='search-items-container'>
+                  <div>
+                    <input className={personalityMark} type="checkbox" value={personality} name="personality" id="personality" onChange={this.onChange} />
+                    <label htmlFor="personality">Personality </label>
+                  </div>
+                  <div>
+                    <input className={locationMark} type="checkbox" value={location} name="location" id="location" onChange={this.onChange} />
+                    <label htmlFor="location">Location </label>
+                  </div>
+                </div>
+              </form>
             </div>
-          }
-        </article>
-        <Navbar />
-        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
+          </header>
+          <article className='search-info-box'>
+            {noUsers ? <h1 className="no-users">No Users Available</h1> :
+              <div>
+                {loading ? <Spinner /> : <SearchCard user={listOfUsers[indexUser]} />}
+                <button onClick={this.getNext}>Next</button>
+                <button onClick={this.matchUser}>Add</button>
+              </div>
+            }
+          </article>
+          <Navbar />
+          <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
+        </div>
       </section>
     )
   }

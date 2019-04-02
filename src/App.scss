@@ -18,6 +18,11 @@ body{
   font-weight: 300;
 }
 
+
+// #root{
+//   height: 100vh;
+// }
+
 .bg-image{
   position: absolute;
   top: 0;
@@ -55,6 +60,7 @@ h2{
   justify-items: center;
   align-items: center;
   text-align: center;
+  height: 100vh;
 }
 
 .full{
