@@ -37,8 +37,7 @@ class Profile extends Component {
 
   render() {
 
-    const { username, imageUrl, quote } = this.props.user;
-
+    const { username, imageUrl, quote} = this.props.user;
     return (
       <section className='profile-section'>
         <div>

@@ -23,7 +23,7 @@ export default class Interests extends Component {
     return (
       <div className="form-interests">
         <label>Quote</label>
-        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" className="quote-form" required maxLength="100"/>
+        <input name="quote" value={quote} onChange={this.props.handleChange} placeholder="Tell something about you" className="quote-form" required maxLength="100" />
         <label>Interests</label>
         <div className="tags">
           <ul className="tags-list">
@@ -34,6 +34,7 @@ export default class Interests extends Component {
             ))}
           </ul>
           <input
+            required maxLength="15" 
             type="text"
             name="valueInterests"
             placeholder="Hobbies, likes..."
@@ -43,7 +44,6 @@ export default class Interests extends Component {
             className="tag-input"
             onKeyUp={this.props.handleKeyUp}
             onKeyDown={this.props.handleKeyDown}
-            required
           />
         </div>
         <small>
