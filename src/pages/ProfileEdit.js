@@ -51,7 +51,9 @@ class ProfileEdit extends Component {
 
     const { locationText } = this.state;
 
-    await this.getLocation(locationText)
+    if (locationText) {
+      await this.getLocation(locationText)
+    }
 
     const { username, password, quote, interests, locationCoords, currentPassword } = this.state;
 
