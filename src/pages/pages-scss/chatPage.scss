@@ -6,6 +6,7 @@
     bottom: 0;
     right: 0;
     display: flex;
+    font-size: 16px;
     label{
       padding: 5px;
       font-family: Roboto Condensed, Arial, Helvetica, sans-serif;
@@ -67,12 +68,18 @@
     font-weight: bolder;
   }
 
+  .buttons-share-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .accept-decline-chat-invite-image {
     background: none;
     border: none;
+
+
     img {
       margin-bottom: 1vh;
-      box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
       margin-top: 1vh;
       width: 7vw;
       height: 7vw;
@@ -81,7 +88,6 @@
 }
 
 .chat-invite-image-button {
-  box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
   position: absolute;
   top: 1vh; 
   right: 1vh;
@@ -95,7 +101,6 @@
   justify-self: center;
   text-transform: uppercase;
   font-weight: 300;
-  box-shadow: 0 4px 10px 0 rgba(75, 75, 75, 0.2), 0 6px 20px 0 rgba(75, 75, 75, 0.2);
 }
 
 .chat-page-header {

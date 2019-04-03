@@ -241,8 +241,10 @@ class ChatPage extends Component {
     if (this.state.imagesRequest.includes(this.props.user._id)) {
       return <div className='chat-invite-image-box'>
         <h3>{this.state.contact.username}<br></br> wants to share the real profile images</h3>
-        <button className='accept-decline-chat-invite-image' onClick={() => this.handleAcceptEnableImageRequest(this.state.chatId)}><img src={process.env.PUBLIC_URL + '/images/checked.png'} alt='accept-sharing'></img></button>
-        <button className='accept-decline-chat-invite-image' onClick={() => this.handleRejectEnableImageRequest(this.state.chatId)}><img src={process.env.PUBLIC_URL + '/images/x-button .png'} alt='decline-sharing'></img></button>
+        <div className="buttons-share-image">
+          <button className='accept-decline-chat-invite-image' onClick={() => this.handleAcceptEnableImageRequest(this.state.chatId)}><img src={process.env.PUBLIC_URL + '/images/checked.png'} alt='accept-sharing'></img></button>
+          <button className='accept-decline-chat-invite-image' onClick={() => this.handleRejectEnableImageRequest(this.state.chatId)}><img src={process.env.PUBLIC_URL + '/images/x-button .png'} alt='decline-sharing'></img></button>
+        </div>
       </div>
     }
   }
@@ -285,7 +287,7 @@ class ChatPage extends Component {
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
         <div className="contact-header">
           <form className="translate-text">
-            <label>Translate my messages to:</label>
+            <label >Translate my messages to:</label>
             <select onChange={this.handleLanguageSelect} className="select-language">
               <option key="none-language" value="none">None</option>
               {this.state.languagesList.map(language => {
