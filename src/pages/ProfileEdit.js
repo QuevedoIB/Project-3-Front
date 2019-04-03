@@ -154,6 +154,7 @@ class ProfileEdit extends Component {
   render() {
 
     const { username, password, quote, valueInterests, currentPassword, interests } = this.state;
+    const { googleUser } = this.props.user;
 
     return (
       <form onSubmit={(e) => this.handleSubmit(e)} className="profile-edit">
@@ -163,8 +164,8 @@ class ProfileEdit extends Component {
           {this.handleErrorMessage()}
           <label htmlFor="username">New username</label>
           <input type="text" id='new-username' value={username} onChange={(e) => this.handleChange(e)} name='username' required maxLength="12" />
-          <label htmlFor="pass">New password</label>
-          <input type="password" id='pass' value={password} onChange={(e) => { this.handleChange(e); this.checkPasswordStrength() }} name='password' maxLength="100" />
+          {!googleUser && <><label htmlFor="pass">New password</label>
+            <input type="password" id='pass' value={password} onChange={(e) => { this.handleChange(e); this.checkPasswordStrength() }} name='password' maxLength="100" /></>}
           <meter className="hide" max="4" id="password-strength-meter">
             <p id="password-strength-text"></p>
           </meter>
@@ -198,8 +199,8 @@ class ProfileEdit extends Component {
           <div id="location" className='geocoder'>
 
           </div>
-          <label htmlFor="current-password">Current Password: </label>
-          <input type="password" id='current-password' value={currentPassword} onChange={(e) => this.handleChange(e)} name='currentPassword' required />
+          {!googleUser && <><label htmlFor="current-password">Current Password: </label>
+            <input type="password" id='current-password' value={currentPassword} onChange={(e) => this.handleChange(e)} name='currentPassword' required /></>}
           <button className="link-button">Save Changes</button>
         </div>
         <Navbar />
