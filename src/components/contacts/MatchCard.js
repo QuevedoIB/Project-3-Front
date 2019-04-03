@@ -9,7 +9,7 @@ export default class MatchCard extends Component {
     const { imageUrl, username, _id } = this.props.match;
     return (
       <div className="contact-card">
-        <img src={imageUrl} alt={username} className="user-image" />
+        <img src={process.env.PUBLIC_URL+"/images/unknown-image.png"} alt={username} className="user-image" />
         <div className="contact-info">
           <Link to={`/contact/${_id}`} className="username"><h3>{username}</h3></Link>
         </div>
