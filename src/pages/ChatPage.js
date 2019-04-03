@@ -28,6 +28,11 @@ class ChatPage extends Component {
     socket.on("NEW_MESSAGE", () => {
       this.handleGetChat();
     });
+
+    socket = socketManager.getSocket();
+    socket.on("ENABLE-IMAGES", () => {
+      this.handleGetChat();
+    });
   }
 
   handleLanguageSelect = (e) => {
@@ -62,7 +67,6 @@ class ChatPage extends Component {
     let chatData;
 
     if (language) {
-      console.log('translation');
       const messageTranslated = await translateMessage(message, language);
 
       chatData = await chatService.sendMessage(this.state.chatId, messageTranslated);
@@ -110,7 +114,7 @@ class ChatPage extends Component {
 
     if (this.state.imagesRequest.includes(this.props.user._id)) {
       return <div className='chat-invite-image-box'>
-        <h3>{this.state.contact.username}<br></br> wants to share images</h3>
+        <h3>{this.state.contact.username}<br></br> wants to share the real profile images</h3>
         <button className='accept-decline-chat-invite-image' onClick={() => this.handleAcceptEnableImageRequest(this.state.chatId)}><img src={process.env.PUBLIC_URL + '/images/checked.png'} alt='accept-sharing'></img></button>
         <button className='accept-decline-chat-invite-image' onClick={() => this.handleRejectEnableImageRequest(this.state.chatId)}><img src={process.env.PUBLIC_URL + '/images/x-button .png'} alt='decline-sharing'></img></button>
       </div>
@@ -139,6 +143,13 @@ class ChatPage extends Component {
 
   render() {
     const { chatId, contact, imagesStatus } = this.state;
+    let imageContact = contact.imageUrl;
+    if(!imagesStatus || contact.personalImage === '' || contact.personalImage === undefined ){
+      imageContact = contact.imageUrl;
+    }else{
+      imageContact = contact.personalImage;
+    }
+
     return (
       <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
@@ -153,10 +164,11 @@ class ChatPage extends Component {
             </select>
           </form>
           <div className='chat-page-header'>
-            {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />}
+          <img src={imageContact} alt={this.state.contact.username} />
+            {/* {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />} */}
             <div className='chat-page-header-info'>
               <h1>{this.state.contact.username}</h1>
-              <button className='chat-invite-image-button' onClick={() => this.onEnableImagesClick(chatId, contact._id)}>{imagesStatus ? "Don't Share Image" : 'Share Image'}</button>
+              <button className='chat-invite-image-button' onClick={() => this.onEnableImagesClick(chatId, contact._id)}>{imagesStatus ? "Stop Sharing" : 'Share Images'}</button>
               {chatId && this.checkImagesRequestStatus()}
             </div>
           </div>
