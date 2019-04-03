@@ -51,3 +51,17 @@ export const passwordStrengthCheck = () => {
     meter.className = 'hide-meter';
   }
 };
+
+
+export function checkIfPasswordOkay() {
+
+  const meter = document.getElementById('password-strength-meter');
+
+  console.log(meter.className)
+
+  if (meter.className === 'good-meter' || meter.className === 'strong-meter' || meter.className === 'weak-meter') {
+    return true;
+  }
+
+  return false;
+}

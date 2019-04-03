@@ -6,6 +6,7 @@ import { getErrorMessage } from '../lib/helpers/error-handler';
 import Error from '.././components/error/Error';
 
 import './pages-scss/signup.scss';
+import { checkIfPasswordOkay } from '../lib/helpers/password-strength';
 
 
 class Signup extends Component {
@@ -20,24 +21,30 @@ class Signup extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { username, password, email} = this.state;
+    const { username, password, email } = this.state;
     const userData = {
       username,
       password,
       email
     }
 
-    this.props.signup(userData)
-      .then((data) => {
-        if (!this.props.errorType) {
-          this.props.history.push('/profile')
-        } else {
-          this.setState({
-            error: getErrorMessage(this.props.errorType),
-          })
-        }
-      })
-      .catch(error => console.log(error))
+
+    console.log(checkIfPasswordOkay())
+    if (checkIfPasswordOkay()) {
+      this.props.signup(userData)
+        .then((data) => {
+          if (!this.props.errorType) {
+            this.props.history.push('/profile')
+          } else {
+            this.setState({
+              error: getErrorMessage(this.props.errorType),
+            })
+          }
+        })
+        .catch(error => console.log(error))
+    } else {
+      this.setState({ error: 'Password Strength too low' })
+    }
   }
 
   handleChange = (event) => {
