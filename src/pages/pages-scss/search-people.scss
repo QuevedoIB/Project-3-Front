@@ -52,11 +52,12 @@ section {
 }
 
 .search-info-box {
+  position: fixed;
+  top: 40vh;
+  left: 10vw;
   width: 80vw;
-  margin: 5vh auto 0 auto;
-  height: 30vh;
   border-radius: 15px;
-  border: 2px solid  rgb(255, 93, 93);//linear-gradient(to right, #fffbd5, #b20a2c);
+  border: 2px solid  rgb(255, 93, 93);
   background-color:  rgba(255, 206, 160, 0.671);
 }
 

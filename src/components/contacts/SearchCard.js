@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 import { withContacts } from '../../providers/ContactProvider';
 import { withAuth } from '../../providers/AuthProvider';
 import '../components-scss/SearchCard.scss';
-import { startDragControl } from '../../lib/helpers/drag-card';
 
 class SearchCard extends Component {
 
-  componentDidMount() {
-    startDragControl();
-  }
-
-  getPersonalityCoincidence(){
+  getPersonalityCoincidence() {
     const personalityUser = this.props.user.personality;
     const personalityCard = this.props.userCard.personality;
     let counter = 0;
@@ -32,7 +27,7 @@ class SearchCard extends Component {
     return (
       <div id='search-contact-info'>
         <div className='search-card-head'>
-        <div>{this.getPersonalityCoincidence()}</div>
+          <div>{this.getPersonalityCoincidence()}</div>
           <h2>{username}</h2>
           <p>{location}</p>
         </div>

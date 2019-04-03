@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { sortArrayByDistance } from '../lib/helpers/harvesine-location';
 import Navbar from '../components/navbar/Navbar';
 import './pages-scss/search-people.scss';
+import { startDragControl, getBoxBack } from '.././lib/helpers/drag-card';
 
 class SearchPeople extends Component {
 
@@ -21,6 +22,7 @@ class SearchPeople extends Component {
 
   componentDidMount = () => {
     this.getUsers();
+    startDragControl(this.matchUser, this.getNext);
   }
 
   onChange = (e) => {
@@ -79,18 +81,9 @@ class SearchPeople extends Component {
 
   }
 
-  getNext = () => {
+  getNext = (callbackResult) => {
+
     const { listOfUsers, indexUser } = this.state;
-    //  
-    //   if (listOfUsers.length === 1) {
-    //     this.setState({
-    //       noUser: true
-    //     })
-    //   } else if (indexUser !== listOfUsers.length - 1) {
-    //     this.setState({
-    //       indexUser: indexUser + 1
-    //     })
-    //   }
 
     if (indexUser !== listOfUsers.length - 1) {
       this.setState({
@@ -102,6 +95,9 @@ class SearchPeople extends Component {
       })
     }
 
+    if (callbackResult) {
+      getBoxBack();
+    }
   }
 
   sortUsersListByPersonality = (usersList, user) => {
@@ -139,13 +135,18 @@ class SearchPeople extends Component {
   }
 
 
-  matchUser = async () => {
+  matchUser = async (callbackResult) => {
+
     const { listOfUsers, indexUser } = this.state;
     try {
       await this.props.matchUser(listOfUsers[indexUser]._id);
       this.getNext();
     } catch (error) {
       console.log(error);
+    }
+
+    if (callbackResult) {
+      getBoxBack();
     }
   }
 
