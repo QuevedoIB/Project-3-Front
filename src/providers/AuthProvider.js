@@ -28,6 +28,7 @@ export const withAuth = (Comp) => {
               completeProfile={authStore.completeProfile}
               errorType={authStore.errorType}
               reportUser={authStore.reportUser}
+              getCurrentSession={authStore.getCurrentSession}
               {...this.props} />
           }}
         </Consumer>
@@ -128,7 +129,11 @@ export default class AuthProvider extends Component {
     })
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
+    this.getCurrentSession();
+  }
+
+  getCurrentSession = () => {
     authService.me()
       .then((user) => {
         this.setState({
@@ -169,6 +174,7 @@ export default class AuthProvider extends Component {
               completeProfile: this.completeProfile,
               errorType: this.state.errorType,
               reportUser: this.reportUser,
+              getCurrentSession: this.getCurrentSession,
             }}>
             {children}
           </Provider>

@@ -18,12 +18,18 @@ class SearchPeople extends Component {
     loading: true,
     indexUser: 0,
     noUsers: false,
+    helper: true,
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
+
     this.getUsers();
     startDragControl(this.matchUser, this.getNext);
+
+    await this.props.getCurrentSession();
+
   }
+
 
   onChange = (e) => {
 
@@ -142,6 +148,7 @@ class SearchPeople extends Component {
     try {
 
       if (indexUser <= listOfUsers.length - 1) {
+
         await this.props.matchUser(listOfUsers[indexUser]._id);
       }
       this.getNext();
@@ -156,11 +163,23 @@ class SearchPeople extends Component {
   }
 
   onNoContactsAndMatchesUser = () => {
+
     const { contacts, pending } = this.props.user;
-    if (contacts.length === 0 && pending.length === 0) {
-      return <div>
-        <h3>Move left -> Next, Move right -> Add</h3>
-      </div>
+
+    if (this.state.helper) {
+      if (contacts.length === 0 && pending.length === 0) {
+        return <div className='search-first-time-box'>
+          <div>
+            <h5>Drag left<br></br>to see Next</h5>
+            <img src={process.env.PUBLIC_URL + '/images/drag-left.png'} alt='drag-left'></img>
+          </div>
+          <button className='link-button search-first-tiem-button' onClick={() => this.setState({ helper: false })}>Ok!</button>
+          <div>
+            <h5>Drag right<br></br>to send Match</h5>
+            <img src={process.env.PUBLIC_URL + '/images/drag-right.png'} alt='drag-right'></img>
+          </div>
+        </div>
+      }
     }
   }
 
@@ -168,7 +187,7 @@ class SearchPeople extends Component {
     const { location, personality, listOfUsers, loading, indexUser, noUsers } = this.state;
 
     const personalityMark = personality ? 'search-sort-marked' : '';
-    const locationMark = location ? 'search-sort-marked' : ''
+    const locationMark = location ? 'search-sort-marked' : '';
 
     return (
       <section>
@@ -192,6 +211,7 @@ class SearchPeople extends Component {
               </form>
             </div>
           </header>
+          {this.onNoContactsAndMatchesUser()}
           <article className='search-info-box'>
             {noUsers ? <h1 className="no-users">No Users Available</h1> :
               <div>
