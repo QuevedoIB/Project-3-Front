@@ -15,10 +15,31 @@ class Profile extends Component {
   state = {
     imageUrl: this.props.user.imageUrl,
     personalImage: this.props.user.personalImage,
+    showedImage: '',
     imageProfile: '',
     isUploading: false,
     progress: 0,
   };
+
+
+  componentDidMount(){
+    console.log('MOUNT');
+    console.log(this.props.user);
+    this.selectImage();
+  }
+
+  selectImage = async() =>{
+    const { imageUrl, personalImage } = this.state;
+    if(personalImage === '' || personalImage === undefined){
+      await this.setState({
+        showedImage: imageUrl
+      });
+    }else{
+      await this.setState({
+        showedImage: personalImage
+      });
+    }
+  }
 
   handleUploadStart = () => {
     console.log('start upload');
@@ -35,16 +56,17 @@ class Profile extends Component {
     console.log('upload success');
     this.setState({ imageProfile: filename, progress: 100, isUploading: false });
     try {
-      await firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ imageUrl: url }));
-      await this.props.changeImage(this.state.imageUrl);
+      await firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ personalImage: url }));
+      await this.props.changeImage(this.state.personalImage);
+      await this.selectImage();
     } catch (err) {
       console.log(err);
     }
   };
 
+
   checkUserData() {
     const { interests, location, personality, quote } = this.props.user;
-
 
     if (interests.length && location.coords.length && personality.length && quote) {
       return <div className='completed-profile-box'>
@@ -74,14 +96,14 @@ class Profile extends Component {
   render() {
     const changeButtonHidden = this.state.isUploading ? 'hidden-button-image' : '';
     const { username, quote } = this.props.user;
-    const { imageUrl, personalImage } = this.state;
-    let showedImage = imageUrl;
-    if(personalImage === '' || personalImage === undefined){
-      showedImage = imageUrl;
-    }else{
-      showedImage = personalImage;
-    }
-
+    // const { imageUrl, personalImage } = this.state;
+    // let showedImage = imageUrl;
+    // if(personalImage === '' || personalImage === undefined){
+    //   showedImage = imageUrl;
+    // }else{
+    //   showedImage = personalImage;
+    // }
+    console.log('SHOW IMAGE: ', this.state.showedImage, 'PERSONAL IMAGE: ', this.state.personalImage);
     return (
       <section className='profile-section'>
         <div>
@@ -102,7 +124,7 @@ class Profile extends Component {
                     onUploadSuccess={this.handleUploadSuccess}
                     onProgress={this.handleProgress} />
                 </label>
-                {this.state.isUploading ? <Spinner className="spinner-image" /> : <img src={showedImage} alt={username} />}
+                {this.state.isUploading ? <Spinner className="spinner-image" /> : <div className="image-holder"><img src={this.state.showedImage} alt={username} /></div>}
               </div>
               <h1>{username}</h1>
             </div>
