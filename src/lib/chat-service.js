@@ -44,6 +44,17 @@ class ChatService {
       .then(({ data }) => data);
   }
 
+  onTyping(chatId, userTypingId) {
+
+    return this.chat.post('/chat/on-typing', { chatId, userTypingId })
+      .then(({ data }) => data);
+  }
+
+  // onStopTyping(chatId) {
+  //   return this.chat.post('/chat/on-typing-stop', { chatId })
+  //     .then(({ data }) => data);
+  // }
+
   // getAllMessages(id){
   //   return this.chat.get(`/chat/${id}`)
   //     .then(response => response.data)

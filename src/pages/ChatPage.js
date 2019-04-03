@@ -19,12 +19,17 @@ class ChatPage extends Component {
     language: '',
     imagesStatus: false,
     imagesRequest: false,
+    typing: [],
+    userTyping: false,
+    otherUserTyping: false,
   }
 
   componentDidMount = async () => {
     await this.handleGetChat();
     await socketManager.initSocket(this.state.chatId);
+
     let socket = socketManager.getSocket();
+
     socket.on("NEW_MESSAGE", () => {
       this.handleGetChat();
     });
@@ -33,7 +38,116 @@ class ChatPage extends Component {
     socket.on("ENABLE-IMAGES", () => {
       this.handleGetChat();
     });
+
+
+    // socket.on("TYPING", async (data) => {
+    //   if (data.userTypingId === this.state.contact._id) {
+    //     await this.setState({
+    //       otherUserTyping: !this.state.otherUserTyping,
+    //     })
+    //   }
+    // });
   }
+
+
+  onChangeInput = async (input) => {
+
+    // const { userTyping, otherUserTyping } = this.state;
+
+    // const { _id } = this.props.user;
+
+    // let socket;
+
+
+    // if (input.length && !userTyping) {
+
+    //   this.setState({ userTyping: true })
+    //   chatService.onTyping(this.state.chatId, _id);
+    //   socketManager.getSocket()
+    //   // socket = socketManager.getSocket()
+
+    //   // socket.on("TYPING", async (data) => {
+
+    //   //   if (data.userTypingId === this.state.contact._id) {
+    //   //     await this.setState({
+    //   //       otherUserTyping: !otherUserTyping,
+    //   //     })
+    //   //   }
+    //   //   console.log(otherUserTyping, 'STAAAART')
+    //   // })
+    //   return;
+    // }
+
+    // if (!input.length && userTyping) {
+
+    //   this.setState({
+    //     userTyping: false,
+    //   })
+
+    //   chatService.onTyping(this.state.chatId, _id);
+    //   socketManager.getSocket()
+    //   // socket = socketManager.getSocket()
+    //   // socket.on("TYPING", async (data) => {
+    //   //   console.log('LEAVVE')
+    //   //   if (data.userTypingId === this.state.contact._id) {
+    //   //     await this.setState({
+    //   //       otherUserTyping: !otherUserTyping,
+    //   //     })
+    //   //   }
+
+    //   //   console.log(otherUserTyping)
+    //   // })
+    // }
+
+    // console.log(otherUserTyping)
+  }
+
+
+
+  //   console.log(this.state.typing, 'ENTRAAA111111111111111A', this.state.userTyping)
+  //     await this.setState({ typing: true })
+
+  // chatService.onTyping(this.state.chatId, true);
+  // socket = socketManager.getSocket()
+  // // let socket = socketManager.getSocket();
+  // socket.on("TYPING", (data) => {
+  //   console.log('DATA ', data);
+  //   if (!this.state.typing) {
+  //     this.setState({ userTyping: data.userTypingId })
+  //   }
+  // });
+  // console.log('AFTER CHAT SERVICE');
+
+  //}
+
+  // if (!input.length && this.state.typing) {
+  //   console.log(this.state.typing, 'ENTRAAAA', this.state.userTyping)
+  //   await this.setState({
+  //     typing: false,
+  //   })
+  //   chatService.onTyping(this.state.chatId, false)
+  //   socket = socketManager.getSocket();
+  //   //let socket = socketManager.getSocket();
+  //   socket.on("TYPING", (data) => {
+  //     this.setState({ userTyping: data.userTyping })
+  //   })
+
+  // }
+
+  // if (!input.length && this.state.typing) {
+  //   console.log(this.state.typing, 'ENTRAAAA', this.state.userTyping)
+  //   await this.setState({
+  //     typing: false,
+  //   })
+  //   socket = socketManager.getSocket();
+  //   //let socket = socketManager.getSocket();
+  //   socket.on("STOP_TYPING", (data) => {
+  //     this.setState({ userTyping: data.userTyping })
+  //   })
+
+  //   chatService.onStopTyping(this.state.chatId)
+  // }
+  //}
 
   handleLanguageSelect = (e) => {
     e.preventDefault();
@@ -42,7 +156,7 @@ class ChatPage extends Component {
       this.setState({
         language: e.target.value,
       })
-    }else{
+    } else {
       this.setState({
         language: '',
       })
@@ -62,7 +176,7 @@ class ChatPage extends Component {
   }
 
   handleSendMessage = async (message) => {
-    const { language } = this.state;
+    const { language, userTyping, otherUserTyping } = this.state;
 
     let chatData;
 
@@ -77,12 +191,24 @@ class ChatPage extends Component {
     await this.setState({
       message: '',
       chat: chatData,
+      userTyping,
     })
 
     let socket = socketManager.getSocket();
     socket.on("NEW_MESSAGE", () => {
       this.handleGetChat();
     });
+
+    // chatService.onTyping(this.state.chatId, this.props.user._id);
+
+    // socket.on("TYPING", (data) => {
+    //   console.log('LEAVVE')
+    //   if (data.userTypingId === this.state.contact._id) {
+    //     this.setState({
+    //       otherUserTyping: !otherUserTyping,
+    //     })
+    //   }
+    // })
   }
 
   onBack = () => {
@@ -145,9 +271,9 @@ class ChatPage extends Component {
     const { chatId, contact, imagesStatus } = this.state;
     let imageContact = contact.imageUrl;
 
-    if(!imagesStatus || contact.personalImage === '' || contact.personalImage === undefined ){
+    if (!imagesStatus || contact.personalImage === '' || contact.personalImage === undefined) {
       imageContact = contact.imageUrl;
-    }else{
+    } else {
       imageContact = contact.personalImage;
     }
 
@@ -168,8 +294,8 @@ class ChatPage extends Component {
             </select>
           </form>
           <div className='chat-page-header'>
-          <div className="image-holder" style={showImageStyle}></div>
-          {/* <img src={imageContact} alt={this.state.contact.username} /> */}
+            <div className="image-holder" style={showImageStyle}></div>
+            {/* <img src={imageContact} alt={this.state.contact.username} /> */}
             {/* {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />} */}
             <div className='chat-page-header-info'>
               <h1>{this.state.contact.username}</h1>
@@ -177,8 +303,9 @@ class ChatPage extends Component {
               {chatId && this.checkImagesRequestStatus()}
             </div>
           </div>
+          {this.state.otherUserTyping && <h1>Typing...</h1>}
         </div>
-        < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} contact={this.state.contact} />
+        < Chat handleSendMessage={this.handleSendMessage} chat={this.state.chat} contact={this.state.contact} typing={this.onChangeInput} />
         <Link to='/contacts' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
       </div >
     )

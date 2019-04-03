@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Messages from './Messages';
 import '../components-scss/chat.scss';
+import Dictaphone from './Dictaphone';
 
 class Chat extends Component {
 
@@ -10,8 +11,16 @@ class Chat extends Component {
     }
 
     handleChange = (event) => {
+
         const { name, value } = event.target;
         this.setState({ [name]: value });
+        this.props.typing(event.target.value)
+    }
+
+    onAudioMessage = (transcription) => {
+        this.setState({
+            message: transcription,
+        })
     }
 
     render() {
@@ -25,6 +34,7 @@ class Chat extends Component {
                         <input className="button message-button" type="submit" value="Send" />
                         <input autoComplete="off" className="input message-input" placeholder="Write a message" type="text" name="message" onChange={this.handleChange} value={this.state.message} />
                     </form>
+                    <Dictaphone onAudioMessage={this.onAudioMessage} handleSendMessage={this.props.handleSendMessage} />
                 </div>
             </>
         )
