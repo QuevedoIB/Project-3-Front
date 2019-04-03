@@ -2,31 +2,53 @@ ul {
   list-style-type: none;
 }
 
-.search-card-head {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 3vw;
-  height: 12vh;
 
-  h3 {
+.search-card-head {
+  // display: flex;
+  // justify-content: space-between;
+  margin: 0 3vw;
+
+  h2 {
     text-align: center;
+    margin: 2vh;
+    text-transform: none;
+  }
+
+  h5{
+    font-size: 18px;
   }
 
   p {
-    text-align: justify;
-    margin-right: 0;
-    width: 50%;
+    margin: 0;
+    margin-left: 2vw;
+    margin-top: 1vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-card-quote {
+    font-style: italic;
+    text-align: center;
+    font-family: Roboto Condensed, Arial, Helvetica, sans-serif;
+    margin: 2vh;
   }
 }
 
-.search-card-quote {
-  font-style: italic;
-  text-align: center;
-  width: 80%;
-}
 
-.search-interests-li {
-  margin: 0 3vw;
-  display: inline-block;
-  width: 20%;
+
+
+.search-interests-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top:  5vh;
+  li{
+    span{
+      background-image: linear-gradient(-90deg, #ff8080, #ff8585);
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: white;
+      margin: 1vw;
+    }
+  }
 }

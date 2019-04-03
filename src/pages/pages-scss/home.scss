@@ -16,6 +16,7 @@ $profile-3: 'https://firebasestorage.googleapis.com/v0/b/tinder-sorpresa-e6911.a
     margin-top: 0;
     margin-top: 30vh;
     margin-bottom: 10vh;
+    font-size: 24px;
   }
   .google-signup{
     display: flex;
@@ -38,6 +39,15 @@ $profile-3: 'https://firebasestorage.googleapis.com/v0/b/tinder-sorpresa-e6911.a
     opacity: 0;
     background-size: cover;
     animation: logo 30s infinite;
+  }
+
+  .bg-home{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: -2;
+    opacity: 0.6;
+    top: 10vh;
   }
 
 

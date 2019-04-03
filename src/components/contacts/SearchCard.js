@@ -17,7 +17,7 @@ class SearchCard extends Component {
     const coincidence = counter * 10;
 
     return (
-      <p>Personality coincidence: {coincidence}%</p>
+      <span>Personality coincidence: {coincidence}%</span>
     );
   }
 
@@ -27,13 +27,13 @@ class SearchCard extends Component {
     return (
       <div id='search-contact-info'>
         <div className='search-card-head'>
-          <div>{this.getPersonalityCoincidence()}</div>
           <h2>{username}</h2>
-          <p>{location}</p>
+          <h5 className='search-card-quote'>{quote}</h5>
+          <p><img src={process.env.PUBLIC_URL + '/images/brain.png'} alt="brain" width="20px" />{this.getPersonalityCoincidence()}</p>
+          <p><img src={process.env.PUBLIC_URL + '/images/location.png'} alt="location" width="20px" />{location}</p>
         </div>
-        <p className='search-card-quote'>"{quote}"</p>
-        <ul>
-          {interests.map((e, index) => <li className='search-interests-li' key={`${e}${index}`}>{e}</li>)}
+        <ul className="search-interests-list">
+          {interests.map((e, index) => <li className='search-interests-li' key={`${e}${index}`}><span>{e}</span></li>)}
         </ul>
       </div>
     )

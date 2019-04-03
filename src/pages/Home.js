@@ -22,13 +22,14 @@ class Home extends Component {
       <section className="page home full">
         {/* <Navbar data='data' /> */}
         <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-home.png'} alt='header' />
+        <img className="bg-home" src={process.env.PUBLIC_URL + '/images/bg-image-home.png'} alt='header' />
         <div className="logo"></div>
         <article>
           <div>
             <h1>Tinder Sorpresa</h1>
           </div>
           <div>
-            <h3>Find people like you</h3>
+            <h3>Find people compatible with you</h3>
           </div>
           <div>
             <Link to='/signup' className="link-button">Sign Up</Link>
