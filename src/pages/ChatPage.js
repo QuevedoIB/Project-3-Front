@@ -139,6 +139,13 @@ class ChatPage extends Component {
 
   render() {
     const { chatId, contact, imagesStatus } = this.state;
+    let imageContact = contact.imageUrl;
+    if(!imagesStatus || contact.personalImage === '' || contact.personalImage === undefined ){
+      imageContact = contact.imageUrl;
+    }else{
+      imageContact = contact.personalImage;
+    }
+
     return (
       <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
@@ -153,7 +160,8 @@ class ChatPage extends Component {
             </select>
           </form>
           <div className='chat-page-header'>
-            {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />}
+          <img src={imageContact} alt={this.state.contact.username} />
+            {/* {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />} */}
             <div className='chat-page-header-info'>
               <h1>{this.state.contact.username}</h1>
               <button className='chat-invite-image-button' onClick={() => this.onEnableImagesClick(chatId, contact._id)}>{imagesStatus ? "Don't Share Image" : 'Share Image'}</button>

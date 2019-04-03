@@ -14,6 +14,7 @@ class Profile extends Component {
 
   state = {
     imageUrl: this.props.user.imageUrl,
+    personalImage: this.props.user.personalImage,
     imageProfile: '',
     isUploading: false,
     progress: 0,
@@ -73,8 +74,14 @@ class Profile extends Component {
   render() {
     const changeButtonHidden = this.state.isUploading ? 'hidden-button-image' : '';
     const { username, quote } = this.props.user;
-    const { imageUrl } = this.state;
-    
+    const { imageUrl, personalImage } = this.state;
+    let showedImage = imageUrl;
+    if(personalImage === '' || personalImage === undefined){
+      showedImage = imageUrl;
+    }else{
+      showedImage = personalImage;
+    }
+
     return (
       <section className='profile-section'>
         <div>
@@ -95,7 +102,7 @@ class Profile extends Component {
                     onUploadSuccess={this.handleUploadSuccess}
                     onProgress={this.handleProgress} />
                 </label>
-                {this.state.isUploading ? <Spinner className="spinner-image" /> : <img src={imageUrl} alt={username} />}
+                {this.state.isUploading ? <Spinner className="spinner-image" /> : <img src={showedImage} alt={username} />}
               </div>
               <h1>{username}</h1>
             </div>
