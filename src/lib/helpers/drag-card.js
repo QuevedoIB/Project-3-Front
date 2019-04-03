@@ -3,10 +3,7 @@ export function startDragControl(callbackAdd, callbackNext) {
   const itemToDrag = document.querySelector('article.search-info-box');
 
   itemToDrag.style.height = '30vh';
-
-  itemToDrag.addEventListener('touchstart', e => {
-
-  })
+  itemToDrag.style.width = '80vw';
 
 
   itemToDrag.addEventListener('touchmove', e => {
@@ -14,38 +11,50 @@ export function startDragControl(callbackAdd, callbackNext) {
 
     let touchLocation = e.targetTouches[0];
 
-    itemToDrag.style.left = touchLocation.pageX + itemToDrag.style.width / 2 + 'px';
 
+    itemToDrag.style.left = touchLocation.pageX - parseInt(itemToDrag.style.width) * 2 + 'px';
   })
 
   itemToDrag.addEventListener('touchend', e => {
 
+    let counterPlus = parseInt(itemToDrag.style.left);
+    let counterMinus = parseInt(itemToDrag.style.left);
+
     if (parseInt(itemToDrag.style.left) > 357) {
 
 
-      while (parseInt(itemToDrag.style.left) < 410) {
-        itemToDrag.style.left = (parseInt(itemToDrag.style.left) + 1) + 'px';
+      // while (parseInt(itemToDrag.style.left) < 410) {
+      //   itemToDrag.style.left = (parseInt(itemToDrag.style.left) + 1) + 'px';
 
-      }
+      // }
 
-      itemToDrag.style.left = -340 + 'px';
-
-      return callbackAdd(true);
+      let intr = setInterval(function () {
+        itemToDrag.style.left = counterMinus + 'px';
+        counterMinus -= 5;
+        if (parseInt(itemToDrag.style.left) < 410) {
+          clearInterval(intr);
+          itemToDrag.style.left = -340 + 'px';
+          return callbackAdd(true);
+        }
+      }, 1)
     }
 
-    if (parseInt(itemToDrag.style.left) < 58) {
+    if (parseInt(itemToDrag.style.left) < -100) {
 
-      while (parseInt(itemToDrag.style.left) > -340) {
+      // while (parseInt(itemToDrag.style.left) > -340) {
+      //   itemToDrag.style.left = (parseInt(itemToDrag.style.left) - 1) + 'px';
+      // }
 
 
-        itemToDrag.style.left = (parseInt(itemToDrag.style.left) - 1) + 'px';
-
-
-      }
-
-      itemToDrag.style.left = 410 + 'px';
-
-      return callbackNext(true);
+      let intr = setInterval(function () {
+        itemToDrag.style.left = counterPlus + 'px';
+        counterPlus += 5;
+        if (parseInt(itemToDrag.style.left) > -340) {
+          clearInterval(intr);
+          itemToDrag.style.left = 410 + 'px';
+          return callbackNext(true);
+        }
+      }, 1)
     }
   })
 
@@ -105,5 +114,16 @@ export function getBoxBack() {
       }, 500)
     }
   })
+
+*/
+
+/*
+
+
+    if (parseInt(itemToDrag.style.left) > 357) {
+
+
+      while (parseInt(itemToDrag.style.left) - (parseInt(itemToDrag.style.width) / 2) < 410) {
+        itemToDrag.style.left = (parseInt(itemToDrag.style.left) - (parseInt(itemToDrag.style.width) / 2) + 1) + 'px';
 
 */
