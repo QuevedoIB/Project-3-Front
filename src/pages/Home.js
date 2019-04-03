@@ -29,7 +29,7 @@ class Home extends Component {
             <h1>Tinder Sorpresa</h1>
           </div>
           <div>
-            <h3>Find people like you</h3>
+            <h3>Find people compatible with you</h3>
           </div>
           <div>
             <Link to='/signup' className="link-button">Sign Up</Link>
