@@ -144,12 +144,16 @@ class ChatPage extends Component {
   render() {
     const { chatId, contact, imagesStatus } = this.state;
     let imageContact = contact.imageUrl;
+
     if(!imagesStatus || contact.personalImage === '' || contact.personalImage === undefined ){
       imageContact = contact.imageUrl;
     }else{
       imageContact = contact.personalImage;
     }
 
+    const showImageStyle = {
+      backgroundImage: `url(${imageContact})`
+    }
     return (
       <div className="chat-page">
         <img className='bg-image' src={process.env.PUBLIC_URL + '/images/bg-chat.png'} alt='profile'></img>
@@ -164,7 +168,8 @@ class ChatPage extends Component {
             </select>
           </form>
           <div className='chat-page-header'>
-          <img src={imageContact} alt={this.state.contact.username} />
+          <div className="image-holder" style={showImageStyle}></div>
+          {/* <img src={imageContact} alt={this.state.contact.username} /> */}
             {/* {imagesStatus && <img src={this.state.contact.imageUrl} alt={this.state.contact.username} />} */}
             <div className='chat-page-header-info'>
               <h1>{this.state.contact.username}</h1>

@@ -9,6 +9,8 @@ import FileUploader from 'react-firebase-file-uploader';
 import firebase from 'firebase';
 
 
+
+
 class Profile extends Component {
 
 
@@ -20,7 +22,6 @@ class Profile extends Component {
     isUploading: false,
     progress: 0,
   };
-
 
   componentDidMount(){
     console.log('MOUNT');
@@ -53,11 +54,11 @@ class Profile extends Component {
     console.error(error);
   }
   handleUploadSuccess = async(filename) => {
-    console.log('upload success');
     this.setState({ imageProfile: filename, progress: 100, isUploading: false });
     try {
       await firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({ personalImage: url }));
       await this.props.changeImage(this.state.personalImage);
+      this.props.getCurrentSession();
       await this.selectImage();
     } catch (err) {
       console.log(err);
@@ -96,14 +97,9 @@ class Profile extends Component {
   render() {
     const changeButtonHidden = this.state.isUploading ? 'hidden-button-image' : '';
     const { username, quote } = this.props.user;
-    // const { imageUrl, personalImage } = this.state;
-    // let showedImage = imageUrl;
-    // if(personalImage === '' || personalImage === undefined){
-    //   showedImage = imageUrl;
-    // }else{
-    //   showedImage = personalImage;
-    // }
-    console.log('SHOW IMAGE: ', this.state.showedImage, 'PERSONAL IMAGE: ', this.state.personalImage);
+    const showImageStyle = {
+      backgroundImage: `url(${this.state.showedImage})`
+    }
     return (
       <section className='profile-section'>
         <div>
@@ -124,7 +120,7 @@ class Profile extends Component {
                     onUploadSuccess={this.handleUploadSuccess}
                     onProgress={this.handleProgress} />
                 </label>
-                {this.state.isUploading ? <Spinner className="spinner-image" /> : <div className="image-holder"><img src={this.state.showedImage} alt={username} /></div>}
+                {this.state.isUploading ? <Spinner className="spinner-image" /> : <div className="image-holder" style={showImageStyle}></div>}
               </div>
               <h1>{username}</h1>
             </div>

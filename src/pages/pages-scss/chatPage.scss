@@ -29,8 +29,11 @@
 .contact-header{
   display: flex;
   height: 20vh;
-  img{
+  .image-holder{
     height: 15vh;
+    width: 15vh;
+    background-size:cover;
+    background-position: center;
     align-self: center;
     margin: 0 5vw;
     border-radius: 100px;
