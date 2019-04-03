@@ -91,6 +91,7 @@ class SearchPeople extends Component {
       })
     } else {
       this.setState({
+        indexUser: indexUser + 1,
         noUsers: true
       })
     }
@@ -139,8 +140,12 @@ class SearchPeople extends Component {
 
     const { listOfUsers, indexUser } = this.state;
     try {
-      await this.props.matchUser(listOfUsers[indexUser]._id);
+
+      if (indexUser <= listOfUsers.length - 1) {
+        await this.props.matchUser(listOfUsers[indexUser]._id);
+      }
       this.getNext();
+
     } catch (error) {
       console.log(error);
     }
@@ -150,6 +155,14 @@ class SearchPeople extends Component {
     }
   }
 
+  onNoContactsAndMatchesUser = () => {
+    const { contacts, pending } = this.props.user;
+    if (contacts.length === 0 && pending.length === 0) {
+      return <div>
+        <h3>Move left -> Next, Move right -> Add</h3>
+      </div>
+    }
+  }
 
   render() {
     const { location, personality, listOfUsers, loading, indexUser, noUsers } = this.state;
