@@ -67,6 +67,7 @@ class Contacts extends Component {
     try {
 
       await this.props.deleteContact(this.props.user.id, deletedContactId);
+      this.props.getCurrentSession();
 
       this.setState({
         contacts: this.getContacts(),
@@ -80,6 +81,7 @@ class Contacts extends Component {
   acceptMatch = (_id) => {
     this.props.acceptMatch(_id)
     this.getMatches();
+    this.props.getCurrentSession();
   }
 
 
@@ -228,7 +230,7 @@ class Contacts extends Component {
           {this.renderList()}
         </ul>
         <Navbar />
-        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px"/></Link>
+        <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
       </>
     )
   }

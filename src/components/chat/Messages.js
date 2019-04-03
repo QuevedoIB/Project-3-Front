@@ -2,6 +2,7 @@ import { Component } from "react";
 import React from "react";
 import './Messages.scss';
 import { withAuth } from '../../providers/AuthProvider';
+import Emoji from 'react-emoji-render';
 
 const meStyle = {
   background: '#d6d6d6',
@@ -16,13 +17,13 @@ const contactStyle = {
 }
 
 const leftStyle = {
-  display:'flex',
-  justifyContent:'flex-start'
+  display: 'flex',
+  justifyContent: 'flex-start'
 }
 
 const rightStyle = {
-  display:'flex',
-  justifyContent:'flex-end'
+  display: 'flex',
+  justifyContent: 'flex-end'
 }
 
 class Messages extends Component {
@@ -49,7 +50,7 @@ class Messages extends Component {
     return (
       <li style={messagePosition} key={message._id}>
         <div className="message-content" style={messageStyle}>
-          <div className="text">{message.text}</div>
+          <div className="text"><Emoji text={message.text} /></div>
           <p>{message.date}</p>
         </div>
       </li>
