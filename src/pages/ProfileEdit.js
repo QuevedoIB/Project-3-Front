@@ -8,6 +8,7 @@ import { passwordStrengthCheck } from '.././lib/helpers/password-strength';
 import Navbar from '../components/navbar/Navbar';
 import { mainMap, getLocationValue } from '.././lib/autocomplete-location';
 import { getCoordsFromPlace } from '../lib/filter-by-location';
+import { checkIfPasswordOkay } from '../lib/helpers/password-strength';
 
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
@@ -51,34 +52,39 @@ class ProfileEdit extends Component {
 
     const { locationText } = this.state;
 
-    if (locationText) {
-      await this.getLocation(locationText)
-    }
+    if (checkIfPasswordOkay()) {
 
-    const { username, password, quote, interests, locationCoords, currentPassword } = this.state;
-
-    const newData = {
-      username,
-      password,
-      quote,
-      interests,
-      locationCoords,
-      locationText,
-      currentPassword
-    }
-
-    try {
-      await this.props.editUser(newData);
-
-      if (this.props.isError) {
-        this.props.onErrorSolved();
+      if (locationText) {
+        await this.getLocation(locationText)
       }
 
-      this.props.history.push('/profile')
-    } catch (err) {
-      this.setState({
-        error: getErrorMessage(err),
-      })
+      const { username, password, quote, interests, locationCoords, currentPassword } = this.state;
+
+      const newData = {
+        username,
+        password,
+        quote,
+        interests,
+        locationCoords,
+        locationText,
+        currentPassword
+      }
+
+      try {
+        await this.props.editUser(newData);
+
+        if (this.props.isError) {
+          this.props.onErrorSolved();
+        }
+
+        this.props.history.push('/profile')
+      } catch (err) {
+        this.setState({
+          error: getErrorMessage(err),
+        })
+      }
+    } else {
+      this.setState({ error: 'Password Strength too low' })
     }
   }
 
