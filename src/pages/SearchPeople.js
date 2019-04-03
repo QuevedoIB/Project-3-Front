@@ -190,7 +190,8 @@ class SearchPeople extends Component {
     const locationMark = location ? 'search-sort-marked' : '';
 
     return (
-      <section>
+
+      <div className="search-section">
         <div>
           <h1 className='search-title'>Search Friends</h1>
           <header>
@@ -216,15 +217,16 @@ class SearchPeople extends Component {
             {noUsers ? <h1 className="no-users">No Users Available</h1> :
               <div>
                 {loading ? <Spinner /> : <SearchCard userCard={listOfUsers[indexUser]} />}
-                <button onClick={this.getNext}>Next</button>
-                <button onClick={this.matchUser}>Add</button>
+                {/* <button onClick={this.getNext}>Next</button>
+                <button onClick={this.matchUser}>Add</button> */}
               </div>
             }
           </article>
           <Navbar />
           <Link to='/profile' className="back-button"><img src={process.env.PUBLIC_URL + '/images/back.png'} alt="back" width="45px" /></Link>
         </div>
-      </section>
+      </div>
+
     )
   }
 }
