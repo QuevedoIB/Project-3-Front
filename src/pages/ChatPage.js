@@ -179,13 +179,28 @@ class ChatPage extends Component {
     const { language, userTyping, otherUserTyping } = this.state;
 
     let chatData;
+    let time = new Date();
+    const dd = String(time.getDate()).padStart(2, '0');
+    const mm = String(time.getMonth() + 1).padStart(2, '0');
+    let hours = String(time.getHours());
+    let minutes = String(time.getMinutes());
+
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    } else if (hours < 10) {
+      hours = `0${hours}`;
+    }
+
+    time = `${hours}:${minutes} - ${dd}/${mm}`;
+
+    console.log(time);
 
     if (language) {
       const messageTranslated = await translateMessage(message, language);
 
-      chatData = await chatService.sendMessage(this.state.chatId, messageTranslated);
+      chatData = await chatService.sendMessage(this.state.chatId, messageTranslated, time);
     } else {
-      chatData = await chatService.sendMessage(this.state.chatId, message);
+      chatData = await chatService.sendMessage(this.state.chatId, message, time);
     }
 
     await this.setState({

@@ -19,8 +19,8 @@ class ChatService {
       .then(response => response.data)
   }
 
-  sendMessage(id, message) {
-    return this.chat.post('/chat/send-message', { id, message })
+  sendMessage(id, message, date) {
+    return this.chat.post('/chat/send-message', { id, message, date })
       .then(({ data }) => data);
   }
 

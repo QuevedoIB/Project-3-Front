@@ -59,9 +59,9 @@ export function checkIfPasswordOkay() {
 
   console.log(meter.className)
 
-  if (meter.className === 'good-meter' || meter.className === 'strong-meter' || meter.className === 'weak-meter') {
-    return true;
+  if (meter.className === 'worst-meter' || meter.className === 'hide-meter') {
+    return false;
   }
 
-  return false;
+  return true;
 }
