@@ -21,13 +21,18 @@ class Home extends Component {
     return (
       <section className="page home full">
         {/* <Navbar data='data' /> */}
-        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-home.png'} alt='header' />
+        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-home-2.png'} alt='header' />
         {/* <img className="bg-home" src={process.env.PUBLIC_URL + '/images/bg-image-home.png'} alt='header' /> */}
-        <div className="logo"></div>
+
         <article>
           <div>
             <h1>Tinder Sorpresa</h1>
           </div>
+        <div className="logo-container">
+          <div className="logo-background">
+            <div className="logo"></div>
+          </div>
+        </div>
           <div>
             <h3>Find people compatible with you</h3>
           </div>

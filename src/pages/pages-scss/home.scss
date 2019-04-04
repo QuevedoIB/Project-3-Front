@@ -10,11 +10,11 @@ $profile-3: 'https://firebasestorage.googleapis.com/v0/b/tinder-sorpresa-e6911.a
     font-size: 48px;
     color: white;
     margin-top: 5vh;
+    margin-bottom: 2vh;
   }
   h3{
     color: #6d5454;
-    margin-top: 0;
-    margin-top: 30vh;
+    margin-top: 2vh;
     margin-bottom: 10vh;
     font-size: 24px;
   }
@@ -30,15 +30,34 @@ $profile-3: 'https://firebasestorage.googleapis.com/v0/b/tinder-sorpresa-e6911.a
     }
   }
 
+  .logo-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .logo-background{
+    
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    height: 110px;
+    width: 110px;
+    background-color: white;
+    border-radius: 100px;
+    margin: 0;
+  }
+
   .logo{
-    position: absolute;
-    top: 11vh;
-    left: 36vw; 
-    height: 26vw;
-    width: 26vw;
+    margin: 0;
+    height: 95px;
+    width: 95px;
     opacity: 0;
     background-size: cover;
+    background-position: center;
     animation: logo 30s infinite;
+    z-index: 2;
   }
 
   .bg-home{
