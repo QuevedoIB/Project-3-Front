@@ -60,8 +60,6 @@ class ChatPage extends Component {
     this.props.getCurrentSession();
     let socket = socketManager.getSocket();
     socket.disconnect();
-    console.log('DISCONECT', this.state.chatId);
-
   }
 
   onChangeInput = async (input) => {
@@ -165,7 +163,7 @@ class ChatPage extends Component {
 
   handleLanguageSelect = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
+
     if (e.target.value !== "none") {
       this.setState({
         language: e.target.value,
@@ -225,17 +223,15 @@ class ChatPage extends Component {
       this.handleGetChat();
     });
 
-
-    await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
-    this.props.getCurrentSession();
-
-    console.log('NEW MESSAGE', this.state.newMessage);
     await this.setState({
       message: '',
       chat: chatData,
       userTyping,
       newMessage: true,
     })
+    await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
+    this.props.getCurrentSession();
+
 
     // chatService.onTyping(this.state.chatId, this.props.user._id);
 

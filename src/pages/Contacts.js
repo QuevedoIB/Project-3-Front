@@ -167,19 +167,19 @@ class Contacts extends Component {
     if (filteredContacts.length > 0) {
       return filteredContacts.map(contact => {
         let notification;
-        contact.readMessages.forEach(chat => {
-          this.props.user.readMessages.forEach(myChat => {
-            if (chat.chatId === myChat.chatId) {
-              console.log('CHAT FOUND');
-              console.log('CHAT CONTACT: ', chat.numberMessages, 'CHAT ME:', myChat.numberMessages);
-              if (chat.numberMessages > myChat.numberMessages) {
-                notification = true;
-              } else {
-                notification = false;
+        if (contact.readMessages) {
+          contact.readMessages.forEach(chat => {
+            this.props.user.readMessages.forEach(myChat => {
+              if (chat.chatId === myChat.chatId) {
+                if (chat.numberMessages > myChat.numberMessages) {
+                  notification = true;
+                } else {
+                  notification = false;
+                }
               }
-            }
+            })
           })
-        })
+        }
         return <li key={contact._id}>
           <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} updateContacts={this.onChangeContacts} notification={notification} />
         </li>
