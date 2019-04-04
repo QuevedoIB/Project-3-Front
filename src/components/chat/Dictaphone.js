@@ -33,7 +33,6 @@ class Dictaphone extends Component {
   handleClick = () => {
     const { recording } = this.state;
 
-    console.log(this.props.transcript, 'HOOOLA')
     if (recording) {
       this.setState({
         recording: false,

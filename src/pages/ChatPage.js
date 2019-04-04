@@ -304,8 +304,10 @@ class ChatPage extends Component {
   }
 
   render() {
+
     const { chatId, contact, imagesStatus } = this.state;
     let imageContact = contact.imageUrl;
+    console.log('HEY', this.state.chat.length, contact.readMessages, this.props.user.readMessages);
 
     if (!imagesStatus || contact.personalImage === '' || contact.personalImage === undefined) {
       imageContact = contact.imageUrl;

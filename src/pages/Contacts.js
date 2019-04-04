@@ -12,6 +12,7 @@ class Contacts extends Component {
   state = {
     contacts: [],
     matches: [],
+    readMessages: [],
     text: '',
     // loadingMatches: true,
     // loadingContacts: true,
@@ -31,6 +32,7 @@ class Contacts extends Component {
 
     this.getContacts();
     this.getMatches();
+    this.getReadMessages();
   }
 
   onChangeContacts = (deletedId) => {
@@ -115,6 +117,20 @@ class Contacts extends Component {
     }
   }
 
+  getReadMessages = async () => {
+    try {
+      const readMessages = await this.props.getReadMessages();
+
+      if (readMessages.length > 0) {
+        this.setState({
+          readMessages,
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   renderList = () => {
     const matches = this.renderListMatches();
     const contacts = this.renderListContacts();
@@ -164,13 +180,19 @@ class Contacts extends Component {
 
     const { contacts, text } = this.state;
     const filteredContacts = contacts.filter(contact => contact.username.includes(text));
+
     if (filteredContacts.length > 0) {
       const notificationsContacts = filteredContacts.map(contact => {
         contact.notification = false;
+        console.log('CONTACT MESSAGES', contact.readMessages, 'USERMESSAGES', this.props.user.readMessages);
         if (contact.readMessages) {
+          console.log('1');
           contact.readMessages.forEach(chat => {
-            this.props.user.readMessages.forEach(myChat => {
+            console.log('2');
+            this.state.readMessages.forEach(myChat => {
+              console.log('3');
               if (chat.chatId === myChat.chatId) {
+                console.log('4');
                 if (chat.numberMessages > myChat.numberMessages) {
                   contact.notification = true;
                 }
@@ -239,6 +261,8 @@ class Contacts extends Component {
   render() {
 
     const { text, matches } = this.state;
+
+    console.log('READ MESSAGES:', this.state.readMessages);
 
     return (
       <>

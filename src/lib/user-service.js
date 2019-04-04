@@ -22,9 +22,12 @@ class UserService {
     return this.users.get(`/profile/matches`)
       .then(response => response.data)
   }
+  getReadMessages() {
+    return this.users.get(`/profile/read-messages`)
+      .then(response => response.data)
+  }
 
   deleteContact(userId, contactId) {
-
     return this.users.post('/profile/contact/delete', { userId, contactId })
       .then(({ data }) => data);
   }
