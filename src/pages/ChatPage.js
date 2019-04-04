@@ -60,7 +60,7 @@ class ChatPage extends Component {
     this.props.getCurrentSession();
     let socket = socketManager.getSocket();
     socket.disconnect();
-    console.log('DISCONECT', this.state.chatId);
+    console.log('DISCONECT', this.state.chatId, this.state.chat.length);
 
   }
 
@@ -227,10 +227,8 @@ class ChatPage extends Component {
       this.handleGetChat();
     });
 
-
-    await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
-    this.props.getCurrentSession();
-  
+    
+    
     console.log('NEW MESSAGE', this.state.newMessage);
     await this.setState({
       message: '',
@@ -238,6 +236,10 @@ class ChatPage extends Component {
       userTyping,
       newMessage: true,
     })
+    await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
+    this.props.getCurrentSession();
+    
+    console.log('LENGTH CHAT', this.state.chat.length);
 
     // chatService.onTyping(this.state.chatId, this.props.user._id);
 
