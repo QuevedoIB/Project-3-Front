@@ -36,7 +36,6 @@ class ContactProfile extends Component {
     return !isLoading ? <Spinner /> : <div className="contact-profile">
       <div className="contact-header">
         <Report clickAction={() => { this.props.reportUser(_id); this.props.history.push('/profile') }} username={username} />
-        {/* <button onClick={() => { this.props.reportUser(_id); this.props.history.push('/profile') }}>Report</button> */}
         <img src={imageUrl} alt={imageUrl} />
         <h1>{username}</h1>
       </div>

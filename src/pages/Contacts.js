@@ -13,8 +13,6 @@ class Contacts extends Component {
     contacts: [],
     matches: [],
     text: '',
-    // loadingMatches: true,
-    // loadingContacts: true,
     showContacts: true,
   }
 
@@ -62,8 +60,6 @@ class Contacts extends Component {
 
   handleDelete = async (deletedContactId) => {
 
-    //const newContacts = this.state.contacts.filter(contact => contact.id !== deletedContactId);
-
     try {
 
       await this.props.deleteContact(this.props.user.id, deletedContactId);
@@ -89,10 +85,10 @@ class Contacts extends Component {
     try {
       const contacts = await this.props.getContacts();
 
+
       if (contacts.length > 0) {
         this.setState({
           contacts,
-          //loadingContacts: false
         })
       }
     } catch (err) {
@@ -108,7 +104,6 @@ class Contacts extends Component {
       if (matches.length > 0) {
         this.setState({
           matches,
-          //loadingMatches: false
         })
       }
 
@@ -141,7 +136,6 @@ class Contacts extends Component {
 
 
   renderListMatches = () => {
-    //if (!this.state.loadingMatches) {
     const { matches, text } = this.state;
     const filteredMatches = matches.filter(match => match.username.includes(text));
 
@@ -159,28 +153,21 @@ class Contacts extends Component {
     } else {
       return <></>
     }
-
-    //}
   }
-  //cambiar on delete
+
   renderListContacts = () => {
-    //if (!this.state.loadingContacts) {
 
     const { contacts, text } = this.state;
     const filteredContacts = contacts.filter(contact => contact.username.includes(text));
+
     if (filteredContacts.length > 0) {
       const notificationsContacts = filteredContacts.map(contact => {
-        console.log(contact.readMessages, this.props.user.readMessages)
         contact.notification = false;
         if (contact.readMessages) {
           contact.readMessages.forEach(chat => {
-
-            this.props.user.readMessages.forEach(myChat => {
-              console.log(chat.chatId, 'contact', myChat.chatId === contact.username)
-           
-              if (chat.chatId === myChat.chatId) {
-                //console.log(myChat.numberMessages,chat.numberMessages, contact.username)
-                if (chat.numberMessages > myChat.numberMessages) {
+            this.props.user.readMessages.forEach(userChatId => {
+              if (chat.chatId === userChatId.chatId) {
+                if (chat.numberMessages > userChatId.numberMessages) {
                   contact.notification = true;
                 }
               }
@@ -205,12 +192,6 @@ class Contacts extends Component {
     } else {
       return <></>
     }
-
-    /*
-    return <li key={contact._id}>
-          <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} updateContacts={this.onChangeContacts} notification={notification} />
-        </li>
-    */
   }
 
   showMatches = (e) => {

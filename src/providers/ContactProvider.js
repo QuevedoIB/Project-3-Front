@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import userService from '../lib/user-service';
 
-export const ContactContext = React.createContext(
-  // authStore // default value
-);
+export const ContactContext = React.createContext();
 
 const { Provider, Consumer } = ContactContext;
 
@@ -14,8 +12,6 @@ export const withContacts = (Comp) => {
         <Consumer>
           {(contactStore) => {
             return <Comp
-              // isLogged={contactStore.isLogged}
-              // user={contactStore.user}
               getUsers={contactStore.getUsers}
               matchUser={contactStore.matchUser}
               getContacts={contactStore.getContacts}
@@ -33,29 +29,7 @@ export const withContacts = (Comp) => {
 }
 
 export default class ContactProvider extends Component {
-  // state = {
-  //   isLogged: false,
-  //   user: {},
-  //   status: 'loading'
-  // }
 
-  // componentDidMount() {
-  //   authService.me()
-  //     .then((user) => {
-  //       this.setState({
-  //         isLogged: true,
-  //         user,
-  //         status: 'loaded'
-  //       })
-  //     })
-  //     .catch((error) => {
-  //       this.setState({
-  //         isLogged: false,
-  //         user: {},
-  //         status: 'loaded'
-  //       });
-  //     })
-  // }
 
   getUsers = () => {
     return userService.getUsers()
@@ -107,12 +81,8 @@ export default class ContactProvider extends Component {
   }
 
   render() {
-    // const { isLogged, user, status } = this.state;
     const { children } = this.props;
-    // switch (status) {
-    //   case 'loading':
-    //     return <div>Loading</div>
-    //   default:
+
     return (
       <Provider value={
         {

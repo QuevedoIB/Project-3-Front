@@ -3,8 +3,6 @@ import axios from 'axios';
 class AuthService {
   constructor() {
     this.auth = axios.create({
-      //baseURL: 'http://localhost:5000',
-      // withCredentials es para propagar las cookies
       baseURL: process.env.REACT_APP_BACKEND_URL,
       withCredentials: true, // only beacause we want to share cookies with the backend server otherwise set it to false
       // headers: {
@@ -57,7 +55,7 @@ class AuthService {
   }
 
   changeImage(image) {
-    return this.auth.post('/profile/change-image', {image})
+    return this.auth.post('/profile/change-image', { image })
       .then(response => {
         return response.data
       })

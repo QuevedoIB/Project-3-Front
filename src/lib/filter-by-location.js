@@ -2,8 +2,6 @@ import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from 'mapbox-gl-geocoder';
 import fetch from 'node-fetch';
 
-//añadir key al .env?¿ falla el access token porque se pierde al pasar a js
-
 export const getSortedByDistanceArray = (usersArray, userLocation) => {
 
   let copyArray = usersArray.slice();
@@ -14,8 +12,6 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
 
   mapboxgl.accessToken = token;
   MapboxGeocoder.accessToken = token;
-
-  //añadir helper auto coger coordenadas al registrarse si no hay nada
 
   mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbm1hcHMiLCJhIjoiY2pzeDNkZHo0MGU2ZjQ1bzV3ZGExNXRmMCJ9.Yc4_1JYlXjBEZ-mXzuETgA';
 
@@ -86,21 +82,6 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
   return copyArray;
 }
 
-// export function getCoordsFromPlace(place) {
-//   let coordinates;
-//   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?access_token=pk.eyJ1IjoiaXZhbm1hcHMiLCJhIjoiY2p0dXFoenR2MDBkYTQ1cDhtcXNsbXZmdyJ9.xUz2uqz5N5ydjWTl-p4qCQ`)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (myJson) {
-//       if (myJson.features[0]) {
-//         coordinates = myJson.features[0].center;
-//       }
-//     });
-//   return coordinates;
-// }
-
-
 export async function getCoordsFromPlace(place) {
   let coordinates;
   const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?access_token=pk.eyJ1IjoiaXZhbm1hcHMiLCJhIjoiY2p0dXFoenR2MDBkYTQ1cDhtcXNsbXZmdyJ9.xUz2uqz5N5ydjWTl-p4qCQ`)
@@ -108,6 +89,6 @@ export async function getCoordsFromPlace(place) {
   if (jsonResponse.features[0]) {
     coordinates = jsonResponse.features[0].center;
   }
-  
+
   return coordinates;
 }

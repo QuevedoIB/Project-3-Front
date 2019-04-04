@@ -4,10 +4,6 @@ export function sortArrayByDistance(arrayUsers, userCoords) {
   const userLat = userCoords[0];
   const userLon = userCoords[1];
 
-  // Number.prototype.toRad = function () {
-  //   return this * Math.PI / 180;
-  // }
-
   const toRad = (number) => number * Math.PI / 180;
 
   copyArray.sort((a, b) => {

@@ -20,9 +20,7 @@ class Home extends Component {
   render() {
     return (
       <section className="page home full">
-        {/* <Navbar data='data' /> */}
         <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-home.png'} alt='header' />
-        {/* <img className="bg-home" src={process.env.PUBLIC_URL + '/images/bg-image-home.png'} alt='header' /> */}
         <div className="logo"></div>
         <article>
           <div>

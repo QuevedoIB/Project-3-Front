@@ -7,23 +7,11 @@ export default class Question extends Component {
     class: '',
   }
 
-  // getDerivedStateFromProps() {
-  //   this.setState({
-  //     class: 'question-from-right',
-  //   })
-  // }
-
   componentDidMount() {
     this.setState({
       class: '',
     })
   }
-
-  // componentWillUnmount = () => {
-  //   this.setState({
-  //     class: 'question-to-left',
-  //   })
-  // }
 
   render() {
     const { imageUrl, me, notMe } = this.props.question;

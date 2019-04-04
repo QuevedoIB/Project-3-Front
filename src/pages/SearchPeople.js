@@ -67,9 +67,9 @@ class SearchPeople extends Component {
         noUsers: false
       })
     } else if (this.state.location) {
-      
+
       const sortedUsers = sortArrayByDistance(resultUsers, this.props.user.location.coords);
-      
+
       return this.setState({
         listOfUsers: sortedUsers,
         loading: false,
@@ -217,8 +217,6 @@ class SearchPeople extends Component {
             {noUsers ? <h1 className="no-users">No Users Available</h1> :
               <div>
                 {loading ? <Spinner /> : <SearchCard userCard={listOfUsers[indexUser]} />}
-                {/* <button onClick={this.getNext}>Next</button>
-                <button onClick={this.matchUser}>Add</button> */}
               </div>
             }
           </article>
@@ -232,27 +230,3 @@ class SearchPeople extends Component {
 }
 
 export default withAuth(withContacts(SearchPeople));
-
-
-
-// const me = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-
-// const array = [{
-//   personality: ['a', 1, 2, 3, 4, 5, 6, 7, 8, 'h'],
-// },
-// {
-//   personality: ['a', 1, 'j', 3, 4, 5, 'f', 7, 8, 'h']
-// }];
-
-
-// array.forEach(person => {
-//   let counter = 0;
-//   person.personality.forEach((p, index) => {
-//     if (me.includes(p)) {
-//       counter++;
-//     }
-//   })
-//   person.counter = counter;
-// })
-
-// array.sort((a, b) => b.counter - a.counter);
