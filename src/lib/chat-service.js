@@ -24,6 +24,11 @@ class ChatService {
       .then(({ data }) => data);
   }
 
+  updateNumberMessages(chatId, numberMessages) {
+    return this.chat.post('/chat/update-number-messages', { chatId, numberMessages })
+      .then(({ data }) => data);
+  }
+
   enableImageRequest(id, contactId) {
     return this.chat.post('/chat/enable-images-request', { id, contactId })
       .then(({ data }) => data);

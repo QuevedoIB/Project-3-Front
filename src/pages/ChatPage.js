@@ -22,11 +22,15 @@ class ChatPage extends Component {
     typing: [],
     userTyping: false,
     otherUserTyping: false,
+    newMessage: false
   }
 
   componentDidMount = async () => {
     await this.handleGetChat();
+    await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
+    this.props.getCurrentSession();
     await socketManager.initSocket(this.state.chatId);
+
 
     let socket = socketManager.getSocket();
 
@@ -40,6 +44,7 @@ class ChatPage extends Component {
     });
 
 
+
     // socket.on("TYPING", async (data) => {
     //   if (data.userTypingId === this.state.contact._id) {
     //     await this.setState({
@@ -49,6 +54,15 @@ class ChatPage extends Component {
     // });
   }
 
+  componentWillUnmount = async () => {
+
+    await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
+    this.props.getCurrentSession();
+    let socket = socketManager.getSocket();
+    socket.disconnect();
+    console.log('DISCONECT', this.state.chatId);
+
+  }
 
   onChangeInput = async (input) => {
 
@@ -164,6 +178,8 @@ class ChatPage extends Component {
   }
 
   handleGetChat = async () => {
+
+
     const chat = await chatService.getChat(this.props.match.params.id);
     await this.setState({
       chatId: chat._id,
@@ -173,6 +189,8 @@ class ChatPage extends Component {
       imagesStatus: chat.enabledImages,
     });
     scrollToBottom();
+
+
   }
 
   handleSendMessage = async (message) => {
@@ -203,16 +221,23 @@ class ChatPage extends Component {
       chatData = await chatService.sendMessage(this.state.chatId, message, time);
     }
 
-    await this.setState({
-      message: '',
-      chat: chatData,
-      userTyping,
-    })
 
     let socket = socketManager.getSocket();
     socket.on("NEW_MESSAGE", () => {
       this.handleGetChat();
     });
+
+
+    await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
+    this.props.getCurrentSession();
+  
+    console.log('NEW MESSAGE', this.state.newMessage);
+    await this.setState({
+      message: '',
+      chat: chatData,
+      userTyping,
+      newMessage: true,
+    })
 
     // chatService.onTyping(this.state.chatId, this.props.user._id);
 

@@ -13,6 +13,7 @@ class ContactCard extends Component {
   }
 
   render() {
+
     const { imageUrl, username, _id } = this.props.contact;
     return (
       <div className="contact-card">
@@ -31,6 +32,7 @@ class ContactCard extends Component {
             this.props.updateContacts(_id)
           }}><img src={process.env.PUBLIC_URL + '/images/delete.png'} alt="delete" /></button>
         </div>
+        {this.props.notification && <h1>New Messages!</h1>}
       </div>
     )
   }
