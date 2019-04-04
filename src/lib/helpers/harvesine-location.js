@@ -19,8 +19,8 @@ export function sortArrayByDistance(arrayUsers, userCoords) {
   });
 
   function getDistanceBetween(user) {
-    const lat2 = user.location[0];
-    const lon2 = user.location[1];
+    const lat2 = user.location.coords[0];
+    const lon2 = user.location.coords[1];
 
     const R = 6371; // km 
 
@@ -39,3 +39,15 @@ export function sortArrayByDistance(arrayUsers, userCoords) {
   return copyArray;
 }
 
+/*
+
+    if (distanceToA > distanceToB) {
+      answer = -1;
+    } else if (distanceToA < distanceToB) {
+      answer = 1;
+    } else {
+      answer = 0;
+    }
+
+    return answer;
+*/
