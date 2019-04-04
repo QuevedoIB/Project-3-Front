@@ -2,7 +2,7 @@ export function startDragControl(callbackAdd, callbackNext) {
 
   const itemToDrag = document.querySelector('article.search-info-box');
 
-  itemToDrag.style.height = '30vh';
+  itemToDrag.style.height = '40vh';
   itemToDrag.style.width = '80vw';
 
 
