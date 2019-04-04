@@ -14,27 +14,6 @@ const options = {
   autoStart: false
 }
 
-// const Dictaphone = ({
-//   transcript,
-//   resetTranscript,
-//   browserSupportsSpeechRecognition
-// }) => {
-//   if (!browserSupportsSpeechRecognition) {
-//     return null;
-//   }
-
-//   if (transcript) {
-//     // this.props.onAudioMessage(transcript);
-//     console.log(Dictaphone)
-//   }
-
-//   return (
-//     <div>
-//       <button onClick={resetTranscript}>Reset</button>
-//     </div>
-//   );
-// };
-
 class Dictaphone extends Component {
   constructor(props) {
     super(props);

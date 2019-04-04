@@ -28,8 +28,6 @@ class Signup extends Component {
       email
     }
 
-
-    console.log(checkIfPasswordOkay())
     if (checkIfPasswordOkay()) {
       this.props.signup(userData)
         .then((data) => {

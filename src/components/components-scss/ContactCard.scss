@@ -32,13 +32,19 @@
         height: 5vh;
       }
     }
+    .notification-container {
+      position: relative;
+      img{
+        padding: 5px;
+      }
+    }
   }
 }
 
 .notification-message{
   position:absolute;
-  top: 33vh;
-  right: 21vw;
+  top: 0;
+  right: 0;
   background: #ff8080;
   width: 25px;
   height: 25px;

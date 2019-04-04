@@ -65,8 +65,6 @@ export const getSortedByDistanceArray = (usersArray, userLocation) => {
     })
   }
 
-  //mirar console.log(directions) para usar metros en vez de kms y ser más precisos
-
   function getDistanceBetween(coordsA, coordsB) {
     let distanceInKms;
     fetch(`https://api.mapbox.com/directions/v5/mapbox/cycling/${coordsA[0]},${coordsA[1]};${coordsB[0]},${coordsB[1]}?steps=true&voice_instructions=true&banner_instructions=true&voice_units=imperial&waypoint_names=Home;Work&access_token=${token}`)
@@ -110,6 +108,6 @@ export async function getCoordsFromPlace(place) {
   if (jsonResponse.features[0]) {
     coordinates = jsonResponse.features[0].center;
   }
-  console.log(place, coordinates)
+  
   return coordinates;
 }

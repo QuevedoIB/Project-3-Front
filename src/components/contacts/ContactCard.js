@@ -22,9 +22,12 @@ class ContactCard extends Component {
           <Link to={`/contact/${_id}`} className="text-link username"><h3>{username}</h3></Link>
         </div>
         <div className="button-container">
+        <div className='notification-container' >
+        {this.props.notification && <div className='notification-message'></div>}
           <form onSubmit={this.handleSubmit}>
             <button type="submit"><img src={process.env.PUBLIC_URL + '/images/chat.png'} alt="chat" /></button>
           </form>
+          </div>
         </div>
         <div className="button-container">
           <button onClick={() => {
@@ -32,7 +35,6 @@ class ContactCard extends Component {
             this.props.updateContacts(_id)
           }}><img src={process.env.PUBLIC_URL + '/images/delete.png'} alt="delete" /></button>
         </div>
-        {this.props.notification && <div className='notification-message'></div>}
       </div>
     )
   }

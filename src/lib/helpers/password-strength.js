@@ -57,8 +57,6 @@ export function checkIfPasswordOkay() {
 
   const meter = document.getElementById('password-strength-meter');
 
-  console.log(meter.className)
-
   if (meter.className === 'worst-meter' || meter.className === 'hide-meter') {
     return false;
   }

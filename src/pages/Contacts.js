@@ -165,31 +165,43 @@ class Contacts extends Component {
     const { contacts, text } = this.state;
     const filteredContacts = contacts.filter(contact => contact.username.includes(text));
     if (filteredContacts.length > 0) {
-      return filteredContacts.map(contact => {
-        let notification;
+      const notificationsContacts = filteredContacts.map(contact => {
+        contact.notification = false;
         if (contact.readMessages) {
           contact.readMessages.forEach(chat => {
             this.props.user.readMessages.forEach(myChat => {
               if (chat.chatId === myChat.chatId) {
                 if (chat.numberMessages > myChat.numberMessages) {
-                  notification = true;
-                } else {
-                  notification = false;
+                  contact.notification = true;
                 }
               }
             })
           })
         }
-        return <li key={contact._id}>
-          <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} updateContacts={this.onChangeContacts} notification={notification} />
-        </li>
-      })
+        return contact;
+      });
+
+      return notificationsContacts.sort((a, b) => a.username - b.username).sort((a, b) => {
+        if (a.notification && !b.notification) {
+          return -1;
+        } else if (b.notification && !b.notification) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }).map(contact => <li key={contact._id}>
+        <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} updateContacts={this.onChangeContacts} notification={contact.notification} />
+      </li>)
 
     } else {
       return <></>
     }
 
-    //}
+    /*
+    return <li key={contact._id}>
+          <ContactCard contact={contact} deleteContact={this.props.deleteContact} userId={this.props.user._id} updateContacts={this.onChangeContacts} notification={notification} />
+        </li>
+    */
   }
 
   showMatches = (e) => {

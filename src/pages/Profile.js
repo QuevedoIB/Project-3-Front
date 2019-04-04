@@ -24,8 +24,6 @@ class Profile extends Component {
   };
 
   componentDidMount(){
-    console.log('MOUNT');
-    console.log(this.props.user);
     this.selectImage();
   }
 
@@ -43,7 +41,7 @@ class Profile extends Component {
   }
 
   handleUploadStart = () => {
-    console.log('start upload');
+  
     this.setState({ isUploading: true, progress: 0 });
   }
   handleProgress = (progress) => {
