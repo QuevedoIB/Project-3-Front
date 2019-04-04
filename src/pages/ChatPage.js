@@ -211,8 +211,6 @@ class ChatPage extends Component {
 
     time = `${hours}:${minutes} - ${dd}/${mm}`;
 
-    console.log(time);
-
     if (language) {
       const messageTranslated = await translateMessage(message, language);
 
@@ -230,7 +228,7 @@ class ChatPage extends Component {
 
     await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
     this.props.getCurrentSession();
-  
+
     console.log('NEW MESSAGE', this.state.newMessage);
     await this.setState({
       message: '',
