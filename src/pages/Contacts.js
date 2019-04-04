@@ -98,6 +98,8 @@ class Contacts extends Component {
     } catch (err) {
       console.log(err)
     }
+
+    this.props.getCurrentSession();
   }
 
   getMatches = async () => {
@@ -113,6 +115,8 @@ class Contacts extends Component {
     } catch (err) {
       console.log(err)
     }
+
+    this.props.getCurrentSession();
   }
 
   renderList = () => {
@@ -166,11 +170,16 @@ class Contacts extends Component {
     const filteredContacts = contacts.filter(contact => contact.username.includes(text));
     if (filteredContacts.length > 0) {
       const notificationsContacts = filteredContacts.map(contact => {
+        console.log(contact.readMessages, this.props.user.readMessages)
         contact.notification = false;
         if (contact.readMessages) {
           contact.readMessages.forEach(chat => {
+
             this.props.user.readMessages.forEach(myChat => {
+              console.log(chat.chatId, 'contact', myChat.chatId === contact.username)
+           
               if (chat.chatId === myChat.chatId) {
+                //console.log(myChat.numberMessages,chat.numberMessages, contact.username)
                 if (chat.numberMessages > myChat.numberMessages) {
                   contact.notification = true;
                 }
@@ -218,6 +227,8 @@ class Contacts extends Component {
       backgroundImage: 'linear-gradient(-90deg, #ffffff, #fff5f5e8)',
       color: '#ff8080'
     }
+
+    this.getMatches();
   }
 
   showContacts = () => {
@@ -234,6 +245,9 @@ class Contacts extends Component {
       backgroundImage: 'linear-gradient(-90deg, #646464, #777777)',
       color: 'white'
     }
+
+    this.getContacts();
+
   }
 
   render() {
