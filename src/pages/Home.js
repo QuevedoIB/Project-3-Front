@@ -20,11 +20,15 @@ class Home extends Component {
   render() {
     return (
       <section className="page home full">
-        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-home.png'} alt='header' />
-        <div className="logo"></div>
+        <img className="bg-image" src={process.env.PUBLIC_URL + '/images/bg-home-2.png'} alt='header' />
         <article>
           <div>
             <h1>Tinder Sorpresa</h1>
+          </div>
+          <div className="logo-container">
+            <div className="logo-background">
+              <div className="logo"></div>
+            </div>
           </div>
           <div>
             <h3>Find people compatible with you</h3>
