@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import './Interests.css';
 import { mainMap, getLocationValue } from '../../lib/autocomplete-location';
 
-// const ENTER_KEY = 13;
-// const COMMA_KEY = 188;
-// const BACKSPACE_KEY = 8;
-
-
 export default class Interests extends Component {
 
   componentDidMount() {

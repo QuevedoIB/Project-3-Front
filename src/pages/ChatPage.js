@@ -43,15 +43,15 @@ class ChatPage extends Component {
       this.handleGetChat();
     });
 
+    //planteamos la lógica a ejectutar cuando haya un emit de typing
 
-
-    // socket.on("TYPING", async (data) => {
-    //   if (data.userTypingId === this.state.contact._id) {
-    //     await this.setState({
-    //       otherUserTyping: !this.state.otherUserTyping,
-    //     })
-    //   }
-    // });
+    socket.on("TYPING", async (data) => {
+      if (data.userTypingId === this.state.contact._id) {
+        await this.setState({
+          otherUserTyping: !this.state.otherUserTyping,
+        })
+      }
+    });
   }
 
   componentWillUnmount = async () => {
@@ -64,102 +64,62 @@ class ChatPage extends Component {
 
   onChangeInput = async (input) => {
 
-    // const { userTyping, otherUserTyping } = this.state;
+    const { userTyping, otherUserTyping } = this.state;
 
-    // const { _id } = this.props.user;
+    const { _id } = this.props.user;
 
-    // let socket;
+    let socket;
 
 
-    // if (input.length && !userTyping) {
+    // al escribir en el input del chat se hace un emit
+    // el booleano userTyping es solo para que este emit se ejecute 1 vez y no cada vez que
+    // hay un cambio en el input
 
-    //   this.setState({ userTyping: true })
-    //   chatService.onTyping(this.state.chatId, _id);
-    //   socketManager.getSocket()
-    //   // socket = socketManager.getSocket()
+    if (input.length && !userTyping) {
 
-    //   // socket.on("TYPING", async (data) => {
+      this.setState({ userTyping: true })
+      chatService.onTyping(this.state.chatId, _id);
+      socketManager.getSocket()
+      socket = socketManager.getSocket()
 
-    //   //   if (data.userTypingId === this.state.contact._id) {
-    //   //     await this.setState({
-    //   //       otherUserTyping: !otherUserTyping,
-    //   //     })
-    //   //   }
-    //   //   console.log(otherUserTyping, 'STAAAART')
-    //   // })
-    //   return;
-    // }
+      socket.on("TYPING", async (data) => {
 
-    // if (!input.length && userTyping) {
+        if (data.userTypingId === this.state.contact._id) {
+          await this.setState({
+            otherUserTyping: true,
+          })
+        }
+        console.log(otherUserTyping, 'STAAAART')
+      })
+      return;
+    }
 
-    //   this.setState({
-    //     userTyping: false,
-    //   })
+    // cuando borramos el input y lo dejamos vacio reseteamos el booleano para que 
+    // se vuelva a ejecutar la lógica
 
-    //   chatService.onTyping(this.state.chatId, _id);
-    //   socketManager.getSocket()
-    //   // socket = socketManager.getSocket()
-    //   // socket.on("TYPING", async (data) => {
-    //   //   console.log('LEAVVE')
-    //   //   if (data.userTypingId === this.state.contact._id) {
-    //   //     await this.setState({
-    //   //       otherUserTyping: !otherUserTyping,
-    //   //     })
-    //   //   }
+    if (!input.length && userTyping) {
 
-    //   //   console.log(otherUserTyping)
-    //   // })
-    // }
+      this.setState({
+        userTyping: false,
+      })
 
-    // console.log(otherUserTyping)
+      chatService.onTyping(this.state.chatId, _id);
+      socketManager.getSocket()
+      socket = socketManager.getSocket()
+      socket.on("TYPING", async (data) => {
+        console.log('LEAVVE')
+        if (data.userTypingId === this.state.contact._id) {
+          await this.setState({
+            otherUserTyping: false,
+          })
+        }
+
+        console.log(otherUserTyping)
+      })
+    }
+
+    console.log(otherUserTyping)
   }
-
-
-
-  //   console.log(this.state.typing, 'ENTRAAA111111111111111A', this.state.userTyping)
-  //     await this.setState({ typing: true })
-
-  // chatService.onTyping(this.state.chatId, true);
-  // socket = socketManager.getSocket()
-  // // let socket = socketManager.getSocket();
-  // socket.on("TYPING", (data) => {
-  //   console.log('DATA ', data);
-  //   if (!this.state.typing) {
-  //     this.setState({ userTyping: data.userTypingId })
-  //   }
-  // });
-  // console.log('AFTER CHAT SERVICE');
-
-  //}
-
-  // if (!input.length && this.state.typing) {
-  //   console.log(this.state.typing, 'ENTRAAAA', this.state.userTyping)
-  //   await this.setState({
-  //     typing: false,
-  //   })
-  //   chatService.onTyping(this.state.chatId, false)
-  //   socket = socketManager.getSocket();
-  //   //let socket = socketManager.getSocket();
-  //   socket.on("TYPING", (data) => {
-  //     this.setState({ userTyping: data.userTyping })
-  //   })
-
-  // }
-
-  // if (!input.length && this.state.typing) {
-  //   console.log(this.state.typing, 'ENTRAAAA', this.state.userTyping)
-  //   await this.setState({
-  //     typing: false,
-  //   })
-  //   socket = socketManager.getSocket();
-  //   //let socket = socketManager.getSocket();
-  //   socket.on("STOP_TYPING", (data) => {
-  //     this.setState({ userTyping: data.userTyping })
-  //   })
-
-  //   chatService.onStopTyping(this.state.chatId)
-  // }
-  //}
 
   handleLanguageSelect = (e) => {
     e.preventDefault();
@@ -226,23 +186,25 @@ class ChatPage extends Component {
     await this.setState({
       message: '',
       chat: chatData,
-      userTyping,
+      userTyping: false,
       newMessage: true,
     })
     await chatService.updateNumberMessages(this.state.chatId, this.state.chat.length);
     this.props.getCurrentSession();
 
+    // al hacer el submit del formulario del chat llamamos al método de chatservice que hace la llamada al backend
+    // reseteamos el booleano para que toda la lógica vuelva a su estado inicial
 
-    // chatService.onTyping(this.state.chatId, this.props.user._id);
+    chatService.onTyping(this.state.chatId, this.props.user._id);
 
-    // socket.on("TYPING", (data) => {
-    //   console.log('LEAVVE')
-    //   if (data.userTypingId === this.state.contact._id) {
-    //     this.setState({
-    //       otherUserTyping: !otherUserTyping,
-    //     })
-    //   }
-    // })
+    socket.on("TYPING", (data) => {
+      console.log('LEAVVE')
+      if (data.userTypingId === this.state.contact._id) {
+        this.setState({
+          otherUserTyping: false,
+        })
+      }
+    })
   }
 
   onBack = () => {
